@@ -55,6 +55,14 @@ GPU rental we found a published on-demand per-GPU rate for.
 
 {{TABLE:HEADTOHEAD}}
 
+**Kimi K3 and GLM 5.2 are deliberately absent from this table.** Both are
+priced by 8+ hosts and both are in the pricing tables below. Neither has a
+public throughput datapoint that states hardware, engine version, precision,
+concurrency and sequence lengths together, so no self-hosting cost can be
+computed for them without guessing. The blank is the finding: two of the most
+widely served open models on the market have no reproducible published serving
+benchmark.
+
 Two things to take from this. First, the utilization column you believe about
 yourself decides the answer, and it is the number teams are most optimistic
 about. Second, self-hosting wins here only on AMD MI355X at $2.59/GPU/hr, which

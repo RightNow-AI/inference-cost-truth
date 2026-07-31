@@ -26,16 +26,18 @@ RETRIEVED = "2026-07-31"
 QUOTE_MAX = 220
 
 
-def load(lane: str, name: str = "findings.json"):
+def load(lane: str, name: str = "findings.json", key: str | None = None):
     p = LANES / f"ict-{lane}" / name
     if not p.exists():
         return []
     payload = json.loads(p.read_text(encoding="utf-8-sig"))
     if isinstance(payload, list):
         return payload
-    for key in ("rows", "findings", "data"):
-        if isinstance(payload.get(key), list):
-            return payload[key]
+    if key and isinstance(payload.get(key), list):
+        return payload[key]
+    for k in ("rows", "findings", "data"):
+        if isinstance(payload.get(k), list):
+            return payload[k]
     for v in payload.values():
         if isinstance(v, list) and v and isinstance(v[0], dict):
             return v
@@ -50,8 +52,16 @@ def quote(row: dict) -> str | None:
     return lit[:QUOTE_MAX] + ("..." if len(lit) > QUOTE_MAX else "")
 
 
-def tier_of(notes: str | None) -> str:
-    """Read the service tier the lane recorded in its notes."""
+def tier_of(notes: str | None, explicit: str | None = None) -> str:
+    """Read the service tier the lane recorded.
+
+    Later lanes emit a dedicated service_tier field, which is authoritative.
+    Earlier lanes only recorded it in prose notes, so that path is kept.
+    """
+    if explicit:
+        e = str(explicit).strip().lower()
+        if e in {"standard", "batch", "flex", "fast", "priority", "provisioned"}:
+            return e
     n = (notes or "").lower()
     if "service tier: batch" in n or "batch tier" in n:
         return "batch"
@@ -99,7 +109,7 @@ def main() -> int:
                 "row_type": "serverless_per_token",
                 "provider": r.get("vendor"),
                 "model_name": r.get("model_name"),
-                "service_tier": tier_of(notes),
+                "service_tier": tier_of(notes, r.get("service_tier")),
                 "long_context_tier": is_long_context(notes),
                 "input_per_1m": r.get("input_per_1m"),
                 "cached_input_per_1m": r.get("cached_input_per_1m"),
@@ -118,7 +128,7 @@ def main() -> int:
             }
         )
 
-    for r in load("pricing-hosted"):
+    for r in list(load("pricing-hosted")) + list(load("k3-glm", key="hosted_prices")):
         if (r.get("provider"), str(r.get("model_name"))) in dropped_mislabelled:
             continue
         rt = r.get("row_type") or "serverless_per_token"
@@ -151,7 +161,7 @@ def main() -> int:
                 # prices, because Fireworks lists Standard and Priority as two
                 # columns of the same table and the lane correctly emitted one
                 # row per tier.
-                "service_tier": tier_of(r.get("notes")),
+                "service_tier": tier_of(r.get("notes"), r.get("service_tier")),
                 "long_context_tier": False,
                 "input_per_1m": r.get("input_per_1m"),
                 "cached_input_per_1m": r.get("cached_input_per_1m"),

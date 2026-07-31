@@ -59,6 +59,14 @@ GPU rental we found a published on-demand per-GPU rate for.
 | `MiniMax-M3` | $1.2 (Nebius AI Studio) | 4x MI355X on Vultr | $0.31 | $0.47 | $0.93 | self-host | self-host |
 | `Llama-3.3-70B-Instruct` | $0.32 (DeepInfra) | 1x MI355X on Vultr | $0.82 | $1.24 | $2.47 | **API** | **API** |
 
+**Kimi K3 and GLM 5.2 are deliberately absent from this table.** Both are
+priced by 8+ hosts and both are in the pricing tables below. Neither has a
+public throughput datapoint that states hardware, engine version, precision,
+concurrency and sequence lengths together, so no self-hosting cost can be
+computed for them without guessing. The blank is the finding: two of the most
+widely served open models on the market have no reproducible published serving
+benchmark.
+
 Two things to take from this. First, the utilization column you believe about
 yourself decides the answer, and it is the number teams are most optimistic
 about. Second, self-hosting wins here only on AMD MI355X at $2.59/GPU/hr, which
@@ -83,8 +91,8 @@ base URL.
 | `qwen/qwen3.7-max` | 3 | $3.75 (Novita AI) | $7.5 (DeepInfra) | **2.0x** |
 | `openai/gpt-oss-20b` | 3 | $0.15 (Novita AI) | $0.3 (Groq) | **2.0x** |
 | `google/gemma-3-27b-it` | 3 | $0.16 (DeepInfra) | $0.3 (Nebius AI Studio) | **1.9x** |
+| `glm-5.2` | 5 | $2.4 (DeepInfra) | $4.4 (Z.ai API) | **1.8x** |
 | `moonshotai/kimi-k2.6` | 4 | $3.4 (Novita AI) | $4.5 (Together AI) | **1.3x** |
-| `qwen/qwen3-235b-a22b-instruct-2507` | 3 | $0.55 (DeepInfra) | $0.6 (Nebius AI Studio) | **1.1x** |
 
 **2. Your batching config moves cost more than your GPU choice does.** Same
 model, same 2x H100, same rental rate. Only concurrency changes:
@@ -206,50 +214,50 @@ section, because a token is not a fixed amount of text.
 | Azure OpenAI | `GPT-4.5-Preview-2025-02-27 Global` | $75 | $37.5 | not documented | $150 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-4` | $60 | not documented | not documented | $120 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-5 Pro Global` | $15 | not documented | not documented | $120 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
-| Azure OpenAI | `GPT-5.5 Global` | $12.5 | $1.25 | not documented | $75 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
-| Azure OpenAI | `GPT-5.6-sol (short context) Global` | $10 | $1 | $12.5 | $60 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `o1 2024-12-17 Global` | $15 | $7.5 | not documented | $60 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `o1 preview 2024-09-12 Global` | $15 | $7.5 | not documented | $60 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-5.5 Long Context Global` | $10 | $1 | not documented | $45 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-5.6-sol (long context) Global` | $10 | $1 | $12.5 | $45 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-4-Turbo` | $11 | not documented | not documented | $33 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-4-Turbo-Vision` | $11 | not documented | not documented | $33 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
-| Azure OpenAI | `GPT-5.4 (<272k context length) Global` | $5 | $0.5 | not documented | $30 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
-| Azure OpenAI | `GPT-5.6-terra (short context) Global` | $5 | $0.5 | $6.25 | $30 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.5 Global` | $5 | $0.5 | not documented | $30 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.6-sol (short context) Global` | $5 | $0.5 | $6.25 | $30 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-Chat Latest 05052026 Global` | $5 | $0.5 | not documented | $30 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
-| Azure OpenAI | `GPT-5.2 Global` | $3.5 | $0.35 | not documented | $28 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
-| Azure OpenAI | `GPT-5.3 Codex Global` | $3.5 | $0.35 | not documented | $28 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-5.4 (>272k context length) Global` | $5 | $0.5 | not documented | $22.5 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-5.6-terra (long context) Global` | $5 | $0.5 | $6.25 | $22.5 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
-| Azure OpenAI | `GPT-5 2025-08-07 Global` | $2.5 | $0.25 | not documented | $20 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
-| Azure OpenAI | `GPT-5.1 Global` | $2.5 | $0.25 | not documented | $20 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-4o-2024-0513 Global` | $5 | not documented | not documented | $15 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
-| Azure OpenAI | `GPT-4.1-2025-04-14 Global` | $3.5 | $0.875 | not documented | $14 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.4 (<272k context length) Global` | $2.5 | $0.25 | not documented | $15 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.6-terra (short context) Global` | $2.5 | $0.25 | $3.125 | $15 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-5.2 Codex Global` | $1.75 | $0.175 | not documented | $14 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.2 Global` | $1.75 | $0.175 | not documented | $14 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-5.2-chat latest Global` | $1.75 | $0.175 | not documented | $14 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-5.3 Chat Global` | $1.75 | $0.175 | not documented | $14 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.3 Codex Global` | $1.75 | $0.175 | not documented | $14 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-4o-2024-08-06 Global` | $2.5 | $1.25 | not documented | $10 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-4o-2024-1120 Global` | $2.5 | $1.25 | not documented | $10 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5 2025-08-07 Global` | $1.25 | $0.125 | not documented | $10 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-5 chat Global` | $1.25 | $0.125 | not documented | $10 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-5 Codex Global` | $1.25 | $0.125 | not documented | $10 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.1 Global` | $1.25 | $0.125 | not documented | $10 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-5.1-chat Global` | $1.25 | $0.125 | not documented | $10 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-5.1-codex Global` | $1.25 | $0.125 | not documented | $10 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-5.1-codex-max Global` | $1.25 | $0.125 | not documented | $10 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
-| Azure OpenAI | `GPT-5.4 mini Global` | $1.5 | $0.15 | not documented | $9 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-5.6-luna (long context) Global` | $2 | $0.2 | $2.5 | $9 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-4.1-2025-04-14 Global` | $2 | $0.5 | not documented | $8 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `o3 2025-04-16 Global` | $2 | $0.5 | not documented | $8 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-5.6-luna (short context) Global` | $1 | $0.1 | $1.25 | $6 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.4 mini Global` | $0.75 | $0.075 | not documented | $4.5 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `o1-mini 2024-09-12 Global` | $1.1 | $0.55 | not documented | $4.4 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `o3 mini 2025-01-31 Global` | $1.1 | $0.55 | not documented | $4.4 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `o4-mini 2025-04-16 Global` | $1.1 | $0.275 | not documented | $4.4 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-3.5-Turbo-0613` | $3 | not documented | not documented | $4 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
-| Azure OpenAI | `GPT-5-mini Global` | $0.45 | $0.045 | not documented | $3.6 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
-| Azure OpenAI | `GPT-4.1-mini-2025-04-14 Global` | $0.7 | $0.175 | not documented | $2.8 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-3.5-Turbo-1106` | $1.1 | not documented | not documented | $2.2 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-3.5-Turbo-Instruct` | $1.65 | not documented | not documented | $2.2 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-3.5-Turbo-0301` | $1.5 | not documented | not documented | $2 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-5.1-codex-mini Global` | $0.25 | $0.025 | not documented | $2 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5-mini Global` | $0.25 | $0.025 | not documented | $2 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-3.5-Turbo-0125` | $0.55 | not documented | not documented | $1.65 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-4.1-mini-2025-04-14 Global` | $0.4 | $0.1 | not documented | $1.6 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-5.4 nano Global` | $0.2 | $0.02 | not documented | $1.25 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `GPT-4o-mini-0718 Global` | $0.15 | $0.075 | not documented | $0.6 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
 | Azure OpenAI | `gpt-oss-120b` | $0.15 | not documented | not documented | $0.6 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
@@ -475,10 +483,14 @@ across providers for one model reaches 10x.
 | Kimi-K3 | Baseten | `moonshotai/Kimi-K3` | $3 | $0.3 | $15 | not stated | [src](https://www.baseten.co/pricing/) |
 | Kimi-K3 | Novita AI | `moonshotai/kimi-k3` | $3 | $0.3 | $15 | not stated | [src](https://novita.ai/pricing) |
 | Kimi-K3 | Nebius AI Studio | `moonshotai/Kimi-K3` | $3 | not offered | $15 | fp4 | [src](https://tokenfactory.nebius.com/api/public/models_info) |
+| Kimi-K3 | SiliconFlow | `Kimi-K3` | $3 | $0.3 | $15 | not stated | [src](https://www.siliconflow.com/models/kimi-k3) |
+| Kimi-K3 | Moonshot AI / Kimi API | `kimi-k3` | $3 | $0.3 | $15 | not stated | [src](https://platform.kimi.ai/docs/pricing/chat-k3.md) |
+| GLM-5.2 | DeepInfra | `GLM-5.2` | $0.6 | $0.112 | $1.92 | not stated | [src](https://deepinfra.com/zai-org/GLM-5.2) |
+| GLM-5.2 | DeepInfra | `GLM-5.2` | $0.75 | $0.14 | $2.4 | not stated | [src](https://deepinfra.com/zai-org/GLM-5.2) |
+| GLM-5.2 | DeepInfra | `GLM-5.2` | $1.125 | $0.21 | $3.6 | not stated | [src](https://deepinfra.com/zai-org/GLM-5.2) |
+| GLM-5.2 | SiliconFlow | `GLM-5.2` | $1.302 | $0.26 | $4.092 | not stated | [src](https://www.siliconflow.com/models/glm-5-2) |
 | GLM-5.2 | Together AI | `zai-org/GLM-5.2` | $1.4 | $0.26 | $4.4 | FP4 | [src](https://www.together.ai/models/glm-52) |
 | GLM-5.2 | Novita AI | `zai-org/glm-5.2` | $1.4 | $0.26 | $4.4 | fp8 | [src](https://novita.ai/pricing) |
-| GLM-5.2 | Nebius AI Studio | `zai-org/GLM-5.2` | $1.4 | not offered | $4.4 | fp4 | [src](https://tokenfactory.nebius.com/api/public/models_info) |
-| GLM-5.2 | Baseten | `zai-org/GLM-5.2-Fast` | $2.1 | $0.21 | $6.6 | not stated | [src](https://www.baseten.co/pricing/) |
 
 ## Prompt caching
 
