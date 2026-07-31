@@ -178,8 +178,20 @@ def t_tokenizers(tok):
 
 
 def t_selfhost(sh):
-    out = []
+    """Best published configuration per model and accelerator.
+
+    self-host.json holds every point of every concurrency sweep. Rendering all
+    of them here would be hundreds of near-duplicate rows; the operating-point
+    effect is shown deliberately in its own table instead.
+    """
+    best = {}
     for r in sh["rows"]:
+        key = (r["model"], r["gpu_model"], r["gpu_count"], r["gpu_provider"])
+        cur = best.get(key)
+        if cur is None or r["throughput_tok_per_s"] > cur["throughput_tok_per_s"]:
+            best[key] = r
+    out = []
+    for r in sorted(best.values(), key=lambda r: (str(r["model"]), r["gpu_model"])):
         u = r["cost_per_1m_by_utilization"]
         out.append([
             r["model"][:30],

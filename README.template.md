@@ -12,10 +12,13 @@ repo answers, so read the numbers adversarially.
 
 The finding that cuts against us is in the head-to-head table below. **At 30%
 utilization, which is generous for most real deployments, buying the open model
-from a hosted API is cheaper than renting GPUs to serve it yourself in every
-comparison we could make.** Self-hosting only pulls ahead at 90% utilization,
-on the cheapest AMD capacity we could find a published rate for, and even then
-only for two of three models. Before counting a single hour of engineer time.
+from a hosted API is cheaper than renting GPUs to serve it yourself in two of
+the three comparisons we can make like-for-like.** The exception is MiniMax-M3
+on AMD MI355X at concurrency 512, which reaches $0.93 per 1M output against
+$1.20 hosted. That exception is instructive rather than encouraging: it needs
+the cheapest AMD capacity on the market, a batch size of 512, 1k input lengths,
+and 30% sustained utilization, all at once. Miss any one and the API wins.
+None of this counts engineer time, which the model excludes entirely.
 
 ## What this repo is not
 
@@ -108,10 +111,13 @@ MI355X at $2.59/GPU/hr is under half the cheapest B200 rate at $5.89, against
 higher measured throughput on DeepSeek-R1. It is also the hardest rate to find:
 none of the eight mainstream GPU providers we surveyed first published one.
 
-**9. At any utilization you will actually hit, the API wins.** See the
-head-to-head table. Self-hosting only wins at 90% utilization, and 90%
-utilization means a saturated box, which means a queue, which means the latency
-you were trying to avoid.
+**9. Self-hosting wins only when everything lines up at once.** In the
+head-to-head table the API takes two of three at 30% utilization. The one
+self-hosted win needs the cheapest AMD capacity, concurrency 512, short inputs,
+and sustained 30% utilization simultaneously. High utilization also means a
+saturated box, which means a queue, which means the latency you were self-
+hosting to control. The conditions that make the spreadsheet work are the ones
+that make the service worse.
 
 ## API pricing, closed vendors
 

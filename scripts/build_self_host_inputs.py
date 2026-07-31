@@ -72,8 +72,10 @@ def load(lane: str, key_hint: str | None = None):
 
 
 def main() -> int:
-    thr_rows = list(load("throughput", "findings")) + list(
-        load("throughput2", "findings")
+    thr_rows = (
+        list(load("throughput", "findings"))
+        + list(load("throughput2", "findings"))
+        + list(load("throughput3", "findings"))
     )
     # The gaps lane supplies the AMD Instinct rates the first survey missed.
     gpu_rows = list(load("gpu-rental")) + [
@@ -126,8 +128,23 @@ def main() -> int:
             )
             continue
 
+        # The quoted source field name WINS over the lane's basis label.
+        # Order matters and was learned the hard way: the first throughput lane
+        # labelled basis "total_output" on rows whose own quoted literal reads
+        # `"output_tput_per_gpu":371.92`. Trusting the label re-introduces a 4x
+        # understatement on every 4-GPU box. The literal is the source's actual
+        # field name, so it is the stronger evidence; the label is only used
+        # when the literal does not settle it.
         lit = str(r.get("evidence_literal") or "")
-        per_gpu_source = "output_tput_per_gpu" in lit
+        basis = str(r.get("throughput_basis") or "").lower()
+        if "output_tput_per_gpu" in lit:
+            per_gpu_source = True
+        elif basis in ("per_gpu_output", "per_gpu"):
+            per_gpu_source = True
+        elif basis in ("total_output", "total_output_across_deployment"):
+            per_gpu_source = False
+        else:
+            per_gpu_source = False
         total = thr * count if per_gpu_source else thr
 
         configs.append(

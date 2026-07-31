@@ -159,8 +159,19 @@ def build_break_even(self_host: dict, providers: dict) -> dict:
         stem = re.split(r"[-_ ]", str(sh_row["model"]).split("/")[-1])[0].lower()
         return len(stem) > 3 and stem in str(api.get("model_name", "")).lower()
 
-    out = []
+    # self-host.json carries every point of every published concurrency sweep,
+    # which is right for the source of truth and wrong here: a break-even row
+    # per sweep point is noise and blows the file up to tens of megabytes.
+    # Keep the best-performing config per (model, GPU, rental provider).
+    best_by_deploy: dict[tuple, dict] = {}
     for sh in self_host["rows"]:
+        key = (sh["model"], sh["gpu_model"], sh["gpu_count"], sh["gpu_provider"])
+        cur = best_by_deploy.get(key)
+        if cur is None or sh["throughput_tok_per_s"] > cur["throughput_tok_per_s"]:
+            best_by_deploy[key] = sh
+
+    out = []
+    for sh in best_by_deploy.values():
         monthly_fixed = sh["deployment_hourly"] * HOURS_PER_MONTH
         for api in api_rows:
             if not relevant(sh, api):

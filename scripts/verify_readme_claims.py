@@ -174,9 +174,17 @@ def main() -> int:
 
     def _key(x):
         return _re.sub(r"[^a-z0-9.]+", "-", str(x).lower())
-    api_wins_at_30 = 0
-    compared = 0
-    for mid, shkey in HEAD.items():
+    # Assert the per-pair verdict, not an aggregate. An aggregate ("the API
+    # wins all of them") hides a flip in either direction: one pair reversing
+    # while another reverses back would still pass. These are the verdicts the
+    # README states in prose, so a change in the data fails the build here
+    # rather than silently making the prose wrong.
+    EXPECTED_WINNER_AT_30 = {
+        "deepseek-r1-0528": "api",
+        "llama-3.3-70b": "api",
+        "minimax-m3": "self_host",
+    }
+    for mid, canon in HEAD.items():
         hosted = [
             num(r.get("output_per_1m"))
             for r in prov["rows"]
@@ -185,22 +193,20 @@ def main() -> int:
             and str(r.get("model_name", "")).lower().replace("-turbo", "") == mid
             and num(r.get("output_per_1m"))
         ]
-        rows = [r for r in sh["rows"] if shkey in _key(r["model"])]
+        rows = [r for r in sh["rows"] if canon in _key(r["model"])]
+        checks += 1
         if not hosted or not rows:
+            fails.append(f"head-to-head {canon}: no comparable pair found")
             continue
-        compared += 1
         best30 = min(r["cost_per_1m_by_utilization"]["30pct"] for r in rows)
-        if min(hosted) < best30:
-            api_wins_at_30 += 1
-    checks += 1
-    if compared == 0:
-        fails.append("headline claim: no like-for-like pairs could be compared")
-    elif api_wins_at_30 != compared:
-        fails.append(
-            f"headline claim: README says the API is cheaper in EVERY comparison "
-            f"at 30% utilization, but that holds in only {api_wins_at_30} of "
-            f"{compared} pairs"
-        )
+        winner = "api" if min(hosted) < best30 else "self_host"
+        want = EXPECTED_WINNER_AT_30[canon]
+        if winner != want:
+            fails.append(
+                f"head-to-head {canon} at 30% utilization: README prose says "
+                f"{want} wins, data says {winner} "
+                f"(hosted ${min(hosted):g} vs self-host ${best30:.2f})"
+            )
 
     print(f"checked {checks} claims")
     if fails:
