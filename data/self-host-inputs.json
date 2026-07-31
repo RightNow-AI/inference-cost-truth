@@ -1,0 +1,178 @@
+{
+  "utilization_levels": [
+    0.1,
+    0.3,
+    0.6,
+    0.9
+  ],
+  "excluded_from_model": [
+    "engineer time to build and operate the deployment",
+    "model storage and image registry costs",
+    "network egress",
+    "cold start time and time spent loading weights",
+    "idle time outside the assumed utilization",
+    "on-call and incident response",
+    "redundancy or replicas for uptime",
+    "load balancer and gateway costs",
+    "evaluation and regression testing of the self-hosted model"
+  ],
+  "configs": [
+    {
+      "id": "DeepSeek-R1-0528-4xB200",
+      "model": "DeepSeek-R1-0528",
+      "gpu_model": "B200",
+      "gpu_model_as_benchmarked": "B200",
+      "gpu_count": 4,
+      "engine": "SGLang",
+      "engine_version": "v0.5.12.post1",
+      "precision": "fp4",
+      "batch_or_concurrency": "concurrency=32",
+      "input_len": 8192,
+      "output_len": 1024,
+      "throughput_tok_per_s": 1487.69,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "output_tput_per_gpu multiplied by gpu_count",
+      "per_gpu_correction_applied": true,
+      "throughput_source_url": "https://inferencex.semianalysis.com/api/v1/benchmarks?model=DeepSeek-R1-0528",
+      "throughput_measured": false,
+      "throughput_status": "COMPLETE",
+      "throughput_missing_fields": [],
+      "vendor_reported": false,
+      "rates": [
+        {
+          "provider": "RunPod",
+          "gpu_model_as_listed": "B200",
+          "hourly_per_gpu": 5.89,
+          "tier": "on_demand",
+          "source_url": "https://www.runpod.io/pricing",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "CoreWeave",
+          "gpu_model_as_listed": "NVIDIA HGX B200",
+          "hourly_per_gpu": 8.6,
+          "tier": "on_demand",
+          "source_url": "https://www.coreweave.com/pricing",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "InferenceX row 431560 is non-disaggregated and reports num_prefill_gpu=num_decode_gpu=4. throughput_tok_per_s is the source's output_tput_per_gpu: aggregate output-token throughput normalized per GPU, not whole-system throughput; no multiplication was performed."
+    },
+    {
+      "id": "MiniMax-M3-4xB300",
+      "model": "MiniMax-M3",
+      "gpu_model": "B300",
+      "gpu_model_as_benchmarked": "B300",
+      "gpu_count": 4,
+      "engine": "vLLM",
+      "engine_version": "nightly-4080263bb2c5d10deac17aaeb88e0823bc35bca9",
+      "precision": "fp4",
+      "batch_or_concurrency": "concurrency=512",
+      "input_len": 8192,
+      "output_len": 1024,
+      "throughput_tok_per_s": 6280.02,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "output_tput_per_gpu multiplied by gpu_count",
+      "per_gpu_correction_applied": true,
+      "throughput_source_url": "https://inferencex.semianalysis.com/api/v1/benchmarks?model=MiniMax-M3",
+      "throughput_measured": false,
+      "throughput_status": "COMPLETE",
+      "throughput_missing_fields": [],
+      "vendor_reported": false,
+      "rates": [
+        {
+          "provider": "RunPod",
+          "gpu_model_as_listed": "B300",
+          "hourly_per_gpu": 6.94,
+          "tier": "on_demand",
+          "source_url": "https://www.runpod.io/pricing",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "Nebius",
+          "gpu_model_as_listed": "NVIDIA HGX B300",
+          "hourly_per_gpu": 7.85,
+          "tier": "on_demand",
+          "source_url": "https://nebius.com/prices",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "InferenceX row 437393 is non-disaggregated and reports num_prefill_gpu=num_decode_gpu=4. The exact engine build is identified by the vLLM nightly image tag. Throughput is output_tput_per_gpu, not a derived system total."
+    },
+    {
+      "id": "Llama-3.3-70B-Instruct-FP8-(InferenceX-key:-llama70b)-2xH200",
+      "model": "Llama-3.3-70B-Instruct-FP8 (InferenceX key: llama70b)",
+      "gpu_model": "H200",
+      "gpu_model_as_benchmarked": "H200",
+      "gpu_count": 2,
+      "engine": "trt",
+      "engine_version": null,
+      "precision": "fp8",
+      "batch_or_concurrency": "concurrency=128",
+      "input_len": 8192,
+      "output_len": 1024,
+      "throughput_tok_per_s": 1121.42,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "output_tput_per_gpu multiplied by gpu_count",
+      "per_gpu_correction_applied": true,
+      "throughput_source_url": "https://inferencex.semianalysis.com/api/v1/benchmarks?model=Llama-3.3-70B-Instruct-FP8",
+      "throughput_measured": false,
+      "throughput_status": "INCOMPLETE",
+      "throughput_missing_fields": [
+        "inference engine version"
+      ],
+      "vendor_reported": false,
+      "rates": [
+        {
+          "provider": "RunPod",
+          "gpu_model_as_listed": "H200",
+          "hourly_per_gpu": 3.59,
+          "tier": "on_demand",
+          "source_url": "https://www.runpod.io/pricing",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "CoreWeave",
+          "gpu_model_as_listed": "NVIDIA HGX H200",
+          "hourly_per_gpu": 6.31,
+          "tier": "on_demand",
+          "source_url": "https://www.coreweave.com/pricing",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "InferenceX row 40216 reports image=null, so the framework version is not recoverable from this source. Throughput is output_tput_per_gpu. No version was borrowed from another page."
+    }
+  ],
+  "dropped_for_lack_of_a_published_rate": [
+    {
+      "model": "DeepSeek-R1-0528",
+      "gpu": "MI355X",
+      "reason": "no surveyed provider publishes an on-demand per-GPU rate"
+    },
+    {
+      "model": "MiniMax-M3",
+      "gpu": "MI355X",
+      "reason": "no surveyed provider publishes an on-demand per-GPU rate"
+    },
+    {
+      "model": "amd/Kimi-K2.5-MXFP4",
+      "gpu": "AMD Instinct MI355X",
+      "reason": "no surveyed provider publishes an on-demand per-GPU rate"
+    },
+    {
+      "model": "amd/Kimi-K2.5-MXFP4",
+      "gpu": "AMD Instinct MI355X",
+      "reason": "no surveyed provider publishes an on-demand per-GPU rate"
+    },
+    {
+      "model": "Llama-3.3-70B-Instruct-FP8 (InferenceX key: llama70b)",
+      "gpu": "MI355X",
+      "reason": "no surveyed provider publishes an on-demand per-GPU rate"
+    },
+    {
+      "model": "nvidia/DeepSeek-R1-FP4",
+      "gpu": "B200",
+      "reason": "gpu_count or throughput missing"
+    }
+  ]
+}

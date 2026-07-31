@@ -1,0 +1,44 @@
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+Copyright (c) 2026 RightNow AI
+
+The data files in this repository, being everything under data/ and every table
+in README.md derived from them, are licensed under the Creative Commons
+Attribution 4.0 International License.
+
+You are free to:
+
+  Share    copy and redistribute the material in any medium or format
+  Adapt    remix, transform, and build upon the material for any purpose,
+           including commercially
+
+Under the following terms:
+
+  Attribution   You must give appropriate credit, provide a link to the
+                license, and indicate if changes were made. You may do so in
+                any reasonable manner, but not in any way that suggests the
+                licensor endorses you or your use.
+
+  No additional restrictions   You may not apply legal terms or technological
+                measures that legally restrict others from doing anything the
+                license permits.
+
+Suggested attribution:
+
+  Source: RightNow AI, inference-cost-truth, snapshot YYYY-MM-DD.
+  https://github.com/RightNow-AI/inference-cost-truth
+  Licensed CC BY 4.0.
+
+The full legal code is at:
+https://creativecommons.org/licenses/by/4.0/legalcode
+
+A plain-language summary is at:
+https://creativecommons.org/licenses/by/4.0/
+
+DISCLAIMER
+
+The data is provided as-is, without warranties of any kind. Prices and
+throughput figures are point-in-time observations of third-party pages and
+benchmarks, recorded on the dates given in each file. They go out of date.
+Verify against the linked source before relying on any number for a purchasing
+decision. Nothing here is a claim about any provider's internal costs.
