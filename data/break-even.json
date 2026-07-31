@@ -6050,6 +6050,174 @@
       "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
     },
     {
+      "self_host_id": "amd_Kimi-K2.5-MXFP4-8xMI355X::Vultr::on_demand",
+      "self_host_model": "amd/Kimi-K2.5-MXFP4",
+      "gpu_model": "MI355X",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 14918.4,
+      "api_model": "Kimi K3",
+      "api_provider": "Fireworks AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 994560000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 273702240,
+        "30pct": 821106720,
+        "60pct": 1642213440,
+        "90pct": 2463320160
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "amd_Kimi-K2.5-MXFP4-8xMI355X::Vultr::on_demand",
+      "self_host_model": "amd/Kimi-K2.5-MXFP4",
+      "gpu_model": "MI355X",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 14918.4,
+      "api_model": "Kimi K3 US",
+      "api_provider": "Fireworks AI",
+      "api_output_per_1m": 16.5,
+      "break_even_output_tokens_per_month": 904145455,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 273702240,
+        "30pct": 821106720,
+        "60pct": 1642213440,
+        "90pct": 2463320160
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "amd_Kimi-K2.5-MXFP4-8xMI355X::Vultr::on_demand",
+      "self_host_model": "amd/Kimi-K2.5-MXFP4",
+      "gpu_model": "MI355X",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 14918.4,
+      "api_model": "Kimi K3",
+      "api_provider": "Together AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 994560000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 273702240,
+        "30pct": 821106720,
+        "60pct": 1642213440,
+        "90pct": 2463320160
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "amd_Kimi-K2.5-MXFP4-8xMI355X::Vultr::on_demand",
+      "self_host_model": "amd/Kimi-K2.5-MXFP4",
+      "gpu_model": "MI355X",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 14918.4,
+      "api_model": "Kimi K3",
+      "api_provider": "Baseten",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 994560000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 273702240,
+        "30pct": 821106720,
+        "60pct": 1642213440,
+        "90pct": 2463320160
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "amd_Kimi-K2.5-MXFP4-8xMI355X::Vultr::on_demand",
+      "self_host_model": "amd/Kimi-K2.5-MXFP4",
+      "gpu_model": "MI355X",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 14918.4,
+      "api_model": "Kimi K3",
+      "api_provider": "Novita AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 994560000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 273702240,
+        "30pct": 821106720,
+        "60pct": 1642213440,
+        "90pct": 2463320160
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "amd_Kimi-K2.5-MXFP4-8xMI355X::Vultr::on_demand",
+      "self_host_model": "amd/Kimi-K2.5-MXFP4",
+      "gpu_model": "MI355X",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 14918.4,
+      "api_model": "Kimi-K3",
+      "api_provider": "SiliconFlow",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 994560000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 273702240,
+        "30pct": 821106720,
+        "60pct": 1642213440,
+        "90pct": 2463320160
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "amd_Kimi-K2.5-MXFP4-8xMI355X::Vultr::on_demand",
+      "self_host_model": "amd/Kimi-K2.5-MXFP4",
+      "gpu_model": "MI355X",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 14918.4,
+      "api_model": "kimi-k3",
+      "api_provider": "Moonshot AI / Kimi API",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 994560000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 273702240,
+        "30pct": 821106720,
+        "60pct": 1642213440,
+        "90pct": 2463320160
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
       "self_host_id": "amd_Kimi-K2.5-MXFP4-8xMI355X::Oracle Cloud::pay_as_you_go",
       "self_host_model": "amd/Kimi-K2.5-MXFP4",
       "gpu_model": "MI355X",
@@ -6801,6 +6969,174 @@
       "monthly_fixed_usd": 49536.0,
       "api_model": "moonshotai/Kimi-K3",
       "api_provider": "Nebius AI Studio",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 3302400000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 273702240,
+        "30pct": 821106720,
+        "60pct": 1642213440,
+        "90pct": 2463320160
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": false,
+        "90pct": false
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "amd_Kimi-K2.5-MXFP4-8xMI355X::Oracle Cloud::pay_as_you_go",
+      "self_host_model": "amd/Kimi-K2.5-MXFP4",
+      "gpu_model": "MI355X",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 49536.0,
+      "api_model": "Kimi K3",
+      "api_provider": "Fireworks AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 3302400000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 273702240,
+        "30pct": 821106720,
+        "60pct": 1642213440,
+        "90pct": 2463320160
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": false,
+        "90pct": false
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "amd_Kimi-K2.5-MXFP4-8xMI355X::Oracle Cloud::pay_as_you_go",
+      "self_host_model": "amd/Kimi-K2.5-MXFP4",
+      "gpu_model": "MI355X",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 49536.0,
+      "api_model": "Kimi K3 US",
+      "api_provider": "Fireworks AI",
+      "api_output_per_1m": 16.5,
+      "break_even_output_tokens_per_month": 3002181818,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 273702240,
+        "30pct": 821106720,
+        "60pct": 1642213440,
+        "90pct": 2463320160
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": false,
+        "90pct": false
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "amd_Kimi-K2.5-MXFP4-8xMI355X::Oracle Cloud::pay_as_you_go",
+      "self_host_model": "amd/Kimi-K2.5-MXFP4",
+      "gpu_model": "MI355X",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 49536.0,
+      "api_model": "Kimi K3",
+      "api_provider": "Together AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 3302400000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 273702240,
+        "30pct": 821106720,
+        "60pct": 1642213440,
+        "90pct": 2463320160
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": false,
+        "90pct": false
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "amd_Kimi-K2.5-MXFP4-8xMI355X::Oracle Cloud::pay_as_you_go",
+      "self_host_model": "amd/Kimi-K2.5-MXFP4",
+      "gpu_model": "MI355X",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 49536.0,
+      "api_model": "Kimi K3",
+      "api_provider": "Baseten",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 3302400000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 273702240,
+        "30pct": 821106720,
+        "60pct": 1642213440,
+        "90pct": 2463320160
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": false,
+        "90pct": false
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "amd_Kimi-K2.5-MXFP4-8xMI355X::Oracle Cloud::pay_as_you_go",
+      "self_host_model": "amd/Kimi-K2.5-MXFP4",
+      "gpu_model": "MI355X",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 49536.0,
+      "api_model": "Kimi K3",
+      "api_provider": "Novita AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 3302400000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 273702240,
+        "30pct": 821106720,
+        "60pct": 1642213440,
+        "90pct": 2463320160
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": false,
+        "90pct": false
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "amd_Kimi-K2.5-MXFP4-8xMI355X::Oracle Cloud::pay_as_you_go",
+      "self_host_model": "amd/Kimi-K2.5-MXFP4",
+      "gpu_model": "MI355X",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 49536.0,
+      "api_model": "Kimi-K3",
+      "api_provider": "SiliconFlow",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 3302400000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 273702240,
+        "30pct": 821106720,
+        "60pct": 1642213440,
+        "90pct": 2463320160
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": false,
+        "90pct": false
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "amd_Kimi-K2.5-MXFP4-8xMI355X::Oracle Cloud::pay_as_you_go",
+      "self_host_model": "amd/Kimi-K2.5-MXFP4",
+      "gpu_model": "MI355X",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 49536.0,
+      "api_model": "kimi-k3",
+      "api_provider": "Moonshot AI / Kimi API",
       "api_output_per_1m": 15.0,
       "break_even_output_tokens_per_month": 3302400000,
       "monthly_output_capacity_by_utilization": {
@@ -35570,6 +35906,174 @@
       "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
     },
     {
+      "self_host_id": "Kimi-K2.5-4xB200::RunPod::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "B200",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 16963.2,
+      "api_model": "Kimi K3",
+      "api_provider": "Fireworks AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1130880000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 1076649408,
+        "30pct": 3229948224,
+        "60pct": 6459896448,
+        "90pct": 9689844672
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xB200::RunPod::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "B200",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 16963.2,
+      "api_model": "Kimi K3 US",
+      "api_provider": "Fireworks AI",
+      "api_output_per_1m": 16.5,
+      "break_even_output_tokens_per_month": 1028072727,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 1076649408,
+        "30pct": 3229948224,
+        "60pct": 6459896448,
+        "90pct": 9689844672
+      },
+      "reachable_at_utilization": {
+        "10pct": true,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xB200::RunPod::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "B200",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 16963.2,
+      "api_model": "Kimi K3",
+      "api_provider": "Together AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1130880000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 1076649408,
+        "30pct": 3229948224,
+        "60pct": 6459896448,
+        "90pct": 9689844672
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xB200::RunPod::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "B200",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 16963.2,
+      "api_model": "Kimi K3",
+      "api_provider": "Baseten",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1130880000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 1076649408,
+        "30pct": 3229948224,
+        "60pct": 6459896448,
+        "90pct": 9689844672
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xB200::RunPod::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "B200",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 16963.2,
+      "api_model": "Kimi K3",
+      "api_provider": "Novita AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1130880000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 1076649408,
+        "30pct": 3229948224,
+        "60pct": 6459896448,
+        "90pct": 9689844672
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xB200::RunPod::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "B200",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 16963.2,
+      "api_model": "Kimi-K3",
+      "api_provider": "SiliconFlow",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1130880000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 1076649408,
+        "30pct": 3229948224,
+        "60pct": 6459896448,
+        "90pct": 9689844672
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xB200::RunPod::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "B200",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 16963.2,
+      "api_model": "kimi-k3",
+      "api_provider": "Moonshot AI / Kimi API",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1130880000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 1076649408,
+        "30pct": 3229948224,
+        "60pct": 6459896448,
+        "90pct": 9689844672
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
       "self_host_id": "Kimi-K2.5-4xB200::CoreWeave::on_demand",
       "self_host_model": "Kimi-K2.5",
       "gpu_model": "B200",
@@ -36321,6 +36825,174 @@
       "monthly_fixed_usd": 24768.0,
       "api_model": "moonshotai/Kimi-K3",
       "api_provider": "Nebius AI Studio",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1651200000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 1076649408,
+        "30pct": 3229948224,
+        "60pct": 6459896448,
+        "90pct": 9689844672
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xB200::CoreWeave::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "B200",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 24768.0,
+      "api_model": "Kimi K3",
+      "api_provider": "Fireworks AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1651200000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 1076649408,
+        "30pct": 3229948224,
+        "60pct": 6459896448,
+        "90pct": 9689844672
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xB200::CoreWeave::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "B200",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 24768.0,
+      "api_model": "Kimi K3 US",
+      "api_provider": "Fireworks AI",
+      "api_output_per_1m": 16.5,
+      "break_even_output_tokens_per_month": 1501090909,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 1076649408,
+        "30pct": 3229948224,
+        "60pct": 6459896448,
+        "90pct": 9689844672
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xB200::CoreWeave::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "B200",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 24768.0,
+      "api_model": "Kimi K3",
+      "api_provider": "Together AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1651200000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 1076649408,
+        "30pct": 3229948224,
+        "60pct": 6459896448,
+        "90pct": 9689844672
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xB200::CoreWeave::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "B200",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 24768.0,
+      "api_model": "Kimi K3",
+      "api_provider": "Baseten",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1651200000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 1076649408,
+        "30pct": 3229948224,
+        "60pct": 6459896448,
+        "90pct": 9689844672
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xB200::CoreWeave::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "B200",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 24768.0,
+      "api_model": "Kimi K3",
+      "api_provider": "Novita AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1651200000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 1076649408,
+        "30pct": 3229948224,
+        "60pct": 6459896448,
+        "90pct": 9689844672
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xB200::CoreWeave::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "B200",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 24768.0,
+      "api_model": "Kimi-K3",
+      "api_provider": "SiliconFlow",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1651200000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 1076649408,
+        "30pct": 3229948224,
+        "60pct": 6459896448,
+        "90pct": 9689844672
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xB200::CoreWeave::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "B200",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 24768.0,
+      "api_model": "kimi-k3",
+      "api_provider": "Moonshot AI / Kimi API",
       "api_output_per_1m": 15.0,
       "break_even_output_tokens_per_month": 1651200000,
       "monthly_output_capacity_by_utilization": {
@@ -37106,6 +37778,174 @@
       "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
     },
     {
+      "self_host_id": "Kimi-K2.5-4xB300::RunPod::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "B300",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 19987.2,
+      "api_model": "Kimi K3",
+      "api_provider": "Fireworks AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1332480000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 1101110112,
+        "30pct": 3303330336,
+        "60pct": 6606660672,
+        "90pct": 9909991008
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xB300::RunPod::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "B300",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 19987.2,
+      "api_model": "Kimi K3 US",
+      "api_provider": "Fireworks AI",
+      "api_output_per_1m": 16.5,
+      "break_even_output_tokens_per_month": 1211345455,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 1101110112,
+        "30pct": 3303330336,
+        "60pct": 6606660672,
+        "90pct": 9909991008
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xB300::RunPod::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "B300",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 19987.2,
+      "api_model": "Kimi K3",
+      "api_provider": "Together AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1332480000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 1101110112,
+        "30pct": 3303330336,
+        "60pct": 6606660672,
+        "90pct": 9909991008
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xB300::RunPod::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "B300",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 19987.2,
+      "api_model": "Kimi K3",
+      "api_provider": "Baseten",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1332480000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 1101110112,
+        "30pct": 3303330336,
+        "60pct": 6606660672,
+        "90pct": 9909991008
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xB300::RunPod::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "B300",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 19987.2,
+      "api_model": "Kimi K3",
+      "api_provider": "Novita AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1332480000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 1101110112,
+        "30pct": 3303330336,
+        "60pct": 6606660672,
+        "90pct": 9909991008
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xB300::RunPod::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "B300",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 19987.2,
+      "api_model": "Kimi-K3",
+      "api_provider": "SiliconFlow",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1332480000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 1101110112,
+        "30pct": 3303330336,
+        "60pct": 6606660672,
+        "90pct": 9909991008
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xB300::RunPod::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "B300",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 19987.2,
+      "api_model": "kimi-k3",
+      "api_provider": "Moonshot AI / Kimi API",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1332480000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 1101110112,
+        "30pct": 3303330336,
+        "60pct": 6606660672,
+        "90pct": 9909991008
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
       "self_host_id": "Kimi-K2.5-4xB300::Nebius::on_demand",
       "self_host_model": "Kimi-K2.5",
       "gpu_model": "B300",
@@ -37857,6 +38697,174 @@
       "monthly_fixed_usd": 22608.0,
       "api_model": "moonshotai/Kimi-K3",
       "api_provider": "Nebius AI Studio",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1507200000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 1101110112,
+        "30pct": 3303330336,
+        "60pct": 6606660672,
+        "90pct": 9909991008
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xB300::Nebius::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "B300",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 22608.0,
+      "api_model": "Kimi K3",
+      "api_provider": "Fireworks AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1507200000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 1101110112,
+        "30pct": 3303330336,
+        "60pct": 6606660672,
+        "90pct": 9909991008
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xB300::Nebius::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "B300",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 22608.0,
+      "api_model": "Kimi K3 US",
+      "api_provider": "Fireworks AI",
+      "api_output_per_1m": 16.5,
+      "break_even_output_tokens_per_month": 1370181818,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 1101110112,
+        "30pct": 3303330336,
+        "60pct": 6606660672,
+        "90pct": 9909991008
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xB300::Nebius::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "B300",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 22608.0,
+      "api_model": "Kimi K3",
+      "api_provider": "Together AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1507200000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 1101110112,
+        "30pct": 3303330336,
+        "60pct": 6606660672,
+        "90pct": 9909991008
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xB300::Nebius::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "B300",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 22608.0,
+      "api_model": "Kimi K3",
+      "api_provider": "Baseten",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1507200000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 1101110112,
+        "30pct": 3303330336,
+        "60pct": 6606660672,
+        "90pct": 9909991008
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xB300::Nebius::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "B300",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 22608.0,
+      "api_model": "Kimi K3",
+      "api_provider": "Novita AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1507200000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 1101110112,
+        "30pct": 3303330336,
+        "60pct": 6606660672,
+        "90pct": 9909991008
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xB300::Nebius::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "B300",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 22608.0,
+      "api_model": "Kimi-K3",
+      "api_provider": "SiliconFlow",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1507200000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 1101110112,
+        "30pct": 3303330336,
+        "60pct": 6606660672,
+        "90pct": 9909991008
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xB300::Nebius::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "B300",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 22608.0,
+      "api_model": "kimi-k3",
+      "api_provider": "Moonshot AI / Kimi API",
       "api_output_per_1m": 15.0,
       "break_even_output_tokens_per_month": 1507200000,
       "monthly_output_capacity_by_utilization": {
@@ -38642,6 +39650,174 @@
       "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
     },
     {
+      "self_host_id": "Kimi-K2.5-8xH200::RunPod::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "H200",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 20678.4,
+      "api_model": "Kimi K3",
+      "api_provider": "Fireworks AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1378560000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 540330912,
+        "30pct": 1620992736,
+        "60pct": 3241985472,
+        "90pct": 4862978208
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-8xH200::RunPod::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "H200",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 20678.4,
+      "api_model": "Kimi K3 US",
+      "api_provider": "Fireworks AI",
+      "api_output_per_1m": 16.5,
+      "break_even_output_tokens_per_month": 1253236364,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 540330912,
+        "30pct": 1620992736,
+        "60pct": 3241985472,
+        "90pct": 4862978208
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-8xH200::RunPod::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "H200",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 20678.4,
+      "api_model": "Kimi K3",
+      "api_provider": "Together AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1378560000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 540330912,
+        "30pct": 1620992736,
+        "60pct": 3241985472,
+        "90pct": 4862978208
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-8xH200::RunPod::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "H200",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 20678.4,
+      "api_model": "Kimi K3",
+      "api_provider": "Baseten",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1378560000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 540330912,
+        "30pct": 1620992736,
+        "60pct": 3241985472,
+        "90pct": 4862978208
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-8xH200::RunPod::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "H200",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 20678.4,
+      "api_model": "Kimi K3",
+      "api_provider": "Novita AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1378560000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 540330912,
+        "30pct": 1620992736,
+        "60pct": 3241985472,
+        "90pct": 4862978208
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-8xH200::RunPod::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "H200",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 20678.4,
+      "api_model": "Kimi-K3",
+      "api_provider": "SiliconFlow",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1378560000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 540330912,
+        "30pct": 1620992736,
+        "60pct": 3241985472,
+        "90pct": 4862978208
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-8xH200::RunPod::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "H200",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 20678.4,
+      "api_model": "kimi-k3",
+      "api_provider": "Moonshot AI / Kimi API",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1378560000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 540330912,
+        "30pct": 1620992736,
+        "60pct": 3241985472,
+        "90pct": 4862978208
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
       "self_host_id": "Kimi-K2.5-8xH200::CoreWeave::on_demand",
       "self_host_model": "Kimi-K2.5",
       "gpu_model": "H200",
@@ -39393,6 +40569,174 @@
       "monthly_fixed_usd": 36345.6,
       "api_model": "moonshotai/Kimi-K3",
       "api_provider": "Nebius AI Studio",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 2423040000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 540330912,
+        "30pct": 1620992736,
+        "60pct": 3241985472,
+        "90pct": 4862978208
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-8xH200::CoreWeave::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "H200",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 36345.6,
+      "api_model": "Kimi K3",
+      "api_provider": "Fireworks AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 2423040000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 540330912,
+        "30pct": 1620992736,
+        "60pct": 3241985472,
+        "90pct": 4862978208
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-8xH200::CoreWeave::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "H200",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 36345.6,
+      "api_model": "Kimi K3 US",
+      "api_provider": "Fireworks AI",
+      "api_output_per_1m": 16.5,
+      "break_even_output_tokens_per_month": 2202763636,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 540330912,
+        "30pct": 1620992736,
+        "60pct": 3241985472,
+        "90pct": 4862978208
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-8xH200::CoreWeave::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "H200",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 36345.6,
+      "api_model": "Kimi K3",
+      "api_provider": "Together AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 2423040000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 540330912,
+        "30pct": 1620992736,
+        "60pct": 3241985472,
+        "90pct": 4862978208
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-8xH200::CoreWeave::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "H200",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 36345.6,
+      "api_model": "Kimi K3",
+      "api_provider": "Baseten",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 2423040000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 540330912,
+        "30pct": 1620992736,
+        "60pct": 3241985472,
+        "90pct": 4862978208
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-8xH200::CoreWeave::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "H200",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 36345.6,
+      "api_model": "Kimi K3",
+      "api_provider": "Novita AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 2423040000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 540330912,
+        "30pct": 1620992736,
+        "60pct": 3241985472,
+        "90pct": 4862978208
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-8xH200::CoreWeave::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "H200",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 36345.6,
+      "api_model": "Kimi-K3",
+      "api_provider": "SiliconFlow",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 2423040000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 540330912,
+        "30pct": 1620992736,
+        "60pct": 3241985472,
+        "90pct": 4862978208
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-8xH200::CoreWeave::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "H200",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 36345.6,
+      "api_model": "kimi-k3",
+      "api_provider": "Moonshot AI / Kimi API",
       "api_output_per_1m": 15.0,
       "break_even_output_tokens_per_month": 2423040000,
       "monthly_output_capacity_by_utilization": {
@@ -40178,6 +41522,174 @@
       "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
     },
     {
+      "self_host_id": "Kimi-K2.5-8xMI300X::Vultr::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "MI300X",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 10656.0,
+      "api_model": "Kimi K3",
+      "api_provider": "Fireworks AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 710400000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 213941088,
+        "30pct": 641823264,
+        "60pct": 1283646528,
+        "90pct": 1925469792
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-8xMI300X::Vultr::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "MI300X",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 10656.0,
+      "api_model": "Kimi K3 US",
+      "api_provider": "Fireworks AI",
+      "api_output_per_1m": 16.5,
+      "break_even_output_tokens_per_month": 645818182,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 213941088,
+        "30pct": 641823264,
+        "60pct": 1283646528,
+        "90pct": 1925469792
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-8xMI300X::Vultr::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "MI300X",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 10656.0,
+      "api_model": "Kimi K3",
+      "api_provider": "Together AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 710400000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 213941088,
+        "30pct": 641823264,
+        "60pct": 1283646528,
+        "90pct": 1925469792
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-8xMI300X::Vultr::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "MI300X",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 10656.0,
+      "api_model": "Kimi K3",
+      "api_provider": "Baseten",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 710400000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 213941088,
+        "30pct": 641823264,
+        "60pct": 1283646528,
+        "90pct": 1925469792
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-8xMI300X::Vultr::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "MI300X",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 10656.0,
+      "api_model": "Kimi K3",
+      "api_provider": "Novita AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 710400000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 213941088,
+        "30pct": 641823264,
+        "60pct": 1283646528,
+        "90pct": 1925469792
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-8xMI300X::Vultr::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "MI300X",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 10656.0,
+      "api_model": "Kimi-K3",
+      "api_provider": "SiliconFlow",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 710400000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 213941088,
+        "30pct": 641823264,
+        "60pct": 1283646528,
+        "90pct": 1925469792
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-8xMI300X::Vultr::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "MI300X",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 10656.0,
+      "api_model": "kimi-k3",
+      "api_provider": "Moonshot AI / Kimi API",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 710400000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 213941088,
+        "30pct": 641823264,
+        "60pct": 1283646528,
+        "90pct": 1925469792
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
       "self_host_id": "Kimi-K2.5-8xMI300X::Oracle Cloud::pay_as_you_go",
       "self_host_model": "Kimi-K2.5",
       "gpu_model": "MI300X",
@@ -40929,6 +42441,174 @@
       "monthly_fixed_usd": 34560.0,
       "api_model": "moonshotai/Kimi-K3",
       "api_provider": "Nebius AI Studio",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 2304000000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 213941088,
+        "30pct": 641823264,
+        "60pct": 1283646528,
+        "90pct": 1925469792
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": false,
+        "90pct": false
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-8xMI300X::Oracle Cloud::pay_as_you_go",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "MI300X",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 34560.0,
+      "api_model": "Kimi K3",
+      "api_provider": "Fireworks AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 2304000000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 213941088,
+        "30pct": 641823264,
+        "60pct": 1283646528,
+        "90pct": 1925469792
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": false,
+        "90pct": false
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-8xMI300X::Oracle Cloud::pay_as_you_go",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "MI300X",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 34560.0,
+      "api_model": "Kimi K3 US",
+      "api_provider": "Fireworks AI",
+      "api_output_per_1m": 16.5,
+      "break_even_output_tokens_per_month": 2094545455,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 213941088,
+        "30pct": 641823264,
+        "60pct": 1283646528,
+        "90pct": 1925469792
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": false,
+        "90pct": false
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-8xMI300X::Oracle Cloud::pay_as_you_go",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "MI300X",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 34560.0,
+      "api_model": "Kimi K3",
+      "api_provider": "Together AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 2304000000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 213941088,
+        "30pct": 641823264,
+        "60pct": 1283646528,
+        "90pct": 1925469792
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": false,
+        "90pct": false
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-8xMI300X::Oracle Cloud::pay_as_you_go",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "MI300X",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 34560.0,
+      "api_model": "Kimi K3",
+      "api_provider": "Baseten",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 2304000000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 213941088,
+        "30pct": 641823264,
+        "60pct": 1283646528,
+        "90pct": 1925469792
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": false,
+        "90pct": false
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-8xMI300X::Oracle Cloud::pay_as_you_go",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "MI300X",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 34560.0,
+      "api_model": "Kimi K3",
+      "api_provider": "Novita AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 2304000000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 213941088,
+        "30pct": 641823264,
+        "60pct": 1283646528,
+        "90pct": 1925469792
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": false,
+        "90pct": false
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-8xMI300X::Oracle Cloud::pay_as_you_go",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "MI300X",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 34560.0,
+      "api_model": "Kimi-K3",
+      "api_provider": "SiliconFlow",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 2304000000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 213941088,
+        "30pct": 641823264,
+        "60pct": 1283646528,
+        "90pct": 1925469792
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": false,
+        "60pct": false,
+        "90pct": false
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-8xMI300X::Oracle Cloud::pay_as_you_go",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "MI300X",
+      "gpu_count": 8,
+      "monthly_fixed_usd": 34560.0,
+      "api_model": "kimi-k3",
+      "api_provider": "Moonshot AI / Kimi API",
       "api_output_per_1m": 15.0,
       "break_even_output_tokens_per_month": 2304000000,
       "monthly_output_capacity_by_utilization": {
@@ -41714,6 +43394,174 @@
       "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
     },
     {
+      "self_host_id": "Kimi-K2.5-4xMI355X::Vultr::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "MI355X",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 7459.2,
+      "api_model": "Kimi K3",
+      "api_provider": "Fireworks AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 497280000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 587440512,
+        "30pct": 1762321536,
+        "60pct": 3524643072,
+        "90pct": 5286964608
+      },
+      "reachable_at_utilization": {
+        "10pct": true,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xMI355X::Vultr::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "MI355X",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 7459.2,
+      "api_model": "Kimi K3 US",
+      "api_provider": "Fireworks AI",
+      "api_output_per_1m": 16.5,
+      "break_even_output_tokens_per_month": 452072727,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 587440512,
+        "30pct": 1762321536,
+        "60pct": 3524643072,
+        "90pct": 5286964608
+      },
+      "reachable_at_utilization": {
+        "10pct": true,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xMI355X::Vultr::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "MI355X",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 7459.2,
+      "api_model": "Kimi K3",
+      "api_provider": "Together AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 497280000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 587440512,
+        "30pct": 1762321536,
+        "60pct": 3524643072,
+        "90pct": 5286964608
+      },
+      "reachable_at_utilization": {
+        "10pct": true,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xMI355X::Vultr::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "MI355X",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 7459.2,
+      "api_model": "Kimi K3",
+      "api_provider": "Baseten",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 497280000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 587440512,
+        "30pct": 1762321536,
+        "60pct": 3524643072,
+        "90pct": 5286964608
+      },
+      "reachable_at_utilization": {
+        "10pct": true,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xMI355X::Vultr::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "MI355X",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 7459.2,
+      "api_model": "Kimi K3",
+      "api_provider": "Novita AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 497280000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 587440512,
+        "30pct": 1762321536,
+        "60pct": 3524643072,
+        "90pct": 5286964608
+      },
+      "reachable_at_utilization": {
+        "10pct": true,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xMI355X::Vultr::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "MI355X",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 7459.2,
+      "api_model": "Kimi-K3",
+      "api_provider": "SiliconFlow",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 497280000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 587440512,
+        "30pct": 1762321536,
+        "60pct": 3524643072,
+        "90pct": 5286964608
+      },
+      "reachable_at_utilization": {
+        "10pct": true,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xMI355X::Vultr::on_demand",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "MI355X",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 7459.2,
+      "api_model": "kimi-k3",
+      "api_provider": "Moonshot AI / Kimi API",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 497280000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 587440512,
+        "30pct": 1762321536,
+        "60pct": 3524643072,
+        "90pct": 5286964608
+      },
+      "reachable_at_utilization": {
+        "10pct": true,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
       "self_host_id": "Kimi-K2.5-4xMI355X::Oracle Cloud::pay_as_you_go",
       "self_host_model": "Kimi-K2.5",
       "gpu_model": "MI355X",
@@ -42465,6 +44313,174 @@
       "monthly_fixed_usd": 24768.0,
       "api_model": "moonshotai/Kimi-K3",
       "api_provider": "Nebius AI Studio",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1651200000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 587440512,
+        "30pct": 1762321536,
+        "60pct": 3524643072,
+        "90pct": 5286964608
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xMI355X::Oracle Cloud::pay_as_you_go",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "MI355X",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 24768.0,
+      "api_model": "Kimi K3",
+      "api_provider": "Fireworks AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1651200000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 587440512,
+        "30pct": 1762321536,
+        "60pct": 3524643072,
+        "90pct": 5286964608
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xMI355X::Oracle Cloud::pay_as_you_go",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "MI355X",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 24768.0,
+      "api_model": "Kimi K3 US",
+      "api_provider": "Fireworks AI",
+      "api_output_per_1m": 16.5,
+      "break_even_output_tokens_per_month": 1501090909,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 587440512,
+        "30pct": 1762321536,
+        "60pct": 3524643072,
+        "90pct": 5286964608
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xMI355X::Oracle Cloud::pay_as_you_go",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "MI355X",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 24768.0,
+      "api_model": "Kimi K3",
+      "api_provider": "Together AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1651200000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 587440512,
+        "30pct": 1762321536,
+        "60pct": 3524643072,
+        "90pct": 5286964608
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xMI355X::Oracle Cloud::pay_as_you_go",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "MI355X",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 24768.0,
+      "api_model": "Kimi K3",
+      "api_provider": "Baseten",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1651200000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 587440512,
+        "30pct": 1762321536,
+        "60pct": 3524643072,
+        "90pct": 5286964608
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xMI355X::Oracle Cloud::pay_as_you_go",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "MI355X",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 24768.0,
+      "api_model": "Kimi K3",
+      "api_provider": "Novita AI",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1651200000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 587440512,
+        "30pct": 1762321536,
+        "60pct": 3524643072,
+        "90pct": 5286964608
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xMI355X::Oracle Cloud::pay_as_you_go",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "MI355X",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 24768.0,
+      "api_model": "Kimi-K3",
+      "api_provider": "SiliconFlow",
+      "api_output_per_1m": 15.0,
+      "break_even_output_tokens_per_month": 1651200000,
+      "monthly_output_capacity_by_utilization": {
+        "10pct": 587440512,
+        "30pct": 1762321536,
+        "60pct": 3524643072,
+        "90pct": 5286964608
+      },
+      "reachable_at_utilization": {
+        "10pct": false,
+        "30pct": true,
+        "60pct": true,
+        "90pct": true
+      },
+      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
+    },
+    {
+      "self_host_id": "Kimi-K2.5-4xMI355X::Oracle Cloud::pay_as_you_go",
+      "self_host_model": "Kimi-K2.5",
+      "gpu_model": "MI355X",
+      "gpu_count": 4,
+      "monthly_fixed_usd": 24768.0,
+      "api_model": "kimi-k3",
+      "api_provider": "Moonshot AI / Kimi API",
       "api_output_per_1m": 15.0,
       "break_even_output_tokens_per_month": 1651200000,
       "monthly_output_capacity_by_utilization": {

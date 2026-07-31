@@ -32,6 +32,29 @@ None of this counts engineer time, which the model excludes entirely.
 - Not complete. Blank cells marked "not documented" or "not measured" are
   correct output. A gap with a reason beats a number with none.
 
+## How every number here was checked
+
+Three mechanical gates, run by the maintainer, not by the agent that collected
+the data. A number that fails any gate is deleted rather than published.
+
+```mermaid
+flowchart TD
+    A[Fetch official vendor page<br/>raw HTTP, saved to disk] --> B[Gate 1: literal in page?]
+    B -->|no| X[DELETE<br/>counted as fabrication]
+    B -->|yes| C[Gate 2: value inside literal?]
+    C -->|no| X
+    C -->|yes| D[Gate 3: value near its model name?]
+    D -->|no| R[FLAG for human review]
+    D -->|yes| E[Publish to data/*.json]
+    E --> F[README tables generated from JSON]
+    F --> G[Gate 4: prose claims asserted against JSON]
+    G -->|mismatch| X
+    G -->|pass| H[Snapshot + publish]
+```
+
+This caught four real errors in our own work, listed in CHANGELOG.md, including
+one that reversed the repo's headline conclusion.
+
 ## TL;DR
 
 Three categories, one capability tier each, cheapest verified option per
@@ -79,10 +102,14 @@ Identical model id, identical weights, standard tier, one API call away from
 each other. This is the cheapest saving on this page and it requires changing a
 base URL.
 
+{{CHART_SPREAD}}
+
 {{TABLE:SPREADS}}
 
 **2. Your batching config moves cost more than your GPU choice does.** Same
 model, same 2x H100, same rental rate. Only concurrency changes:
+
+{{CHART_OPPOINT}}
 
 {{TABLE:OPPOINT}}
 
@@ -138,8 +165,9 @@ section, because a token is not a fixed amount of text.
 
 ## API pricing, open models on hosted APIs
 
-The same open weights cost different amounts depending on who runs them. Spread
-across providers for one model reaches 10x.
+The same open weights cost different amounts depending on who runs them. Across
+models served by three or more providers on the standard tier, the widest
+spread measured here is 3.2x.
 
 {{TABLE:API_HOSTED}}
 
@@ -150,6 +178,15 @@ and TTL are the two fields most comparisons omit, and both decide whether you
 get the discount at all.
 
 {{TABLE:CACHING}}
+
+## Long-context pricing thresholds
+
+Several vendors charge more above a context threshold. A quote based on the
+headline price is wrong for exactly the workloads people adopt long context
+for. Note that the trigger differs: "input tokens" and "total context length"
+are not the same condition.
+
+{{TABLE:CONTEXT}}
 
 ## Batch and async tiers
 
@@ -217,6 +254,8 @@ GPU count, so check it before reusing any throughput number.
 Utilization is the assumption that moves these numbers most, by 9x across the
 range shown. It is also the one nobody measures honestly before committing.
 
+{{CHART_UTIL}}
+
 Configurations dropped for lack of a published rate: every AMD MI355X result in
 `data/self-host-inputs.json`. The throughput data exists and is good, but no
 surveyed provider publishes an on-demand per-GPU MI355X price, so those rows
@@ -238,6 +277,14 @@ the workloads people try it on first.
 ## Steal this stack
 
 {{TABLE:STACK}}
+
+## What a per-token price does not tell you
+
+Rate limits decide whether a cheap provider is usable at all. Retention and
+training policy decide whether you can send it your data. Neither appears in a
+price comparison.
+
+{{TABLE:HIDDEN}}
 
 ## When the API is the right choice
 

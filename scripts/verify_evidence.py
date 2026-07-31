@@ -72,11 +72,31 @@ def verify_lane(lane: pathlib.Path) -> dict:
     failures = []
 
     rows = list(iter_rows(payload))
-    for i, row in enumerate(rows):
+    i = -1
+    while i + 1 < len(rows):
+        i += 1
+        row = rows[i]
         if not isinstance(row, dict):
             continue
         lit = row.get("evidence_literal")
         ev = row.get("evidence_file")
+
+        # Some lanes cite one source per FIELD rather than one per row, and
+        # emit parallel lists. Expand those into individual checks so every
+        # quoted string is verified rather than the row being skipped.
+        if isinstance(lit, list) or isinstance(ev, list):
+            lits = lit if isinstance(lit, list) else [lit] * len(ev or [])
+            evs = ev if isinstance(ev, list) else [ev] * len(lits)
+            for sub_lit, sub_ev in zip(lits, evs):
+                if sub_lit and sub_ev:
+                    rows.append(
+                        {
+                            "evidence_literal": sub_lit,
+                            "evidence_file": sub_ev,
+                            "provider": row.get("provider"),
+                        }
+                    )
+            continue
         label = (
             row.get("model_name")
             or row.get("gpu_model")

@@ -68,11 +68,56 @@ def money(v, dash="not documented"):
     return f"${n:g}"
 
 
+# Typography rules for generated output. The JSON keeps vendor text byte-exact;
+# this only normalises what gets rendered into the README, because the repo's
+# style bans em dashes and the source pages are full of them.
+_TYPO = {
+    "—": "--", "–": "-", "‘": "'", "’": "'",
+    "“": '"', "”": '"', "…": "...", "×": "x",
+    "→": "->", " ": " ",
+}
+
+
+def demojibake(s: str) -> str:
+    """Repair text that was UTF-8 encoded then decoded as cp1252.
+
+    Vendor pages served this way reach us as sequences like 'A-tilde em-dash'
+    where the original was a multiplication sign: U+00D7 encodes to C3 97, and
+    cp1252 maps 0x97 to U+2014. So an em dash in this data is usually not
+    punctuation at all, it is the second byte of a mangled symbol. Deleting the
+    character would leave 'A-tilde' behind; decoding it back recovers the real
+    one.
+    """
+    if not any(c in s for c in "ÃÂâ"):
+        return s
+    try:
+        repaired = s.encode("cp1252", errors="strict").decode("utf-8", errors="strict")
+    except (UnicodeEncodeError, UnicodeDecodeError):
+        return s
+    return repaired
+
+
+def clean(s):
+    """Strip smart punctuation and pipes from a generated table cell."""
+    s = demojibake(str(s))
+    for k, v in _TYPO.items():
+        s = s.replace(k, v)
+    return s.replace("|", "/").replace("\n", " ")
+
+
+def bar(value, peak, width=34, ch="#"):
+    """Fixed-width ASCII bar. Renders identically everywhere, no build step."""
+    if not peak or peak <= 0:
+        return ""
+    n = max(1, round(value / peak * width))
+    return ch * n
+
+
 def table(headers, rows):
     out = ["| " + " | ".join(headers) + " |",
            "|" + "|".join("---" for _ in headers) + "|"]
     for r in rows:
-        out.append("| " + " | ".join(str(c) for c in r) + " |")
+        out.append("| " + " | ".join(clean(c) for c in r) + " |")
     return "\n".join(out)
 
 
@@ -280,10 +325,20 @@ def t_breakeven(be, sh):
         ("OpenAI", "gpt-5.6-terra"),
         ("Google Gemini", "Gemini 3.6 Flash"),
     ]
-    out = []
+    # One row per (self-host deployment, reference API). break-even.json holds
+    # every sweep point; the README needs the best config per deployment.
+    best = {}
     for row in be["rows"]:
         if (row["api_provider"], row["api_model"]) not in picks:
             continue
+        k = (row["self_host_model"], row["gpu_model"], row["gpu_count"],
+             row["api_model"])
+        cur = best.get(k)
+        if cur is None or row["monthly_fixed_usd"] < cur["monthly_fixed_usd"]:
+            best[k] = row
+
+    out = []
+    for row in sorted(best.values(), key=lambda r: (str(r["self_host_model"]), r["gpu_model"])):
         cap = row["monthly_output_capacity_by_utilization"]
         reach = row["reachable_at_utilization"]
         out.append([
@@ -440,6 +495,132 @@ def t_headtohead(prov, sh):
     )
 
 
+
+def t_context(rows):
+    """Vendors that change price above a context threshold.
+
+    The threshold_applies_to column is the one that matters and the one vendors
+    word differently: "input tokens" and "context length" are not the same
+    trigger, and neither is "prompts".
+    """
+    out = []
+    for r in rows:
+        out.append([
+            r.get("vendor"),
+            f"`{str(r.get('model_name'))[:30]}`",
+            str(r.get("threshold_tokens")),
+            str(r.get("threshold_applies_to"))[:30],
+            str(r.get("input_multiplier") or "not stated"),
+            str(r.get("output_multiplier") or "not stated"),
+            f"[src]({r.get('source_url')})" if r.get("source_url") else "--",
+        ])
+    return table(
+        ["Vendor", "Model", "Threshold", "Applies to", "Input x", "Output x",
+         "Source"],
+        out,
+    )
+
+
+def c_spread(prov, top=7):
+    """Bar chart of price spread for identical open weights."""
+    by_model = defaultdict(list)
+    for r in prov["rows"]:
+        if r.get("category") != "B_hosted_open_api":
+            continue
+        if r.get("service_tier") not in (None, "standard"):
+            continue
+        o = num(r.get("output_per_1m"))
+        if o:
+            by_model[str(r.get("model_name", "")).lower().replace("-turbo", "")].append(o)
+    rows = [
+        (max(v) / min(v), k, min(v), max(v))
+        for k, v in by_model.items()
+        if len(v) >= 3 and min(v) > 0
+    ]
+    rows.sort(reverse=True)
+    if not rows:
+        return "```\nno models served by 3+ providers\n```"
+    peak = rows[0][0]
+    lines = ["output $/1M, cheapest host vs dearest host, same weights", ""]
+    for spread, model, lo, hi in rows[:top]:
+        label = model.split("/")[-1][:30]
+        lines.append(f"{label:<31}{bar(spread, peak):<35}{spread:>5.1f}x  ${lo:g} -> ${hi:g}")
+    return "```\n" + "\n".join(lines) + "\n```"
+
+
+def c_oppoint(sh):
+    """Cost curve as throughput rises on fixed hardware."""
+    rows = [
+        r for r in sh["rows"]
+        if "gptoss" in str(r["model"]).lower()
+        and r["gpu_model"] == "H100"
+        and "RunPod" in str(r["gpu_provider"])
+    ]
+    if not rows:
+        return "```\nno sweep available\n```"
+    rows.sort(key=lambda r: r["throughput_tok_per_s"])
+    peak = max(r["cost_per_1m_by_utilization"]["30pct"] for r in rows)
+    lines = [
+        "gpt-oss-120b, 2x H100, same rental rate, only concurrency changes",
+        "cost per 1M output tokens at 30% utilization",
+        "",
+    ]
+    for r in rows:
+        c = r["cost_per_1m_by_utilization"]["30pct"]
+        lines.append(
+            f"{r['throughput_tok_per_s']:>6,.0f} tok/s  {bar(c, peak):<35}${c:>6.2f}"
+        )
+    lines += ["", "more concurrency, less cost per token, worse per-user latency"]
+    return "```\n" + "\n".join(lines) + "\n```"
+
+
+def c_utilization(sh):
+    """The single assumption that moves self-hosting cost most."""
+    pick = None
+    for r in sh["rows"]:
+        if "minimax" in str(r["model"]).lower() and r["gpu_model"] == "MI355X":
+            if pick is None or r["throughput_tok_per_s"] > pick["throughput_tok_per_s"]:
+                pick = r
+    if not pick:
+        return "```\nno config available\n```"
+    u = pick["cost_per_1m_by_utilization"]
+    peak = u["10pct"]
+    lines = [
+        f"{pick['model']}, {pick['gpu_count']}x {pick['gpu_model']} on "
+        f"{pick['gpu_provider']}, {pick['throughput_tok_per_s']:,.0f} tok/s",
+        "cost per 1M output tokens by utilization",
+        "",
+    ]
+    for k in ("10pct", "30pct", "60pct", "90pct"):
+        lines.append(f"{k.replace('pct','%'):>5}  {bar(u[k], peak):<35}${u[k]:>6.2f}")
+    lines += [
+        "",
+        f"same hardware, same price, {u['10pct'] / u['90pct']:.0f}x cost range.",
+        "utilization is an assumption, not a measurement.",
+    ]
+    return "```\n" + "\n".join(lines) + "\n```"
+
+
+
+def t_hidden(rows):
+    """Costs and limits that never appear in a per-token price."""
+    out = []
+    for r in rows:
+        out.append([
+            r.get("provider"),
+            str(r.get("rate_limits"))[:46],
+            str(r.get("minimum_spend"))[:22],
+            str(r.get("free_tier"))[:26],
+            str(r.get("training_on_your_data"))[:34],
+            str(r.get("uptime_sla"))[:22],
+        ])
+    return table(
+        ["Provider", "Default rate limits", "Minimum spend", "Free tier",
+         "Trains on your data?", "SLA"],
+        out,
+    )
+
+
 def t_stack():
     """Runnable stack. Rendered only from verified registry data."""
     p = LANES / "ict-models" / "stack.json"
@@ -491,17 +672,27 @@ def main() -> int:
         "HEADTOHEAD": t_headtohead(prov, sh),
         "SPREADS": t_spreads(prov),
         "OPPOINT": t_operating_point(sh),
+        "CONTEXT": t_context(lane("context-pricing")),
+        "CHART_SPREAD": c_spread(prov),
+        "CHART_OPPOINT": c_oppoint(sh),
+        "CHART_UTIL": c_utilization(sh),
+        "HIDDEN": t_hidden(lane("hidden-costs")),
     }
 
     tpl = (ROOT / "README.template.md").read_text(encoding="utf-8")
     out = tpl
     for name, md in tables.items():
-        token = "{{TABLE:%s}}" % name
-        if token not in out:
-            print(f"  WARNING: placeholder {token} not in template")
-        out = out.replace(token, md)
+        # Charts use {{NAME}} and tables use {{TABLE:NAME}}. Accept either so a
+        # placeholder never silently survives into the published README.
+        hit = False
+        for token in ("{{TABLE:%s}}" % name, "{{%s}}" % name):
+            if token in out:
+                out = out.replace(token, md)
+                hit = True
+        if not hit:
+            print(f"  WARNING: no placeholder found for {name}")
 
-    leftover = re.findall(r"\{\{TABLE:[A-Z_]+\}\}", out)
+    leftover = re.findall(r"\{\{[A-Z_:]+\}\}", out)
     if leftover:
         print(f"  WARNING: unfilled placeholders: {leftover}")
 

@@ -14,15 +14,22 @@ diff. Future rounds will list only what moved.
 
 Collected in this round:
 
-- 586 per-token price rows across 14 providers, split into closed vendor APIs
-  (281) and open models on hosted APIs (305, of which 48 are dedicated GPU-hour
-  rows rather than per-token).
-- 355 GPU rental rows across 8 providers, covering on-demand, spot, and
-  reserved tiers.
-- 25 billing-mechanics rows covering prompt caching, batch tiers, and reasoning
-  tokens across 10 providers.
-- 9 cited throughput datapoints, 6 complete and 3 incomplete.
+- 928 per-token price rows: 602 closed-vendor across 13 vendors, 278 open
+  models on hosted APIs, 48 dedicated GPU-hour rows.
+- 378 GPU rental rows across 15 providers, on-demand, spot and reserved kept as
+  separate rows.
+- 395 cited throughput datapoints across 7 accelerators (B200, B300, H100,
+  H200, MI300X, MI325X, MI355X), yielding 338 costed configurations.
+- 25 billing-mechanics rows on caching, batch tiers and reasoning tokens.
+- 34 long-context threshold rows across 6 vendors.
+- 22 provider rows on rate limits, minimum spend, retention and training policy.
+- 20 models with params and licenses, active_params stated on 17.
 - 10 tokenizer measurements, 5 recorded gaps.
+
+Every row passed a mechanical evidence gate: 1,993 checks, 0 failures. The
+number must appear literally inside a raw HTTP capture saved at collection
+time, the value must appear inside that quote, and the value must sit near its
+model name in the page.
 
 Notable findings recorded at baseline, each of which is the kind of thing that
 silently corrupts a cost comparison:
@@ -56,6 +63,30 @@ silently corrupts a cost comparison:
   cost row because there is no rate to multiply it by.
 - **36 GPU rental rows are marked `UNCLEAR`** on whether the listed price is
   per GPU or per node. That distinction is an 8x error and was not guessed.
+- **Two of the most widely served open models have no reproducible serving
+  benchmark.** Kimi K3 and GLM 5.2 are priced by eight or more hosts each, and
+  neither has a public throughput datapoint stating hardware, engine version,
+  precision, concurrency and sequence lengths together. They are therefore
+  absent from the head-to-head table.
+
+Errors found in our own work by the audit and fixed before publication, listed
+because the protocol is the product:
+
+1. **11 Fireworks rows carried Priority-tier prices labelled standard**, a 50%
+   overstatement. Fireworks lists Standard and Priority as adjacent columns of
+   one table; the collection lane got it right and the merge script overwrote
+   it with a hardcoded "standard".
+2. **A 4x understatement on every multi-GPU box.** SemiAnalysis InferenceX
+   reports `output_tput_per_gpu`. One lane labelled those rows `total_output`
+   while its own quoted literal named the per-GPU field. Introduced twice,
+   caught twice; the quoted source field name now overrides the label.
+3. **A 13B model priced against a 70B model's API.** Matching "Llama-3.3-70B"
+   on its first token also matched a `llama_13b` row, which briefly reversed
+   the repo's headline conclusion. Matching is now on a full canonical key.
+4. **A claim of uniform tier multipliers** that the data does not support.
+5. **Two Baseten rows** carrying a Fast variant's price under the base model
+   name, dropped rather than corrected, because a corrected value would have
+   come from a different fetch than the row's own quote.
 
 ## Next round
 
