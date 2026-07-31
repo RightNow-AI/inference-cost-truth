@@ -14,9 +14,10 @@ diff. Future rounds will list only what moved.
 
 Collected in this round:
 
-- 928 per-token price rows: 602 closed-vendor across 13 vendors, 278 open
-  models on hosted APIs, 48 dedicated GPU-hour rows.
-- 378 GPU rental rows across 15 providers, on-demand, spot and reserved kept as
+- 874 per-token price rows after deduplication: 581 closed-vendor across 13
+  vendors, 263 open models across 11 hosted providers, 30 dedicated GPU-hour
+  rows.
+- 378 GPU rental rows across 16 providers, on-demand, spot and reserved kept as
   separate rows.
 - 395 cited throughput datapoints across 7 accelerators (B200, B300, H100,
   H200, MI300X, MI325X, MI355X), yielding 338 costed configurations.
@@ -58,10 +59,12 @@ silently corrupts a cost comparison:
   and returns 164 tokens for our English sample on some repos against 134 from
   Mistral's own `mistral-common` library. The first-party library is treated as
   authoritative here.
-- **No surveyed provider publishes an on-demand per-GPU AMD MI355X rate.**
-  Good throughput data for MI355X exists and is recorded, but it produces no
-  cost row because there is no rate to multiply it by.
-- **36 GPU rental rows are marked `UNCLEAR`** on whether the listed price is
+- **AMD MI355X rates are published, but not by the mainstream GPU clouds.**
+  None of the eight providers surveyed first listed one. Vultr does, at
+  $2.59/GPU/hr on demand, under half the cheapest B200 rate found, against
+  higher measured throughput on DeepSeek-R1. Finding it required a second,
+  targeted search.
+- **44 GPU rental rows are marked `UNCLEAR`** on whether the listed price is
   per GPU or per node. That distinction is an 8x error and was not guessed.
 - **Two of the most widely served open models have no reproducible serving
   benchmark.** Kimi K3 and GLM 5.2 are priced by eight or more hosts each, and
