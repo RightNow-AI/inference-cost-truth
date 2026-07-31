@@ -305,17 +305,19 @@ def t_stack():
     items = payload if isinstance(payload, list) else payload.get("stack", [])
     blocks = []
     for s in items:
-        cmd = str(s.get("docker_command", "")).strip()
+        cmd = str(s.get("docker_run", "")).strip()
         bench = str(s.get("benchmark_command", "")).strip()
         blocks.append(
-            f"### {s.get('model_id')}\n\n"
+            f"### `{s.get('model_id')}`\n\n"
             f"[model card]({s.get('hf_url')}) | "
-            f"{s.get('gpu_count', '?')}x {s.get('gpu')} on {s.get('rental_provider')} | "
-            f"{s.get('engine')} | {s.get('quantization')}\n\n"
-            f"{s.get('reason', '')}\n\n"
+            f"{s.get('gpu_count', '?')}x {s.get('recommended_gpu')} on "
+            f"[{s.get('gpu_rental_provider')}]({s.get('gpu_rental_provider_url')}) | "
+            f"{s.get('inference_engine')} | {s.get('quantization')}\n\n"
+            f"{s.get('recommended_gpu_reason', '')}\n\n"
             f"```bash\n{cmd}\n```\n\n"
-            f"Reproduce the throughput number:\n\n```bash\n{bench}\n```\n\n"
-            f"Image tag verified against `{s.get('tag_check_url', 'n/a')}`."
+            f"Reproduce a throughput number on it:\n\n```bash\n{bench}\n```\n\n"
+            f"Image `{s.get('image')}:{s.get('tag')}` confirmed to exist at "
+            f"[{s.get('registry_api_url')}]({s.get('registry_api_url')})."
         )
     return "\n\n".join(blocks)
 

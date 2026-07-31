@@ -25,7 +25,9 @@ SNAPDIR = DATA / "snapshots"
 FILES = [
     "providers.json",
     "self-host.json",
+    "self-host-inputs.json",
     "models.json",
+    "stack.json",
     "tokenizers.json",
     "break-even.json",
 ]

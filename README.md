@@ -370,7 +370,95 @@ the workloads people try it on first.
 
 ## Steal this stack
 
-_Not yet published. Every docker tag in this section has to be proven to exist against the registry API before it goes in, and that verification is still running. A pasted command that 404s is the worst possible failure for this repo._
+### `openai/gpt-oss-20b`
+
+[model card](https://huggingface.co/openai/gpt-oss-20b) | 1x NVIDIA L40S 48 GB on [Runpod](https://www.runpod.io/gpu-models/l40s) | vLLM | MXFP4 MoE weights
+
+The official card says the MXFP4 model runs within 16GB of memory; one Runpod L40S exposes 48 GB, leaving capacity for the runtime and KV cache.
+
+```bash
+docker run --rm --gpus all --ipc=host --network=host -v "${HOME}/.cache/huggingface:/root/.cache/huggingface" vllm/vllm-openai:v0.26.0 --model openai/gpt-oss-20b --port 8000
+```
+
+Reproduce a throughput number on it:
+
+```bash
+docker run --rm --network=host --entrypoint vllm vllm/vllm-openai:v0.26.0 bench serve --backend openai --endpoint /v1/completions --model openai/gpt-oss-20b --dataset-name random --num-prompts 1000 --random-input-len 1024 --random-output-len 128 --port 8000
+```
+
+Image `vllm/vllm-openai:v0.26.0` confirmed to exist at [https://hub.docker.com/v2/repositories/vllm/vllm-openai/tags/v0.26.0](https://hub.docker.com/v2/repositories/vllm/vllm-openai/tags/v0.26.0).
+
+### `openai/gpt-oss-120b`
+
+[model card](https://huggingface.co/openai/gpt-oss-120b) | 1x NVIDIA H100 80 GB on [Runpod](https://www.runpod.io/gpu-models/h100) | vLLM | MXFP4 MoE weights
+
+The official card states that the 117B/5.1B-active MXFP4 model fits into a single 80GB GPU and names NVIDIA H100 as an example.
+
+```bash
+docker run --rm --gpus all --ipc=host --network=host -v "${HOME}/.cache/huggingface:/root/.cache/huggingface" vllm/vllm-openai:v0.26.0 --model openai/gpt-oss-120b --port 8000
+```
+
+Reproduce a throughput number on it:
+
+```bash
+docker run --rm --network=host --entrypoint vllm vllm/vllm-openai:v0.26.0 bench serve --backend openai --endpoint /v1/completions --model openai/gpt-oss-120b --dataset-name random --num-prompts 1000 --random-input-len 1024 --random-output-len 128 --port 8000
+```
+
+Image `vllm/vllm-openai:v0.26.0` confirmed to exist at [https://hub.docker.com/v2/repositories/vllm/vllm-openai/tags/v0.26.0](https://hub.docker.com/v2/repositories/vllm/vllm-openai/tags/v0.26.0).
+
+### `mistralai/Mistral-Small-4-119B-2603`
+
+[model card](https://huggingface.co/mistralai/Mistral-Small-4-119B-2603) | 2x NVIDIA H100 80 GB on [Runpod](https://www.runpod.io/gpu-models/h100) | vLLM | FP8
+
+The official checkpoint is 119B with FP8 weights, and its official vLLM launch uses tensor parallel size 2; two Runpod H100 GPUs provide 80 GB each.
+
+```bash
+docker run --rm --gpus all --ipc=host --network=host -v "${HOME}/.cache/huggingface:/root/.cache/huggingface" vllm/vllm-openai:v0.26.0 --model mistralai/Mistral-Small-4-119B-2603 --port 8000 --max-model-len 262144 --tensor-parallel-size 2 --attention-backend FLASH_ATTN_MLA --tool-call-parser mistral --enable-auto-tool-choice --reasoning-parser mistral --max_num_batched_tokens 16384 --max_num_seqs 128 --gpu_memory_utilization 0.8
+```
+
+Reproduce a throughput number on it:
+
+```bash
+docker run --rm --network=host --entrypoint vllm vllm/vllm-openai:v0.26.0 bench serve --backend openai --endpoint /v1/completions --model mistralai/Mistral-Small-4-119B-2603 --dataset-name random --num-prompts 1000 --random-input-len 1024 --random-output-len 128 --port 8000
+```
+
+Image `vllm/vllm-openai:v0.26.0` confirmed to exist at [https://hub.docker.com/v2/repositories/vllm/vllm-openai/tags/v0.26.0](https://hub.docker.com/v2/repositories/vllm/vllm-openai/tags/v0.26.0).
+
+### `Qwen/Qwen3.6-35B-A3B`
+
+[model card](https://huggingface.co/Qwen/Qwen3.6-35B-A3B) | 8x NVIDIA H100 80 GB on [Runpod](https://www.runpod.io/gpu-models/h100) | vLLM | BF16
+
+The official 35B/3B-active BF16 card explicitly recommends tensor parallel on 8 GPUs for the 262,144-token endpoint; H100 is a listed 80 GB rental GPU.
+
+```bash
+docker run --rm --gpus all --ipc=host --network=host -v "${HOME}/.cache/huggingface:/root/.cache/huggingface" vllm/vllm-openai:v0.26.0 --model Qwen/Qwen3.6-35B-A3B --port 8000 --tensor-parallel-size 8 --max-model-len 262144 --reasoning-parser qwen3 --enable-auto-tool-choice --tool-call-parser qwen3_coder
+```
+
+Reproduce a throughput number on it:
+
+```bash
+docker run --rm --network=host --entrypoint vllm vllm/vllm-openai:v0.26.0 bench serve --backend openai --endpoint /v1/completions --model Qwen/Qwen3.6-35B-A3B --dataset-name random --num-prompts 1000 --random-input-len 1024 --random-output-len 128 --port 8000
+```
+
+Image `vllm/vllm-openai:v0.26.0` confirmed to exist at [https://hub.docker.com/v2/repositories/vllm/vllm-openai/tags/v0.26.0](https://hub.docker.com/v2/repositories/vllm/vllm-openai/tags/v0.26.0).
+
+### `nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16`
+
+[model card](https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16) | 8x NVIDIA H100-80GB on [Runpod](https://www.runpod.io/gpu-models/h100) | vLLM | BF16 weights with FP8 KV cache
+
+NVIDIA states a minimum requirement of 8 H100-80GB GPUs for the 120B/12B-active BF16 checkpoint.
+
+```bash
+docker run --rm --gpus all --ipc=host --network=host -v "${HOME}/.cache/huggingface:/root/.cache/huggingface" vllm/vllm-openai:v0.18.1 --model nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16 --port 8000 --async-scheduling --dtype auto --kv-cache-dtype fp8 --tensor-parallel-size 8 --max-model-len 262144 --enable-expert-parallel --swap-space 0 --trust-remote-code --gpu-memory-utilization 0.9 --max-cudagraph-capture-size 128 --enable-chunked-prefill --mamba-ssm-cache-dtype float32
+```
+
+Reproduce a throughput number on it:
+
+```bash
+docker run --rm --network=host --entrypoint vllm vllm/vllm-openai:v0.18.1 bench serve --backend openai --endpoint /v1/completions --model nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16 --dataset-name random --num-prompts 1000 --random-input-len 1024 --random-output-len 128 --port 8000
+```
+
+Image `vllm/vllm-openai:v0.18.1` confirmed to exist at [https://hub.docker.com/v2/repositories/vllm/vllm-openai/tags/v0.18.1](https://hub.docker.com/v2/repositories/vllm/vllm-openai/tags/v0.18.1).
 
 ## When the API is the right choice
 
