@@ -63,6 +63,75 @@ is less than half the cheapest B200 rate we found, while delivering higher
 measured throughput on DeepSeek-R1. If you are going to self-host, the
 accelerator you pick matters more than the model does.
 
+## Nine things this data says that the comparisons get wrong
+
+Each of these is derived from the tables below, not from anyone's opinion.
+
+**1. The same open weights cost up to 3.2x more depending on who runs them.**
+Identical model id, identical weights, standard tier, one API call away from
+each other. This is the cheapest saving on this page and it requires changing a
+base URL.
+
+| Open model | Providers | Cheapest output /1M | Dearest output /1M | Spread |
+|---|---|---|---|---|
+| `meta-llama/llama-3.3-70b-instruct` | 4 | $0.32 (DeepInfra) | $1.04 (Together AI) | **3.2x** |
+| `openai/gpt-oss-120b` | 6 | $0.25 (Novita AI) | $0.75 (Cerebras) | **3.0x** |
+| `google/gemma-4-31b-it` | 4 | $0.34 (DeepInfra) | $0.97 (Together AI) | **2.9x** |
+| `qwen/qwen3.7-max` | 3 | $3.75 (Novita AI) | $7.5 (DeepInfra) | **2.0x** |
+| `openai/gpt-oss-20b` | 3 | $0.15 (Novita AI) | $0.3 (Groq) | **2.0x** |
+| `google/gemma-3-27b-it` | 3 | $0.16 (DeepInfra) | $0.3 (Nebius AI Studio) | **1.9x** |
+| `moonshotai/kimi-k2.6` | 4 | $3.4 (Novita AI) | $4.5 (Together AI) | **1.3x** |
+| `qwen/qwen3-235b-a22b-instruct-2507` | 3 | $0.55 (DeepInfra) | $0.6 (Nebius AI Studio) | **1.1x** |
+
+**2. Your batching config moves cost more than your GPU choice does.** Same
+model, same 2x H100, same rental rate. Only concurrency changes:
+
+| Total output tok/s | @90% util | @60% | @30% | @10% |
+|---|---|---|---|---|
+| 658 | $1.867 | $2.800 | $5.601 | $16.803 |
+| 998 | $1.230 | $1.846 | $3.692 | $11.075 |
+| 1,385 | $0.887 | $1.330 | $2.660 | $7.980 |
+| 1,825 | $0.673 | $1.010 | $2.019 | $6.058 |
+| 2,282 | $0.538 | $0.807 | $1.615 | $4.845 |
+
+That is a 3.5x swing in cost per token from a config flag. People agonise over
+which accelerator to buy and then run it at concurrency 8.
+
+**3. Reasoning tokens are the largest hidden multiplier in the whole stack.**
+A 14.3x gap between the tokens you see and the tokens you pay for dwarfs every
+price difference between vendors. Optimising your provider choice while
+ignoring reasoning-token volume is optimising the wrong term.
+
+**4. Cache writes are not free, and almost nobody accounts for them.** Across
+the rows here that price it, writing a cache entry costs 1.25x the input rate
+on 61 models and 2.0x on 16. If your prefix changes every request you are
+paying a premium to populate a cache you never read.
+
+**5. Tokenizer normalization barely matters for English and does matter for
+code.** Measured across 10 tokenizers on fixed text: English spans 3.0%, code
+spans 9.7%. The standard blog-post advice to normalize before comparing prices
+is right in principle and nearly irrelevant for prose.
+
+**6. Tier multipliers are not uniform, so you cannot derive one from another.**
+Across OpenAI models, batch output is 0.5x standard on 41 models but 0.562x,
+0.833x and 1.0x on three others; fast ranges 1.667x to 2.5x. Assuming "batch is
+half" is wrong often enough to matter.
+
+**7. Multi-tier pricing is a scraping trap, not just a pricing detail.**
+Fireworks prints Standard and Priority as adjacent columns of one table. Take
+the wrong column and every number is 50% high. We shipped that bug ourselves
+and caught it in audit. Any comparison built by scraping is likely carrying it.
+
+**8. If you self-host, the accelerator decides more than the model does.** AMD
+MI355X at $2.59/GPU/hr is under half the cheapest B200 rate at $5.89, against
+higher measured throughput on DeepSeek-R1. It is also the hardest rate to find:
+none of the eight mainstream GPU providers we surveyed first published one.
+
+**9. At any utilization you will actually hit, the API wins.** See the
+head-to-head table. Self-hosting only wins at 90% utilization, and 90%
+utilization means a saturated box, which means a queue, which means the latency
+you were trying to avoid.
+
 ## API pricing, closed vendors
 
 Standard realtime tier. Batch, flex, fast, and long-context tiers are separate
@@ -72,6 +141,49 @@ section, because a token is not a fixed amount of text.
 
 | Vendor | Model | Input /1M | Cached in | Cache write | Output /1M | Batch out | Source |
 |---|---|---|---|---|---|---|---|
+| AI21 | `Jamba Large` | $2 | not documented | not documented | $8 | -- | [src](https://www.ai21.com/pricing) |
+| AI21 | `Jamba Mini` | $0.2 | not documented | not documented | $0.4 | -- | [src](https://www.ai21.com/pricing) |
+| Amazon Bedrock | `GPT-5.5` | $5.5 | $0.55 | not documented | $33 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `GPT-5.6 Sol` | $5.5 | $0.55 | $6.88 | $33 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `Claude 3.5 Sonnet (Public Extended Access, Effective 1 Dec 2025)` | $6 | not documented | not documented | $30 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `Claude 3.5 Sonnet v2 (Public Extended Access, Effective 1 Dec 2025)` | $6 | $0.6 | $7.5 | $30 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `GPT-5.4` | $2.75 | $0.275 | not documented | $16.5 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `GPT-5.6 Terra` | $2.2 | $0.22 | $2.75 | $13.2 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `Palmyra X4` | $2.5 | not documented | not documented | $10 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `Palmyra X5` | $0.6 | not documented | not documented | $6 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `GLM 5` | $1 | not documented | not documented | $3.2 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `Kimi K2.5` | $0.6 | not documented | not documented | $3 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `Qwen3 VL 235B A22B` | $0.53 | not documented | not documented | $2.66 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `Llama 2 Chat (70B)` | $1.95 | not documented | not documented | $2.56 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `Grok 4.3` | $1.25 | $0.2 | not documented | $2.5 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `Kimi K2 Thinking` | $0.6 | not documented | not documented | $2.5 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `GLM 4.7` | $0.6 | not documented | not documented | $2.2 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `Devstral 2 123B` | $0.4 | not documented | not documented | $2 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `DeepSeek v3.2` | $0.62 | not documented | not documented | $1.85 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `Magistral Small 1.2` | $0.5 | not documented | not documented | $1.5 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `Mistral Large 3` | $0.5 | not documented | not documented | $1.5 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `GPT-5.6 Luna` | $0.22 | $0.022 | $0.275 | $1.32 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `Minimax M2` | $0.3 | not documented | not documented | $1.2 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `Minimax M2.1` | $0.3 | not documented | not documented | $1.2 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `MiniMax M2.5` | $0.3 | not documented | not documented | $1.2 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `Qwen3 Coder Next` | $0.5 | not documented | not documented | $1.2 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `Qwen3 Next 80B A3B` | $0.15 | not documented | not documented | $1.2 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `Llama 2 Chat (13B)` | $0.75 | not documented | not documented | $1 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `NVIDIA Nemotron 3 Super 120B A12B` | $0.15 | not documented | not documented | $0.65 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `NVIDIA Nemotron Nano 2 VL` | $0.2 | not documented | not documented | $0.6 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `Palmyra Vision 7B` | $0.15 | not documented | not documented | $0.6 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `Gemma 4 26B A4B` | $0.13 | not documented | not documented | $0.4 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `Gemma 4 31B` | $0.14 | not documented | not documented | $0.4 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `GLM 4.7 Flash` | $0.07 | not documented | not documented | $0.4 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `Gemma 3 27B` | $0.23 | not documented | not documented | $0.38 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `Gemma 3 12B` | $0.09 | not documented | not documented | $0.29 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `NVIDIA Nemotron 3 Nano 30B A3B` | $0.06 | not documented | not documented | $0.24 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `NVIDIA Nemotron Nano 2` | $0.06 | not documented | not documented | $0.23 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `Ministral 14B 3.0` | $0.2 | not documented | not documented | $0.2 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `Ministral 8B 3.0` | $0.15 | not documented | not documented | $0.15 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `Ministral 3B 3.0` | $0.1 | not documented | not documented | $0.1 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `Gemma 3 4B` | $0.04 | not documented | not documented | $0.08 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
+| Amazon Bedrock | `Gemma 4 E2B` | $0.04 | not documented | not documented | $0.08 | -- | [src](https://aws.amazon.com/bedrock/pricing/) |
 | Anthropic | `Claude Fable 5` | $10 | $1 | $12.5 | $50 | -- | [src](https://platform.claude.com/docs/en/about-claude/pricing) |
 | Anthropic | `Claude Mythos 5 (limited availability)` | $10 | $1 | $12.5 | $50 | -- | [src](https://platform.claude.com/docs/en/about-claude/pricing) |
 | Anthropic | `Claude Opus 5` | $5 | $0.5 | $6.25 | $25 | -- | [src](https://platform.claude.com/docs/en/about-claude/pricing) |
@@ -83,6 +195,71 @@ section, because a token is not a fixed amount of text.
 | Anthropic | `Claude Sonnet 4.6` | $3 | $0.3 | $3.75 | $15 | -- | [src](https://platform.claude.com/docs/en/about-claude/pricing) |
 | Anthropic | `Claude Sonnet 4.5` | $3 | $0.3 | $3.75 | $15 | -- | [src](https://platform.claude.com/docs/en/about-claude/pricing) |
 | Anthropic | `Claude Haiku 4.5` | $1 | $0.1 | $1.25 | $5 | -- | [src](https://platform.claude.com/docs/en/about-claude/pricing) |
+| Azure OpenAI | `GPT-5.4 Pro (>272k context length) Global` | $60 | not documented | not documented | $270 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.4 Pro (<272k context length) Global` | $30 | not documented | not documented | $180 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-4.5-Preview-2025-02-27 Global` | $75 | $37.5 | not documented | $150 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-4` | $60 | not documented | not documented | $120 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5 Pro Global` | $15 | not documented | not documented | $120 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.5 Global` | $12.5 | $1.25 | not documented | $75 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.6-sol (short context) Global` | $10 | $1 | $12.5 | $60 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `o1 2024-12-17 Global` | $15 | $7.5 | not documented | $60 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `o1 preview 2024-09-12 Global` | $15 | $7.5 | not documented | $60 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.5 Long Context Global` | $10 | $1 | not documented | $45 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.6-sol (long context) Global` | $10 | $1 | $12.5 | $45 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-4-Turbo` | $11 | not documented | not documented | $33 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-4-Turbo-Vision` | $11 | not documented | not documented | $33 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.4 (<272k context length) Global` | $5 | $0.5 | not documented | $30 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.6-terra (short context) Global` | $5 | $0.5 | $6.25 | $30 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-Chat Latest 05052026 Global` | $5 | $0.5 | not documented | $30 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.2 Global` | $3.5 | $0.35 | not documented | $28 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.3 Codex Global` | $3.5 | $0.35 | not documented | $28 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.4 (>272k context length) Global` | $5 | $0.5 | not documented | $22.5 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.6-terra (long context) Global` | $5 | $0.5 | $6.25 | $22.5 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5 2025-08-07 Global` | $2.5 | $0.25 | not documented | $20 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.1 Global` | $2.5 | $0.25 | not documented | $20 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-4o-2024-0513 Global` | $5 | not documented | not documented | $15 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-4.1-2025-04-14 Global` | $3.5 | $0.875 | not documented | $14 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.2 Codex Global` | $1.75 | $0.175 | not documented | $14 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.2-chat latest Global` | $1.75 | $0.175 | not documented | $14 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.3 Chat Global` | $1.75 | $0.175 | not documented | $14 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-4o-2024-08-06 Global` | $2.5 | $1.25 | not documented | $10 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-4o-2024-1120 Global` | $2.5 | $1.25 | not documented | $10 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5 chat Global` | $1.25 | $0.125 | not documented | $10 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5 Codex Global` | $1.25 | $0.125 | not documented | $10 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.1-chat Global` | $1.25 | $0.125 | not documented | $10 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.1-codex Global` | $1.25 | $0.125 | not documented | $10 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.1-codex-max Global` | $1.25 | $0.125 | not documented | $10 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.4 mini Global` | $1.5 | $0.15 | not documented | $9 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.6-luna (long context) Global` | $2 | $0.2 | $2.5 | $9 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `o3 2025-04-16 Global` | $2 | $0.5 | not documented | $8 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.6-luna (short context) Global` | $1 | $0.1 | $1.25 | $6 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `o1-mini 2024-09-12 Global` | $1.1 | $0.55 | not documented | $4.4 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `o3 mini 2025-01-31 Global` | $1.1 | $0.55 | not documented | $4.4 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `o4-mini 2025-04-16 Global` | $1.1 | $0.275 | not documented | $4.4 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-3.5-Turbo-0613` | $3 | not documented | not documented | $4 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5-mini Global` | $0.45 | $0.045 | not documented | $3.6 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-4.1-mini-2025-04-14 Global` | $0.7 | $0.175 | not documented | $2.8 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-3.5-Turbo-1106` | $1.1 | not documented | not documented | $2.2 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-3.5-Turbo-Instruct` | $1.65 | not documented | not documented | $2.2 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-3.5-Turbo-0301` | $1.5 | not documented | not documented | $2 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.1-codex-mini Global` | $0.25 | $0.025 | not documented | $2 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-3.5-Turbo-0125` | $0.55 | not documented | not documented | $1.65 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5.4 nano Global` | $0.2 | $0.02 | not documented | $1.25 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-4o-mini-0718 Global` | $0.15 | $0.075 | not documented | $0.6 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `gpt-oss-120b` | $0.15 | not documented | not documented | $0.6 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-4.1-nano-2025-04-14 Global` | $0.1 | $0.025 | not documented | $0.4 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Azure OpenAI | `GPT-5-nano Global` | $0.05 | $0.005 | not documented | $0.4 | -- | [src](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) |
+| Cohere | `Command R+ 04-2024` | $3 | not documented | not documented | $15 | -- | [src](https://cohere.com/pricing) |
+| Cohere | `Command A` | $2.5 | not documented | not documented | $10 | -- | [src](https://docs.cohere.com/docs/command-a) |
+| Cohere | `Command R+` | $2.5 | not documented | not documented | $10 | -- | [src](https://docs.cohere.com/docs/command-r-plus) |
+| Cohere | `Command R+ 08-2024` | $2.5 | not documented | not documented | $10 | -- | [src](https://cohere.com/pricing) |
+| Cohere | `Command` | $1 | not documented | not documented | $2 | -- | [src](https://cohere.com/pricing) |
+| Cohere | `Aya Expanse 32B` | $0.5 | not documented | not documented | $1.5 | -- | [src](https://cohere.com/pricing) |
+| Cohere | `Aya Expanse 8B` | $0.5 | not documented | not documented | $1.5 | -- | [src](https://cohere.com/pricing) |
+| Cohere | `Command R 03-2024` | $0.5 | not documented | not documented | $1.5 | -- | [src](https://cohere.com/pricing) |
+| Cohere | `Command R` | $0.15 | not documented | not documented | $0.6 | -- | [src](https://docs.cohere.com/docs/command-r) |
+| Cohere | `Command-light` | $0.3 | not documented | not documented | $0.6 | -- | [src](https://cohere.com/pricing) |
+| Cohere | `Command R7B` | $0.0375 | not documented | not documented | $0.15 | -- | [src](https://docs.cohere.com/docs/command-r7b) |
 | DeepSeek | `deepseek-v4-pro` | $0.435 | $0.003625 | not documented | $0.87 | -- | [src](https://api-docs.deepseek.com/quick_start/pricing/) |
 | DeepSeek | `deepseek-v4-flash` | $0.14 | $0.0028 | not documented | $0.28 | -- | [src](https://api-docs.deepseek.com/quick_start/pricing/) |
 | Google Gemini | `Gemini 3.1 Pro Preview` | $4 | $0.4 | not documented | $18 | -- | [src](https://ai.google.dev/gemini-api/docs/pricing) |
@@ -98,6 +275,77 @@ section, because a token is not a fixed amount of text.
 | Google Gemini | `Gemini 2.5 Flash-Lite Preview` | $0.1 | $0.01 | not documented | $0.4 | -- | [src](https://ai.google.dev/gemini-api/docs/pricing) |
 | Google Gemini | `Gemini 2.0 Flash` | $0.1 | $0.025 | not documented | $0.4 | -- | [src](https://ai.google.dev/gemini-api/docs/pricing) |
 | Google Gemini | `Gemini 2.0 Flash-Lite` | $0.075 | not documented | not documented | $0.3 | -- | [src](https://ai.google.dev/gemini-api/docs/pricing) |
+| Google Vertex AI | `Claude Fable 5 (long-context pricing)` | $10 | $1 | $12.5 | $50 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Claude Fable 5 (short-context pricing)` | $10 | $1 | $12.5 | $50 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Claude Opus 4.5 (short-context pricing)` | $5 | $0.5 | $6.25 | $25 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Claude Opus 4.6 (long-context pricing)` | $5 | $0.5 | $6.25 | $25 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Claude Opus 4.6 (short-context pricing)` | $5 | $0.5 | $6.25 | $25 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Claude Opus 4.7 (long-context pricing)` | $5 | $0.5 | $6.25 | $25 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Claude Opus 4.7 (short-context pricing)` | $5 | $0.5 | $6.25 | $25 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Claude Opus 4.8 (long-context pricing)` | $5 | $0.5 | $6.25 | $25 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Claude Opus 4.8 (short-context pricing)` | $5 | $0.5 | $6.25 | $25 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Opus 5 (long-context pricing)` | $5 | $0.5 | $6.25 | $25 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Opus 5 (short-context pricing)` | $5 | $0.5 | $6.25 | $25 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Gemini 3.1 Pro Preview (long-context pricing)` | $4 | $0.4 | not documented | $18 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Claude Sonnet 4.5 (short-context pricing)` | $3 | $0.3 | $3.75 | $15 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Claude Sonnet 4.6 (long-context pricing)` | $3 | $0.3 | $3.75 | $15 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Claude Sonnet 4.6 (short-context pricing)` | $3 | $0.3 | $3.75 | $15 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Claude Sonnet 5 (Standard Price beginning September 1st, 2026) (long-context pricing)` | $3 | $0.3 | $3.75 | $15 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Claude Sonnet 5 (Standard Price beginning September 1st, 2026) (short-context pricing)` | $3 | $0.3 | $3.75 | $15 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Gemini 2.5 Pro (long-context pricing)` | $2.5 | $0.25 | not documented | $15 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Gemini 3.1 Pro Preview (short-context pricing)` | $2 | $0.2 | not documented | $12 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Claude Sonnet 5 (Promotional Price through August 31, 2026) (long-context pricing)` | $2 | $0.2 | $2.5 | $10 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Claude Sonnet 5 (Promotional Price through August 31, 2026) (short-context pricing)` | $2 | $0.2 | $2.5 | $10 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Gemini 2.5 Pro (short-context pricing)` | $1.25 | $0.13 | not documented | $10 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Gemini 3.5 Flash (long-context pricing)` | $1.5 | $0.15 | not documented | $9 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Gemini 3.5 Flash (short-context pricing)` | $1.5 | $0.15 | not documented | $9 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Gemini Omni Flash` | $1.5 | not documented | not documented | $9 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Gemini 3.6 Flash (long-context pricing)` | $1.5 | $0.15 | not documented | $7.5 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Gemini 3.6 Flash (short-context pricing)` | $1.5 | $0.15 | not documented | $7.5 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `DeepSeek-R1 (0528)` | $1.35 | not documented | not documented | $5.4 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Claude Haiku 4.5 (short-context pricing)` | $1 | $0.1 | $1.25 | $5 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Grok 4.20 Non-Reasoning (long-context pricing)` | $2.5 | $0.4 | not documented | $5 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Grok 4.20 Reasoning (long-context pricing)` | $2.5 | $0.4 | not documented | $5 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Grok 4.3 (long-context pricing)` | $2.5 | $0.4 | not documented | $5 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `GLM-5 *` | $1 | $0.1 | not documented | $3.2 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Gemini 3 Flash Preview (long-context pricing)` | $0.5 | $0.05 | not documented | $3 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Gemini 3 Flash Preview (short-context pricing)` | $0.5 | $0.05 | not documented | $3 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Gemini 2.5 Flash (long-context pricing)` | $0.3 | $0.03 | not documented | $2.5 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Gemini 2.5 Flash (short-context pricing)` | $0.3 | $0.03 | not documented | $2.5 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Gemini 3.5 Flash-Lite (long-context pricing)` | $0.3 | $0.03 | not documented | $2.5 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Gemini 3.5 Flash-Lite (short-context pricing)` | $0.3 | $0.03 | not documented | $2.5 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Grok 4.20 Non-Reasoning (short-context pricing)` | $1.25 | $0.2 | not documented | $2.5 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Grok 4.20 Reasoning (short-context pricing)` | $1.25 | $0.2 | not documented | $2.5 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Grok 4.3 (short-context pricing)` | $1.25 | $0.2 | not documented | $2.5 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Kimi-K2-Thinking` | $0.6 | $0.06 | not documented | $2.5 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `GLM-4.7` | $0.6 | not documented | not documented | $2.2 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Gemini 2.0 Flash Live API` | $0.5 | not documented | not documented | $2 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Gemini 2.5 Flash Live API (long-context pricing)` | $0.5 | not documented | not documented | $2 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Gemini 2.5 Flash Live API (short-context pricing)` | $0.5 | not documented | not documented | $2 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Mistral Medium 3` | $0.4 | not documented | not documented | $2 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Qwen3-Coder-480B-A35B-Instruct` | $0.22 | $0.022 | not documented | $1.8 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `DeepSeek-V3.1` | $0.6 | $0.06 | not documented | $1.7 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `DeepSeek-V3.2` | $0.56 | $0.056 | not documented | $1.68 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Gemini 3.1 Flash-Lite (long-context pricing)` | $0.25 | $0.025 | not documented | $1.5 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Gemini 3.1 Flash-Lite (short-context pricing)` | $0.25 | $0.025 | not documented | $1.5 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `MiniMax-M2` | $0.3 | $0.03 | not documented | $1.2 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Qwen3-Next-80B-Instruct` | $0.15 | not documented | not documented | $1.2 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Qwen3-Next-80B-Thinking` | $0.15 | not documented | not documented | $1.2 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Llama 4 Maverick` | $0.35 | not documented | not documented | $1.15 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Codestral 2` | $0.3 | not documented | not documented | $0.9 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Qwen3-235B-A22B-Instruct-2507` | $0.22 | not documented | not documented | $0.88 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Llama 3.3 70B` | $0.72 | not documented | not documented | $0.72 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Llama 4 Scout` | $0.25 | not documented | not documented | $0.7 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Gemini 2.0 Flash` | $0.15 | not documented | not documented | $0.6 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Gemma 4 26B` | $0.15 | $0.015 | not documented | $0.6 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Grok 4.1 Fast Non-Reasoning` | $0.2 | $0.05 | not documented | $0.5 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Grok 4.1 Fast Reasoning` | $0.2 | $0.05 | not documented | $0.5 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Gemini 2.5 Flash Lite (long-context pricing)` | $0.1 | $0.01 | not documented | $0.4 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Gemini 2.5 Flash Lite (short-context pricing)` | $0.1 | $0.01 | not documented | $0.4 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `gpt-oss-120b` | $0.09 | not documented | not documented | $0.36 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Gemini 2.0 Flash Lite` | $0.075 | not documented | not documented | $0.3 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `Mistral Small 3.1 (25.03)` | $0.1 | not documented | not documented | $0.3 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
+| Google Vertex AI | `gpt-oss-20b` | $0.07 | $0.007 | not documented | $0.25 | -- | [src](https://cloud.google.com/vertex-ai/generative-ai/pricing) |
 | Mistral | `Mistral Medium 3.5` | $1.5 | not documented | not documented | $7.5 | -- | [src](https://mistral.ai/pricing/api/) |
 | Mistral | `Mixtral 8x22B` | $2 | not documented | not documented | $6 | -- | [src](https://mistral.ai/pricing/api/) |
 | Mistral | `Magistral Medium` | $2 | not documented | not documented | $5 | -- | [src](https://mistral.ai/pricing/api/) |
@@ -163,7 +411,25 @@ section, because a token is not a fixed amount of text.
 | OpenAI | `gpt-5-nano` | $0.05 | $0.005 | not documented | $0.4 | -- | [src](https://developers.openai.com/api/docs/pricing) |
 | OpenAI | `gpt-4.1-nano` | $0.1 | $0.025 | not documented | $0.4 | -- | [src](https://developers.openai.com/api/docs/pricing) |
 | OpenAI | `babbage-002` | $0.4 | not documented | not documented | $0.4 | -- | [src](https://developers.openai.com/api/docs/pricing) |
+| Perplexity | `Sonar Pro` | $3 | not documented | not documented | $15 | -- | [src](https://docs.perplexity.ai/docs/getting-started/pricing) |
+| Perplexity | `Sonar Reasoning Pro` | $2 | not documented | not documented | $8 | -- | [src](https://docs.perplexity.ai/docs/getting-started/pricing) |
+| Perplexity | `Sonar` | $1 | not documented | not documented | $1 | -- | [src](https://docs.perplexity.ai/docs/getting-started/pricing) |
+| Reka | `Reka Core` | $2 | not documented | not documented | $6 | -- | [src](https://docs.reka.ai/pricing) |
+| Reka | `Reka Flash` | $0.8 | not documented | not documented | $2 | -- | [src](https://docs.reka.ai/pricing) |
+| Reka | `Reka Edge` | $0.1 | not documented | not documented | $0.1 | -- | [src](https://docs.reka.ai/pricing) |
+| xAI | `grok-4.5 (long context)` | $4 | $0.6 | not documented | $12 | -- | [src](https://docs.x.ai/developers/pricing) |
 | xAI | `Grok 4.5` | $2 | not documented | not documented | $6 | -- | [src](https://docs.x.ai/developers/models) |
+| xAI | `grok-4.5 (short context)` | $2 | $0.3 | not documented | $6 | -- | [src](https://docs.x.ai/developers/pricing) |
+| xAI | `grok-4.20-0309-non-reasoning (long context)` | $2.5 | $0.4 | not documented | $5 | -- | [src](https://docs.x.ai/developers/pricing) |
+| xAI | `grok-4.20-0309-reasoning (long context)` | $2.5 | $0.4 | not documented | $5 | -- | [src](https://docs.x.ai/developers/pricing) |
+| xAI | `grok-4.20-multi-agent-0309 (long context)` | $2.5 | $0.4 | not documented | $5 | -- | [src](https://docs.x.ai/developers/pricing) |
+| xAI | `grok-4.3 (long context)` | $2.5 | $0.4 | not documented | $5 | -- | [src](https://docs.x.ai/developers/pricing) |
+| xAI | `grok-build-0.1 (long context)` | $2 | $0.4 | not documented | $4 | -- | [src](https://docs.x.ai/developers/pricing) |
+| xAI | `grok-4.20-0309-non-reasoning (short context)` | $1.25 | $0.2 | not documented | $2.5 | -- | [src](https://docs.x.ai/developers/pricing) |
+| xAI | `grok-4.20-0309-reasoning (short context)` | $1.25 | $0.2 | not documented | $2.5 | -- | [src](https://docs.x.ai/developers/pricing) |
+| xAI | `grok-4.20-multi-agent-0309 (short context)` | $1.25 | $0.2 | not documented | $2.5 | -- | [src](https://docs.x.ai/developers/pricing) |
+| xAI | `grok-4.3 (short context)` | $1.25 | $0.2 | not documented | $2.5 | -- | [src](https://docs.x.ai/developers/pricing) |
+| xAI | `grok-build-0.1 (short context)` | $1 | $0.2 | not documented | $2 | -- | [src](https://docs.x.ai/developers/pricing) |
 
 ## API pricing, open models on hosted APIs
 
@@ -199,6 +465,14 @@ across providers for one model reaches 10x.
 | MiniMax-M3 | Nebius AI Studio | `MiniMaxAI/MiniMax-M3` | $0.3 | not offered | $1.2 | fp4 | [src](https://tokenfactory.nebius.com/api/public/models_info) |
 | GLM-4.7 | Novita AI | `zai-org/glm-4.7-flash` | $0.07 | $0.01 | $0.4 | bf16 | [src](https://novita.ai/pricing) |
 | GLM-4.7 | Novita AI | `zai-org/glm-4.7` | $0.6 | $0.11 | $2.2 | fp8 | [src](https://novita.ai/pricing) |
+| Kimi-K3 | Together AI | `moonshotai/Kimi-K3` | $3 | $0.3 | $15 | FP4 | [src](https://www.together.ai/models/kimi-k3) |
+| Kimi-K3 | Baseten | `moonshotai/Kimi-K3` | $3 | $0.3 | $15 | not stated | [src](https://www.baseten.co/pricing/) |
+| Kimi-K3 | Novita AI | `moonshotai/kimi-k3` | $3 | $0.3 | $15 | not stated | [src](https://novita.ai/pricing) |
+| Kimi-K3 | Nebius AI Studio | `moonshotai/Kimi-K3` | $3 | not offered | $15 | fp4 | [src](https://tokenfactory.nebius.com/api/public/models_info) |
+| GLM-5.2 | Together AI | `zai-org/GLM-5.2` | $1.4 | $0.26 | $4.4 | FP4 | [src](https://www.together.ai/models/glm-52) |
+| GLM-5.2 | Novita AI | `zai-org/glm-5.2` | $1.4 | $0.26 | $4.4 | fp8 | [src](https://novita.ai/pricing) |
+| GLM-5.2 | Nebius AI Studio | `zai-org/GLM-5.2` | $1.4 | not offered | $4.4 | fp4 | [src](https://tokenfactory.nebius.com/api/public/models_info) |
+| GLM-5.2 | Baseten | `zai-org/GLM-5.2-Fast` | $2.1 | $0.21 | $6.6 | not stated | [src](https://www.baseten.co/pricing/) |
 
 ## Prompt caching
 
@@ -331,6 +605,52 @@ GPU count, so check it before reusing any throughput number.
 | Llama-3.3-70B-Instruct-FP8 (In | 2x H200 | CoreWeave | $6.31 | 1,121 | cited | $31.26 | $10.42 | $5.21 | $3.47 |
 | Llama-3.3-70B-Instruct-FP8 (In | 1x MI355X | Vultr | $2.59 | 971 | cited | $7.41 | $2.47 | $1.24 | $0.82 |
 | Llama-3.3-70B-Instruct-FP8 (In | 1x MI355X | Oracle Cloud | $8.6 | 971 | cited | $24.61 | $8.20 | $4.10 | $2.73 |
+| gptoss120b | 2x H100 | RunPod | $1.99 | 658 | cited | $16.80 | $5.60 | $2.80 | $1.87 |
+| gptoss120b | 2x H100 | CoreWeave | $6.16 | 658 | cited | $52.01 | $17.34 | $8.67 | $5.78 |
+| gptoss120b | 2x H100 | RunPod | $1.99 | 998 | cited | $11.07 | $3.69 | $1.85 | $1.23 |
+| gptoss120b | 2x H100 | CoreWeave | $6.16 | 998 | cited | $34.28 | $11.43 | $5.71 | $3.81 |
+| gptoss120b | 2x H100 | RunPod | $1.99 | 1,385 | cited | $7.98 | $2.66 | $1.33 | $0.89 |
+| gptoss120b | 2x H100 | CoreWeave | $6.16 | 1,385 | cited | $24.70 | $8.23 | $4.12 | $2.74 |
+| gptoss120b | 2x H100 | RunPod | $1.99 | 1,825 | cited | $6.06 | $2.02 | $1.01 | $0.67 |
+| gptoss120b | 2x H100 | CoreWeave | $6.16 | 1,825 | cited | $18.75 | $6.25 | $3.13 | $2.08 |
+| gptoss120b | 2x H100 | RunPod | $1.99 | 2,282 | cited | $4.84 | $1.61 | $0.81 | $0.54 |
+| gptoss120b | 2x H100 | CoreWeave | $6.16 | 2,282 | cited | $15.00 | $5.00 | $2.50 | $1.67 |
+| gptoss120b | 2x H200 | RunPod | $3.59 | 694 | cited | $28.75 | $9.58 | $4.79 | $3.19 |
+| gptoss120b | 2x H200 | CoreWeave | $6.31 | 694 | cited | $50.53 | $16.84 | $8.42 | $5.61 |
+| gptoss120b | 2x H200 | RunPod | $3.59 | 431 | cited | $46.24 | $15.41 | $7.71 | $5.14 |
+| gptoss120b | 2x H200 | CoreWeave | $6.31 | 431 | cited | $81.27 | $27.09 | $13.55 | $9.03 |
+| gptoss120b | 2x H200 | RunPod | $3.59 | 1,453 | cited | $13.72 | $4.58 | $2.29 | $1.52 |
+| gptoss120b | 2x H200 | CoreWeave | $6.31 | 1,453 | cited | $24.12 | $8.04 | $4.02 | $2.68 |
+| gptoss120b | 2x H200 | RunPod | $3.59 | 1,238 | cited | $16.11 | $5.37 | $2.69 | $1.79 |
+| gptoss120b | 2x H200 | CoreWeave | $6.31 | 1,238 | cited | $28.32 | $9.44 | $4.72 | $3.15 |
+| gptoss120b | 2x H200 | RunPod | $3.59 | 2,421 | cited | $8.24 | $2.75 | $1.37 | $0.92 |
+| gptoss120b | 2x H200 | CoreWeave | $6.31 | 2,421 | cited | $14.48 | $4.83 | $2.41 | $1.61 |
+| qwen3.5 | 8x H100 | RunPod | $1.99 | 160 | cited | $276.77 | $92.26 | $46.13 | $30.75 |
+| qwen3.5 | 8x H100 | CoreWeave | $6.16 | 160 | cited | $856.73 | $285.58 | $142.79 | $95.19 |
+| qwen3.5 | 8x H100 | RunPod | $1.99 | 279 | cited | $158.26 | $52.75 | $26.38 | $17.58 |
+| qwen3.5 | 8x H100 | CoreWeave | $6.16 | 279 | cited | $489.89 | $163.30 | $81.65 | $54.43 |
+| qwen3.5 | 8x H100 | RunPod | $1.99 | 457 | cited | $96.69 | $32.23 | $16.11 | $10.74 |
+| qwen3.5 | 8x H100 | CoreWeave | $6.16 | 457 | cited | $299.30 | $99.77 | $49.88 | $33.26 |
+| qwen3.5 | 8x H100 | RunPod | $1.99 | 472 | cited | $93.72 | $31.24 | $15.62 | $10.41 |
+| qwen3.5 | 8x H100 | CoreWeave | $6.16 | 472 | cited | $290.12 | $96.71 | $48.35 | $32.24 |
+| llama_13b | 1x H200 | RunPod | $3.59 | 11,819 | cited | $0.84 | $0.28 | $0.14 | $0.09 |
+| llama_13b | 1x H200 | CoreWeave | $6.31 | 11,819 | cited | $1.48 | $0.49 | $0.25 | $0.16 |
+| llama_13b | 1x H200 | RunPod | $3.59 | 4,750 | cited | $2.10 | $0.70 | $0.35 | $0.23 |
+| llama_13b | 1x H200 | CoreWeave | $6.31 | 4,750 | cited | $3.69 | $1.23 | $0.61 | $0.41 |
+| llama_13b | 1x H200 | RunPod | $3.59 | 1,349 | cited | $7.39 | $2.46 | $1.23 | $0.82 |
+| llama_13b | 1x H200 | CoreWeave | $6.31 | 1,349 | cited | $12.99 | $4.33 | $2.17 | $1.44 |
+| Llama-70B | 1x H200 | RunPod | $3.59 | 3,803 | cited | $2.62 | $0.87 | $0.44 | $0.29 |
+| Llama-70B | 1x H200 | CoreWeave | $6.31 | 3,803 | cited | $4.61 | $1.54 | $0.77 | $0.51 |
+| Llama-70B | 8x H200 | RunPod | $3.59 | 3,803 | cited | $20.98 | $6.99 | $3.50 | $2.33 |
+| Llama-70B | 8x H200 | CoreWeave | $6.31 | 3,803 | cited | $36.87 | $12.29 | $6.15 | $4.10 |
+| Llama-70B | 1x H200 | RunPod | $3.59 | 2,941 | cited | $3.39 | $1.13 | $0.57 | $0.38 |
+| Llama-70B | 1x H200 | CoreWeave | $6.31 | 2,941 | cited | $5.96 | $1.99 | $0.99 | $0.66 |
+| Llama-70B | 8x H200 | RunPod | $3.59 | 3,163 | cited | $25.22 | $8.41 | $4.20 | $2.80 |
+| Llama-70B | 8x H200 | CoreWeave | $6.31 | 3,163 | cited | $44.33 | $14.78 | $7.39 | $4.93 |
+| Llama-70B | 1x H200 | RunPod | $3.59 | 1,946 | cited | $5.12 | $1.71 | $0.85 | $0.57 |
+| Llama-70B | 1x H200 | CoreWeave | $6.31 | 1,946 | cited | $9.01 | $3.00 | $1.50 | $1.00 |
+| Llama-70B | 8x H200 | RunPod | $3.59 | 2,263 | cited | $35.25 | $11.75 | $5.88 | $3.92 |
+| Llama-70B | 8x H200 | CoreWeave | $6.31 | 2,263 | cited | $61.96 | $20.65 | $10.33 | $6.88 |
 
 Utilization is the assumption that moves these numbers most, by 9x across the
 range shown. It is also the one nobody measures honestly before committing.
@@ -355,12 +675,14 @@ where the fixed bill divided by monthly volume equals the API's unit price.
 | DeepSeek-R1-0528 | 4x B200 | $16,963 | Anthropic `Claude Sonnet 5` | $15 | 1,131M | 1,157M | yes | yes |
 | DeepSeek-R1-0528 | 4x B200 | $16,963 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 2,262M | 1,157M | no | yes |
 | DeepSeek-R1-0528 | 4x B200 | $16,963 | DeepSeek `deepseek-v4-flash` | $0.28 | 60,583M | 1,157M | no | no |
+| DeepSeek-R1-0528 | 4x B200 | $16,963 | DeepSeek `deepseek-v4-flash` | $0.28 | 60,583M | 1,157M | no | no |
 | DeepSeek-R1-0528 | 4x B200 | $24,768 | OpenAI `gpt-5.6-terra` | $12 | 2,064M | 1,157M | no | yes |
 | DeepSeek-R1-0528 | 4x B200 | $24,768 | Anthropic `Claude Sonnet 5` | $10 | 2,477M | 1,157M | no | yes |
 | DeepSeek-R1-0528 | 4x B200 | $24,768 | Anthropic `Claude Sonnet 5` | $10 | 2,477M | 1,157M | no | yes |
 | DeepSeek-R1-0528 | 4x B200 | $24,768 | Anthropic `Claude Sonnet 5` | $15 | 1,651M | 1,157M | no | yes |
 | DeepSeek-R1-0528 | 4x B200 | $24,768 | Anthropic `Claude Sonnet 5` | $15 | 1,651M | 1,157M | no | yes |
 | DeepSeek-R1-0528 | 4x B200 | $24,768 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 3,302M | 1,157M | no | yes |
+| DeepSeek-R1-0528 | 4x B200 | $24,768 | DeepSeek `deepseek-v4-flash` | $0.28 | 88,457M | 1,157M | no | no |
 | DeepSeek-R1-0528 | 4x B200 | $24,768 | DeepSeek `deepseek-v4-flash` | $0.28 | 88,457M | 1,157M | no | no |
 | DeepSeek-R1-0528 | 4x MI355X | $7,459 | OpenAI `gpt-5.6-terra` | $12 | 622M | 1,262M | yes | yes |
 | DeepSeek-R1-0528 | 4x MI355X | $7,459 | Anthropic `Claude Sonnet 5` | $10 | 746M | 1,262M | yes | yes |
@@ -369,12 +691,14 @@ where the fixed bill divided by monthly volume equals the API's unit price.
 | DeepSeek-R1-0528 | 4x MI355X | $7,459 | Anthropic `Claude Sonnet 5` | $15 | 497M | 1,262M | yes | yes |
 | DeepSeek-R1-0528 | 4x MI355X | $7,459 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 995M | 1,262M | yes | yes |
 | DeepSeek-R1-0528 | 4x MI355X | $7,459 | DeepSeek `deepseek-v4-flash` | $0.28 | 26,640M | 1,262M | no | no |
+| DeepSeek-R1-0528 | 4x MI355X | $7,459 | DeepSeek `deepseek-v4-flash` | $0.28 | 26,640M | 1,262M | no | no |
 | DeepSeek-R1-0528 | 4x MI355X | $24,768 | OpenAI `gpt-5.6-terra` | $12 | 2,064M | 1,262M | no | yes |
 | DeepSeek-R1-0528 | 4x MI355X | $24,768 | Anthropic `Claude Sonnet 5` | $10 | 2,477M | 1,262M | no | yes |
 | DeepSeek-R1-0528 | 4x MI355X | $24,768 | Anthropic `Claude Sonnet 5` | $10 | 2,477M | 1,262M | no | yes |
 | DeepSeek-R1-0528 | 4x MI355X | $24,768 | Anthropic `Claude Sonnet 5` | $15 | 1,651M | 1,262M | no | yes |
 | DeepSeek-R1-0528 | 4x MI355X | $24,768 | Anthropic `Claude Sonnet 5` | $15 | 1,651M | 1,262M | no | yes |
 | DeepSeek-R1-0528 | 4x MI355X | $24,768 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 3,302M | 1,262M | no | yes |
+| DeepSeek-R1-0528 | 4x MI355X | $24,768 | DeepSeek `deepseek-v4-flash` | $0.28 | 88,457M | 1,262M | no | no |
 | DeepSeek-R1-0528 | 4x MI355X | $24,768 | DeepSeek `deepseek-v4-flash` | $0.28 | 88,457M | 1,262M | no | no |
 | MiniMax-M3 | 4x B300 | $19,987 | OpenAI `gpt-5.6-terra` | $12 | 1,666M | 4,883M | yes | yes |
 | MiniMax-M3 | 4x B300 | $19,987 | Anthropic `Claude Sonnet 5` | $10 | 1,999M | 4,883M | yes | yes |
@@ -383,12 +707,14 @@ where the fixed bill divided by monthly volume equals the API's unit price.
 | MiniMax-M3 | 4x B300 | $19,987 | Anthropic `Claude Sonnet 5` | $15 | 1,332M | 4,883M | yes | yes |
 | MiniMax-M3 | 4x B300 | $19,987 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 2,665M | 4,883M | yes | yes |
 | MiniMax-M3 | 4x B300 | $19,987 | DeepSeek `deepseek-v4-flash` | $0.28 | 71,383M | 4,883M | no | no |
+| MiniMax-M3 | 4x B300 | $19,987 | DeepSeek `deepseek-v4-flash` | $0.28 | 71,383M | 4,883M | no | no |
 | MiniMax-M3 | 4x B300 | $22,608 | OpenAI `gpt-5.6-terra` | $12 | 1,884M | 4,883M | yes | yes |
 | MiniMax-M3 | 4x B300 | $22,608 | Anthropic `Claude Sonnet 5` | $10 | 2,261M | 4,883M | yes | yes |
 | MiniMax-M3 | 4x B300 | $22,608 | Anthropic `Claude Sonnet 5` | $10 | 2,261M | 4,883M | yes | yes |
 | MiniMax-M3 | 4x B300 | $22,608 | Anthropic `Claude Sonnet 5` | $15 | 1,507M | 4,883M | yes | yes |
 | MiniMax-M3 | 4x B300 | $22,608 | Anthropic `Claude Sonnet 5` | $15 | 1,507M | 4,883M | yes | yes |
 | MiniMax-M3 | 4x B300 | $22,608 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 3,014M | 4,883M | yes | yes |
+| MiniMax-M3 | 4x B300 | $22,608 | DeepSeek `deepseek-v4-flash` | $0.28 | 80,743M | 4,883M | no | no |
 | MiniMax-M3 | 4x B300 | $22,608 | DeepSeek `deepseek-v4-flash` | $0.28 | 80,743M | 4,883M | no | no |
 | MiniMax-M3 | 4x MI355X | $7,459 | OpenAI `gpt-5.6-terra` | $12 | 622M | 2,968M | yes | yes |
 | MiniMax-M3 | 4x MI355X | $7,459 | Anthropic `Claude Sonnet 5` | $10 | 746M | 2,968M | yes | yes |
@@ -397,12 +723,14 @@ where the fixed bill divided by monthly volume equals the API's unit price.
 | MiniMax-M3 | 4x MI355X | $7,459 | Anthropic `Claude Sonnet 5` | $15 | 497M | 2,968M | yes | yes |
 | MiniMax-M3 | 4x MI355X | $7,459 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 995M | 2,968M | yes | yes |
 | MiniMax-M3 | 4x MI355X | $7,459 | DeepSeek `deepseek-v4-flash` | $0.28 | 26,640M | 2,968M | no | no |
+| MiniMax-M3 | 4x MI355X | $7,459 | DeepSeek `deepseek-v4-flash` | $0.28 | 26,640M | 2,968M | no | no |
 | MiniMax-M3 | 4x MI355X | $24,768 | OpenAI `gpt-5.6-terra` | $12 | 2,064M | 2,968M | yes | yes |
 | MiniMax-M3 | 4x MI355X | $24,768 | Anthropic `Claude Sonnet 5` | $10 | 2,477M | 2,968M | yes | yes |
 | MiniMax-M3 | 4x MI355X | $24,768 | Anthropic `Claude Sonnet 5` | $10 | 2,477M | 2,968M | yes | yes |
 | MiniMax-M3 | 4x MI355X | $24,768 | Anthropic `Claude Sonnet 5` | $15 | 1,651M | 2,968M | yes | yes |
 | MiniMax-M3 | 4x MI355X | $24,768 | Anthropic `Claude Sonnet 5` | $15 | 1,651M | 2,968M | yes | yes |
 | MiniMax-M3 | 4x MI355X | $24,768 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 3,302M | 2,968M | no | yes |
+| MiniMax-M3 | 4x MI355X | $24,768 | DeepSeek `deepseek-v4-flash` | $0.28 | 88,457M | 2,968M | no | no |
 | MiniMax-M3 | 4x MI355X | $24,768 | DeepSeek `deepseek-v4-flash` | $0.28 | 88,457M | 2,968M | no | no |
 | amd/Kimi-K2.5-MXFP4 | 8x MI355X | $14,918 | OpenAI `gpt-5.6-terra` | $12 | 1,243M | 129M | no | no |
 | amd/Kimi-K2.5-MXFP4 | 8x MI355X | $14,918 | Anthropic `Claude Sonnet 5` | $10 | 1,492M | 129M | no | no |
@@ -411,12 +739,14 @@ where the fixed bill divided by monthly volume equals the API's unit price.
 | amd/Kimi-K2.5-MXFP4 | 8x MI355X | $14,918 | Anthropic `Claude Sonnet 5` | $15 | 995M | 129M | no | no |
 | amd/Kimi-K2.5-MXFP4 | 8x MI355X | $14,918 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 1,989M | 129M | no | no |
 | amd/Kimi-K2.5-MXFP4 | 8x MI355X | $14,918 | DeepSeek `deepseek-v4-flash` | $0.28 | 53,280M | 129M | no | no |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $14,918 | DeepSeek `deepseek-v4-flash` | $0.28 | 53,280M | 129M | no | no |
 | amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | OpenAI `gpt-5.6-terra` | $12 | 4,128M | 129M | no | no |
 | amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | Anthropic `Claude Sonnet 5` | $10 | 4,954M | 129M | no | no |
 | amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | Anthropic `Claude Sonnet 5` | $10 | 4,954M | 129M | no | no |
 | amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | Anthropic `Claude Sonnet 5` | $15 | 3,302M | 129M | no | no |
 | amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | Anthropic `Claude Sonnet 5` | $15 | 3,302M | 129M | no | no |
 | amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 6,605M | 129M | no | no |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | DeepSeek `deepseek-v4-flash` | $0.28 | 176,914M | 129M | no | no |
 | amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | DeepSeek `deepseek-v4-flash` | $0.28 | 176,914M | 129M | no | no |
 | amd/Kimi-K2.5-MXFP4 | 8x MI355X | $14,918 | OpenAI `gpt-5.6-terra` | $12 | 1,243M | 821M | no | yes |
 | amd/Kimi-K2.5-MXFP4 | 8x MI355X | $14,918 | Anthropic `Claude Sonnet 5` | $10 | 1,492M | 821M | no | yes |
@@ -425,12 +755,14 @@ where the fixed bill divided by monthly volume equals the API's unit price.
 | amd/Kimi-K2.5-MXFP4 | 8x MI355X | $14,918 | Anthropic `Claude Sonnet 5` | $15 | 995M | 821M | no | yes |
 | amd/Kimi-K2.5-MXFP4 | 8x MI355X | $14,918 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 1,989M | 821M | no | yes |
 | amd/Kimi-K2.5-MXFP4 | 8x MI355X | $14,918 | DeepSeek `deepseek-v4-flash` | $0.28 | 53,280M | 821M | no | no |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $14,918 | DeepSeek `deepseek-v4-flash` | $0.28 | 53,280M | 821M | no | no |
 | amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | OpenAI `gpt-5.6-terra` | $12 | 4,128M | 821M | no | no |
 | amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | Anthropic `Claude Sonnet 5` | $10 | 4,954M | 821M | no | no |
 | amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | Anthropic `Claude Sonnet 5` | $10 | 4,954M | 821M | no | no |
 | amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | Anthropic `Claude Sonnet 5` | $15 | 3,302M | 821M | no | no |
 | amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | Anthropic `Claude Sonnet 5` | $15 | 3,302M | 821M | no | no |
 | amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 6,605M | 821M | no | no |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | DeepSeek `deepseek-v4-flash` | $0.28 | 176,914M | 821M | no | no |
 | amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | DeepSeek `deepseek-v4-flash` | $0.28 | 176,914M | 821M | no | no |
 | Llama-3.3-70B-Instruct-FP8 | 2x H200 | $5,170 | OpenAI `gpt-5.6-terra` | $12 | 431M | 872M | yes | yes |
 | Llama-3.3-70B-Instruct-FP8 | 2x H200 | $5,170 | Anthropic `Claude Sonnet 5` | $10 | 517M | 872M | yes | yes |
@@ -439,12 +771,14 @@ where the fixed bill divided by monthly volume equals the API's unit price.
 | Llama-3.3-70B-Instruct-FP8 | 2x H200 | $5,170 | Anthropic `Claude Sonnet 5` | $15 | 345M | 872M | yes | yes |
 | Llama-3.3-70B-Instruct-FP8 | 2x H200 | $5,170 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 689M | 872M | yes | yes |
 | Llama-3.3-70B-Instruct-FP8 | 2x H200 | $5,170 | DeepSeek `deepseek-v4-flash` | $0.28 | 18,463M | 872M | no | no |
+| Llama-3.3-70B-Instruct-FP8 | 2x H200 | $5,170 | DeepSeek `deepseek-v4-flash` | $0.28 | 18,463M | 872M | no | no |
 | Llama-3.3-70B-Instruct-FP8 | 2x H200 | $9,086 | OpenAI `gpt-5.6-terra` | $12 | 757M | 872M | yes | yes |
 | Llama-3.3-70B-Instruct-FP8 | 2x H200 | $9,086 | Anthropic `Claude Sonnet 5` | $10 | 909M | 872M | no | yes |
 | Llama-3.3-70B-Instruct-FP8 | 2x H200 | $9,086 | Anthropic `Claude Sonnet 5` | $10 | 909M | 872M | no | yes |
 | Llama-3.3-70B-Instruct-FP8 | 2x H200 | $9,086 | Anthropic `Claude Sonnet 5` | $15 | 606M | 872M | yes | yes |
 | Llama-3.3-70B-Instruct-FP8 | 2x H200 | $9,086 | Anthropic `Claude Sonnet 5` | $15 | 606M | 872M | yes | yes |
 | Llama-3.3-70B-Instruct-FP8 | 2x H200 | $9,086 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 1,212M | 872M | no | yes |
+| Llama-3.3-70B-Instruct-FP8 | 2x H200 | $9,086 | DeepSeek `deepseek-v4-flash` | $0.28 | 32,451M | 872M | no | no |
 | Llama-3.3-70B-Instruct-FP8 | 2x H200 | $9,086 | DeepSeek `deepseek-v4-flash` | $0.28 | 32,451M | 872M | no | no |
 | Llama-3.3-70B-Instruct-FP8 | 1x MI355X | $1,865 | OpenAI `gpt-5.6-terra` | $12 | 155M | 755M | yes | yes |
 | Llama-3.3-70B-Instruct-FP8 | 1x MI355X | $1,865 | Anthropic `Claude Sonnet 5` | $10 | 186M | 755M | yes | yes |
@@ -453,6 +787,7 @@ where the fixed bill divided by monthly volume equals the API's unit price.
 | Llama-3.3-70B-Instruct-FP8 | 1x MI355X | $1,865 | Anthropic `Claude Sonnet 5` | $15 | 124M | 755M | yes | yes |
 | Llama-3.3-70B-Instruct-FP8 | 1x MI355X | $1,865 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 249M | 755M | yes | yes |
 | Llama-3.3-70B-Instruct-FP8 | 1x MI355X | $1,865 | DeepSeek `deepseek-v4-flash` | $0.28 | 6,660M | 755M | no | no |
+| Llama-3.3-70B-Instruct-FP8 | 1x MI355X | $1,865 | DeepSeek `deepseek-v4-flash` | $0.28 | 6,660M | 755M | no | no |
 | Llama-3.3-70B-Instruct-FP8 | 1x MI355X | $6,192 | OpenAI `gpt-5.6-terra` | $12 | 516M | 755M | yes | yes |
 | Llama-3.3-70B-Instruct-FP8 | 1x MI355X | $6,192 | Anthropic `Claude Sonnet 5` | $10 | 619M | 755M | yes | yes |
 | Llama-3.3-70B-Instruct-FP8 | 1x MI355X | $6,192 | Anthropic `Claude Sonnet 5` | $10 | 619M | 755M | yes | yes |
@@ -460,6 +795,375 @@ where the fixed bill divided by monthly volume equals the API's unit price.
 | Llama-3.3-70B-Instruct-FP8 | 1x MI355X | $6,192 | Anthropic `Claude Sonnet 5` | $15 | 413M | 755M | yes | yes |
 | Llama-3.3-70B-Instruct-FP8 | 1x MI355X | $6,192 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 826M | 755M | no | yes |
 | Llama-3.3-70B-Instruct-FP8 | 1x MI355X | $6,192 | DeepSeek `deepseek-v4-flash` | $0.28 | 22,114M | 755M | no | no |
+| Llama-3.3-70B-Instruct-FP8 | 1x MI355X | $6,192 | DeepSeek `deepseek-v4-flash` | $0.28 | 22,114M | 755M | no | no |
+| gptoss120b | 2x H100 | $2,866 | OpenAI `gpt-5.6-terra` | $12 | 239M | 512M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | Anthropic `Claude Sonnet 5` | $10 | 287M | 512M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | Anthropic `Claude Sonnet 5` | $10 | 287M | 512M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | Anthropic `Claude Sonnet 5` | $15 | 191M | 512M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | Anthropic `Claude Sonnet 5` | $15 | 191M | 512M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 382M | 512M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | DeepSeek `deepseek-v4-flash` | $0.28 | 10,234M | 512M | no | no |
+| gptoss120b | 2x H100 | $2,866 | DeepSeek `deepseek-v4-flash` | $0.28 | 10,234M | 512M | no | no |
+| gptoss120b | 2x H100 | $8,870 | OpenAI `gpt-5.6-terra` | $12 | 739M | 512M | no | yes |
+| gptoss120b | 2x H100 | $8,870 | Anthropic `Claude Sonnet 5` | $10 | 887M | 512M | no | yes |
+| gptoss120b | 2x H100 | $8,870 | Anthropic `Claude Sonnet 5` | $10 | 887M | 512M | no | yes |
+| gptoss120b | 2x H100 | $8,870 | Anthropic `Claude Sonnet 5` | $15 | 591M | 512M | no | yes |
+| gptoss120b | 2x H100 | $8,870 | Anthropic `Claude Sonnet 5` | $15 | 591M | 512M | no | yes |
+| gptoss120b | 2x H100 | $8,870 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 1,183M | 512M | no | yes |
+| gptoss120b | 2x H100 | $8,870 | DeepSeek `deepseek-v4-flash` | $0.28 | 31,680M | 512M | no | no |
+| gptoss120b | 2x H100 | $8,870 | DeepSeek `deepseek-v4-flash` | $0.28 | 31,680M | 512M | no | no |
+| gptoss120b | 2x H100 | $2,866 | OpenAI `gpt-5.6-terra` | $12 | 239M | 776M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | Anthropic `Claude Sonnet 5` | $10 | 287M | 776M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | Anthropic `Claude Sonnet 5` | $10 | 287M | 776M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | Anthropic `Claude Sonnet 5` | $15 | 191M | 776M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | Anthropic `Claude Sonnet 5` | $15 | 191M | 776M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 382M | 776M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | DeepSeek `deepseek-v4-flash` | $0.28 | 10,234M | 776M | no | no |
+| gptoss120b | 2x H100 | $2,866 | DeepSeek `deepseek-v4-flash` | $0.28 | 10,234M | 776M | no | no |
+| gptoss120b | 2x H100 | $8,870 | OpenAI `gpt-5.6-terra` | $12 | 739M | 776M | yes | yes |
+| gptoss120b | 2x H100 | $8,870 | Anthropic `Claude Sonnet 5` | $10 | 887M | 776M | no | yes |
+| gptoss120b | 2x H100 | $8,870 | Anthropic `Claude Sonnet 5` | $10 | 887M | 776M | no | yes |
+| gptoss120b | 2x H100 | $8,870 | Anthropic `Claude Sonnet 5` | $15 | 591M | 776M | yes | yes |
+| gptoss120b | 2x H100 | $8,870 | Anthropic `Claude Sonnet 5` | $15 | 591M | 776M | yes | yes |
+| gptoss120b | 2x H100 | $8,870 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 1,183M | 776M | no | yes |
+| gptoss120b | 2x H100 | $8,870 | DeepSeek `deepseek-v4-flash` | $0.28 | 31,680M | 776M | no | no |
+| gptoss120b | 2x H100 | $8,870 | DeepSeek `deepseek-v4-flash` | $0.28 | 31,680M | 776M | no | no |
+| gptoss120b | 2x H100 | $2,866 | OpenAI `gpt-5.6-terra` | $12 | 239M | 1,077M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | Anthropic `Claude Sonnet 5` | $10 | 287M | 1,077M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | Anthropic `Claude Sonnet 5` | $10 | 287M | 1,077M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | Anthropic `Claude Sonnet 5` | $15 | 191M | 1,077M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | Anthropic `Claude Sonnet 5` | $15 | 191M | 1,077M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 382M | 1,077M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | DeepSeek `deepseek-v4-flash` | $0.28 | 10,234M | 1,077M | no | no |
+| gptoss120b | 2x H100 | $2,866 | DeepSeek `deepseek-v4-flash` | $0.28 | 10,234M | 1,077M | no | no |
+| gptoss120b | 2x H100 | $8,870 | OpenAI `gpt-5.6-terra` | $12 | 739M | 1,077M | yes | yes |
+| gptoss120b | 2x H100 | $8,870 | Anthropic `Claude Sonnet 5` | $10 | 887M | 1,077M | yes | yes |
+| gptoss120b | 2x H100 | $8,870 | Anthropic `Claude Sonnet 5` | $10 | 887M | 1,077M | yes | yes |
+| gptoss120b | 2x H100 | $8,870 | Anthropic `Claude Sonnet 5` | $15 | 591M | 1,077M | yes | yes |
+| gptoss120b | 2x H100 | $8,870 | Anthropic `Claude Sonnet 5` | $15 | 591M | 1,077M | yes | yes |
+| gptoss120b | 2x H100 | $8,870 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 1,183M | 1,077M | no | yes |
+| gptoss120b | 2x H100 | $8,870 | DeepSeek `deepseek-v4-flash` | $0.28 | 31,680M | 1,077M | no | no |
+| gptoss120b | 2x H100 | $8,870 | DeepSeek `deepseek-v4-flash` | $0.28 | 31,680M | 1,077M | no | no |
+| gptoss120b | 2x H100 | $2,866 | OpenAI `gpt-5.6-terra` | $12 | 239M | 1,419M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | Anthropic `Claude Sonnet 5` | $10 | 287M | 1,419M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | Anthropic `Claude Sonnet 5` | $10 | 287M | 1,419M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | Anthropic `Claude Sonnet 5` | $15 | 191M | 1,419M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | Anthropic `Claude Sonnet 5` | $15 | 191M | 1,419M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 382M | 1,419M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | DeepSeek `deepseek-v4-flash` | $0.28 | 10,234M | 1,419M | no | no |
+| gptoss120b | 2x H100 | $2,866 | DeepSeek `deepseek-v4-flash` | $0.28 | 10,234M | 1,419M | no | no |
+| gptoss120b | 2x H100 | $8,870 | OpenAI `gpt-5.6-terra` | $12 | 739M | 1,419M | yes | yes |
+| gptoss120b | 2x H100 | $8,870 | Anthropic `Claude Sonnet 5` | $10 | 887M | 1,419M | yes | yes |
+| gptoss120b | 2x H100 | $8,870 | Anthropic `Claude Sonnet 5` | $10 | 887M | 1,419M | yes | yes |
+| gptoss120b | 2x H100 | $8,870 | Anthropic `Claude Sonnet 5` | $15 | 591M | 1,419M | yes | yes |
+| gptoss120b | 2x H100 | $8,870 | Anthropic `Claude Sonnet 5` | $15 | 591M | 1,419M | yes | yes |
+| gptoss120b | 2x H100 | $8,870 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 1,183M | 1,419M | yes | yes |
+| gptoss120b | 2x H100 | $8,870 | DeepSeek `deepseek-v4-flash` | $0.28 | 31,680M | 1,419M | no | no |
+| gptoss120b | 2x H100 | $8,870 | DeepSeek `deepseek-v4-flash` | $0.28 | 31,680M | 1,419M | no | no |
+| gptoss120b | 2x H100 | $2,866 | OpenAI `gpt-5.6-terra` | $12 | 239M | 1,774M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | Anthropic `Claude Sonnet 5` | $10 | 287M | 1,774M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | Anthropic `Claude Sonnet 5` | $10 | 287M | 1,774M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | Anthropic `Claude Sonnet 5` | $15 | 191M | 1,774M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | Anthropic `Claude Sonnet 5` | $15 | 191M | 1,774M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 382M | 1,774M | yes | yes |
+| gptoss120b | 2x H100 | $2,866 | DeepSeek `deepseek-v4-flash` | $0.28 | 10,234M | 1,774M | no | no |
+| gptoss120b | 2x H100 | $2,866 | DeepSeek `deepseek-v4-flash` | $0.28 | 10,234M | 1,774M | no | no |
+| gptoss120b | 2x H100 | $8,870 | OpenAI `gpt-5.6-terra` | $12 | 739M | 1,774M | yes | yes |
+| gptoss120b | 2x H100 | $8,870 | Anthropic `Claude Sonnet 5` | $10 | 887M | 1,774M | yes | yes |
+| gptoss120b | 2x H100 | $8,870 | Anthropic `Claude Sonnet 5` | $10 | 887M | 1,774M | yes | yes |
+| gptoss120b | 2x H100 | $8,870 | Anthropic `Claude Sonnet 5` | $15 | 591M | 1,774M | yes | yes |
+| gptoss120b | 2x H100 | $8,870 | Anthropic `Claude Sonnet 5` | $15 | 591M | 1,774M | yes | yes |
+| gptoss120b | 2x H100 | $8,870 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 1,183M | 1,774M | yes | yes |
+| gptoss120b | 2x H100 | $8,870 | DeepSeek `deepseek-v4-flash` | $0.28 | 31,680M | 1,774M | no | no |
+| gptoss120b | 2x H100 | $8,870 | DeepSeek `deepseek-v4-flash` | $0.28 | 31,680M | 1,774M | no | no |
+| gptoss120b | 2x H200 | $5,170 | OpenAI `gpt-5.6-terra` | $12 | 431M | 539M | yes | yes |
+| gptoss120b | 2x H200 | $5,170 | Anthropic `Claude Sonnet 5` | $10 | 517M | 539M | yes | yes |
+| gptoss120b | 2x H200 | $5,170 | Anthropic `Claude Sonnet 5` | $10 | 517M | 539M | yes | yes |
+| gptoss120b | 2x H200 | $5,170 | Anthropic `Claude Sonnet 5` | $15 | 345M | 539M | yes | yes |
+| gptoss120b | 2x H200 | $5,170 | Anthropic `Claude Sonnet 5` | $15 | 345M | 539M | yes | yes |
+| gptoss120b | 2x H200 | $5,170 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 689M | 539M | no | yes |
+| gptoss120b | 2x H200 | $5,170 | DeepSeek `deepseek-v4-flash` | $0.28 | 18,463M | 539M | no | no |
+| gptoss120b | 2x H200 | $5,170 | DeepSeek `deepseek-v4-flash` | $0.28 | 18,463M | 539M | no | no |
+| gptoss120b | 2x H200 | $9,086 | OpenAI `gpt-5.6-terra` | $12 | 757M | 539M | no | yes |
+| gptoss120b | 2x H200 | $9,086 | Anthropic `Claude Sonnet 5` | $10 | 909M | 539M | no | yes |
+| gptoss120b | 2x H200 | $9,086 | Anthropic `Claude Sonnet 5` | $10 | 909M | 539M | no | yes |
+| gptoss120b | 2x H200 | $9,086 | Anthropic `Claude Sonnet 5` | $15 | 606M | 539M | no | yes |
+| gptoss120b | 2x H200 | $9,086 | Anthropic `Claude Sonnet 5` | $15 | 606M | 539M | no | yes |
+| gptoss120b | 2x H200 | $9,086 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 1,212M | 539M | no | yes |
+| gptoss120b | 2x H200 | $9,086 | DeepSeek `deepseek-v4-flash` | $0.28 | 32,451M | 539M | no | no |
+| gptoss120b | 2x H200 | $9,086 | DeepSeek `deepseek-v4-flash` | $0.28 | 32,451M | 539M | no | no |
+| gptoss120b | 2x H200 | $5,170 | OpenAI `gpt-5.6-terra` | $12 | 431M | 335M | no | yes |
+| gptoss120b | 2x H200 | $5,170 | Anthropic `Claude Sonnet 5` | $10 | 517M | 335M | no | yes |
+| gptoss120b | 2x H200 | $5,170 | Anthropic `Claude Sonnet 5` | $10 | 517M | 335M | no | yes |
+| gptoss120b | 2x H200 | $5,170 | Anthropic `Claude Sonnet 5` | $15 | 345M | 335M | no | yes |
+| gptoss120b | 2x H200 | $5,170 | Anthropic `Claude Sonnet 5` | $15 | 345M | 335M | no | yes |
+| gptoss120b | 2x H200 | $5,170 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 689M | 335M | no | yes |
+| gptoss120b | 2x H200 | $5,170 | DeepSeek `deepseek-v4-flash` | $0.28 | 18,463M | 335M | no | no |
+| gptoss120b | 2x H200 | $5,170 | DeepSeek `deepseek-v4-flash` | $0.28 | 18,463M | 335M | no | no |
+| gptoss120b | 2x H200 | $9,086 | OpenAI `gpt-5.6-terra` | $12 | 757M | 335M | no | yes |
+| gptoss120b | 2x H200 | $9,086 | Anthropic `Claude Sonnet 5` | $10 | 909M | 335M | no | yes |
+| gptoss120b | 2x H200 | $9,086 | Anthropic `Claude Sonnet 5` | $10 | 909M | 335M | no | yes |
+| gptoss120b | 2x H200 | $9,086 | Anthropic `Claude Sonnet 5` | $15 | 606M | 335M | no | yes |
+| gptoss120b | 2x H200 | $9,086 | Anthropic `Claude Sonnet 5` | $15 | 606M | 335M | no | yes |
+| gptoss120b | 2x H200 | $9,086 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 1,212M | 335M | no | no |
+| gptoss120b | 2x H200 | $9,086 | DeepSeek `deepseek-v4-flash` | $0.28 | 32,451M | 335M | no | no |
+| gptoss120b | 2x H200 | $9,086 | DeepSeek `deepseek-v4-flash` | $0.28 | 32,451M | 335M | no | no |
+| gptoss120b | 2x H200 | $5,170 | OpenAI `gpt-5.6-terra` | $12 | 431M | 1,130M | yes | yes |
+| gptoss120b | 2x H200 | $5,170 | Anthropic `Claude Sonnet 5` | $10 | 517M | 1,130M | yes | yes |
+| gptoss120b | 2x H200 | $5,170 | Anthropic `Claude Sonnet 5` | $10 | 517M | 1,130M | yes | yes |
+| gptoss120b | 2x H200 | $5,170 | Anthropic `Claude Sonnet 5` | $15 | 345M | 1,130M | yes | yes |
+| gptoss120b | 2x H200 | $5,170 | Anthropic `Claude Sonnet 5` | $15 | 345M | 1,130M | yes | yes |
+| gptoss120b | 2x H200 | $5,170 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 689M | 1,130M | yes | yes |
+| gptoss120b | 2x H200 | $5,170 | DeepSeek `deepseek-v4-flash` | $0.28 | 18,463M | 1,130M | no | no |
+| gptoss120b | 2x H200 | $5,170 | DeepSeek `deepseek-v4-flash` | $0.28 | 18,463M | 1,130M | no | no |
+| gptoss120b | 2x H200 | $9,086 | OpenAI `gpt-5.6-terra` | $12 | 757M | 1,130M | yes | yes |
+| gptoss120b | 2x H200 | $9,086 | Anthropic `Claude Sonnet 5` | $10 | 909M | 1,130M | yes | yes |
+| gptoss120b | 2x H200 | $9,086 | Anthropic `Claude Sonnet 5` | $10 | 909M | 1,130M | yes | yes |
+| gptoss120b | 2x H200 | $9,086 | Anthropic `Claude Sonnet 5` | $15 | 606M | 1,130M | yes | yes |
+| gptoss120b | 2x H200 | $9,086 | Anthropic `Claude Sonnet 5` | $15 | 606M | 1,130M | yes | yes |
+| gptoss120b | 2x H200 | $9,086 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 1,212M | 1,130M | no | yes |
+| gptoss120b | 2x H200 | $9,086 | DeepSeek `deepseek-v4-flash` | $0.28 | 32,451M | 1,130M | no | no |
+| gptoss120b | 2x H200 | $9,086 | DeepSeek `deepseek-v4-flash` | $0.28 | 32,451M | 1,130M | no | no |
+| gptoss120b | 2x H200 | $5,170 | OpenAI `gpt-5.6-terra` | $12 | 431M | 963M | yes | yes |
+| gptoss120b | 2x H200 | $5,170 | Anthropic `Claude Sonnet 5` | $10 | 517M | 963M | yes | yes |
+| gptoss120b | 2x H200 | $5,170 | Anthropic `Claude Sonnet 5` | $10 | 517M | 963M | yes | yes |
+| gptoss120b | 2x H200 | $5,170 | Anthropic `Claude Sonnet 5` | $15 | 345M | 963M | yes | yes |
+| gptoss120b | 2x H200 | $5,170 | Anthropic `Claude Sonnet 5` | $15 | 345M | 963M | yes | yes |
+| gptoss120b | 2x H200 | $5,170 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 689M | 963M | yes | yes |
+| gptoss120b | 2x H200 | $5,170 | DeepSeek `deepseek-v4-flash` | $0.28 | 18,463M | 963M | no | no |
+| gptoss120b | 2x H200 | $5,170 | DeepSeek `deepseek-v4-flash` | $0.28 | 18,463M | 963M | no | no |
+| gptoss120b | 2x H200 | $9,086 | OpenAI `gpt-5.6-terra` | $12 | 757M | 963M | yes | yes |
+| gptoss120b | 2x H200 | $9,086 | Anthropic `Claude Sonnet 5` | $10 | 909M | 963M | yes | yes |
+| gptoss120b | 2x H200 | $9,086 | Anthropic `Claude Sonnet 5` | $10 | 909M | 963M | yes | yes |
+| gptoss120b | 2x H200 | $9,086 | Anthropic `Claude Sonnet 5` | $15 | 606M | 963M | yes | yes |
+| gptoss120b | 2x H200 | $9,086 | Anthropic `Claude Sonnet 5` | $15 | 606M | 963M | yes | yes |
+| gptoss120b | 2x H200 | $9,086 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 1,212M | 963M | no | yes |
+| gptoss120b | 2x H200 | $9,086 | DeepSeek `deepseek-v4-flash` | $0.28 | 32,451M | 963M | no | no |
+| gptoss120b | 2x H200 | $9,086 | DeepSeek `deepseek-v4-flash` | $0.28 | 32,451M | 963M | no | no |
+| gptoss120b | 2x H200 | $5,170 | OpenAI `gpt-5.6-terra` | $12 | 431M | 1,883M | yes | yes |
+| gptoss120b | 2x H200 | $5,170 | Anthropic `Claude Sonnet 5` | $10 | 517M | 1,883M | yes | yes |
+| gptoss120b | 2x H200 | $5,170 | Anthropic `Claude Sonnet 5` | $10 | 517M | 1,883M | yes | yes |
+| gptoss120b | 2x H200 | $5,170 | Anthropic `Claude Sonnet 5` | $15 | 345M | 1,883M | yes | yes |
+| gptoss120b | 2x H200 | $5,170 | Anthropic `Claude Sonnet 5` | $15 | 345M | 1,883M | yes | yes |
+| gptoss120b | 2x H200 | $5,170 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 689M | 1,883M | yes | yes |
+| gptoss120b | 2x H200 | $5,170 | DeepSeek `deepseek-v4-flash` | $0.28 | 18,463M | 1,883M | no | no |
+| gptoss120b | 2x H200 | $5,170 | DeepSeek `deepseek-v4-flash` | $0.28 | 18,463M | 1,883M | no | no |
+| gptoss120b | 2x H200 | $9,086 | OpenAI `gpt-5.6-terra` | $12 | 757M | 1,883M | yes | yes |
+| gptoss120b | 2x H200 | $9,086 | Anthropic `Claude Sonnet 5` | $10 | 909M | 1,883M | yes | yes |
+| gptoss120b | 2x H200 | $9,086 | Anthropic `Claude Sonnet 5` | $10 | 909M | 1,883M | yes | yes |
+| gptoss120b | 2x H200 | $9,086 | Anthropic `Claude Sonnet 5` | $15 | 606M | 1,883M | yes | yes |
+| gptoss120b | 2x H200 | $9,086 | Anthropic `Claude Sonnet 5` | $15 | 606M | 1,883M | yes | yes |
+| gptoss120b | 2x H200 | $9,086 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 1,212M | 1,883M | yes | yes |
+| gptoss120b | 2x H200 | $9,086 | DeepSeek `deepseek-v4-flash` | $0.28 | 32,451M | 1,883M | no | no |
+| gptoss120b | 2x H200 | $9,086 | DeepSeek `deepseek-v4-flash` | $0.28 | 32,451M | 1,883M | no | no |
+| qwen3.5 | 8x H100 | $11,462 | OpenAI `gpt-5.6-terra` | $12 | 955M | 124M | no | no |
+| qwen3.5 | 8x H100 | $11,462 | Anthropic `Claude Sonnet 5` | $10 | 1,146M | 124M | no | no |
+| qwen3.5 | 8x H100 | $11,462 | Anthropic `Claude Sonnet 5` | $10 | 1,146M | 124M | no | no |
+| qwen3.5 | 8x H100 | $11,462 | Anthropic `Claude Sonnet 5` | $15 | 764M | 124M | no | no |
+| qwen3.5 | 8x H100 | $11,462 | Anthropic `Claude Sonnet 5` | $15 | 764M | 124M | no | no |
+| qwen3.5 | 8x H100 | $11,462 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 1,528M | 124M | no | no |
+| qwen3.5 | 8x H100 | $11,462 | DeepSeek `deepseek-v4-flash` | $0.28 | 40,937M | 124M | no | no |
+| qwen3.5 | 8x H100 | $11,462 | DeepSeek `deepseek-v4-flash` | $0.28 | 40,937M | 124M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | OpenAI `gpt-5.6-terra` | $12 | 2,957M | 124M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | Anthropic `Claude Sonnet 5` | $10 | 3,548M | 124M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | Anthropic `Claude Sonnet 5` | $10 | 3,548M | 124M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | Anthropic `Claude Sonnet 5` | $15 | 2,365M | 124M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | Anthropic `Claude Sonnet 5` | $15 | 2,365M | 124M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 4,731M | 124M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | DeepSeek `deepseek-v4-flash` | $0.28 | 126,720M | 124M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | DeepSeek `deepseek-v4-flash` | $0.28 | 126,720M | 124M | no | no |
+| qwen3.5 | 8x H100 | $11,462 | OpenAI `gpt-5.6-terra` | $12 | 955M | 217M | no | no |
+| qwen3.5 | 8x H100 | $11,462 | Anthropic `Claude Sonnet 5` | $10 | 1,146M | 217M | no | no |
+| qwen3.5 | 8x H100 | $11,462 | Anthropic `Claude Sonnet 5` | $10 | 1,146M | 217M | no | no |
+| qwen3.5 | 8x H100 | $11,462 | Anthropic `Claude Sonnet 5` | $15 | 764M | 217M | no | no |
+| qwen3.5 | 8x H100 | $11,462 | Anthropic `Claude Sonnet 5` | $15 | 764M | 217M | no | no |
+| qwen3.5 | 8x H100 | $11,462 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 1,528M | 217M | no | no |
+| qwen3.5 | 8x H100 | $11,462 | DeepSeek `deepseek-v4-flash` | $0.28 | 40,937M | 217M | no | no |
+| qwen3.5 | 8x H100 | $11,462 | DeepSeek `deepseek-v4-flash` | $0.28 | 40,937M | 217M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | OpenAI `gpt-5.6-terra` | $12 | 2,957M | 217M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | Anthropic `Claude Sonnet 5` | $10 | 3,548M | 217M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | Anthropic `Claude Sonnet 5` | $10 | 3,548M | 217M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | Anthropic `Claude Sonnet 5` | $15 | 2,365M | 217M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | Anthropic `Claude Sonnet 5` | $15 | 2,365M | 217M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 4,731M | 217M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | DeepSeek `deepseek-v4-flash` | $0.28 | 126,720M | 217M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | DeepSeek `deepseek-v4-flash` | $0.28 | 126,720M | 217M | no | no |
+| qwen3.5 | 8x H100 | $11,462 | OpenAI `gpt-5.6-terra` | $12 | 955M | 356M | no | yes |
+| qwen3.5 | 8x H100 | $11,462 | Anthropic `Claude Sonnet 5` | $10 | 1,146M | 356M | no | no |
+| qwen3.5 | 8x H100 | $11,462 | Anthropic `Claude Sonnet 5` | $10 | 1,146M | 356M | no | no |
+| qwen3.5 | 8x H100 | $11,462 | Anthropic `Claude Sonnet 5` | $15 | 764M | 356M | no | yes |
+| qwen3.5 | 8x H100 | $11,462 | Anthropic `Claude Sonnet 5` | $15 | 764M | 356M | no | yes |
+| qwen3.5 | 8x H100 | $11,462 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 1,528M | 356M | no | no |
+| qwen3.5 | 8x H100 | $11,462 | DeepSeek `deepseek-v4-flash` | $0.28 | 40,937M | 356M | no | no |
+| qwen3.5 | 8x H100 | $11,462 | DeepSeek `deepseek-v4-flash` | $0.28 | 40,937M | 356M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | OpenAI `gpt-5.6-terra` | $12 | 2,957M | 356M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | Anthropic `Claude Sonnet 5` | $10 | 3,548M | 356M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | Anthropic `Claude Sonnet 5` | $10 | 3,548M | 356M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | Anthropic `Claude Sonnet 5` | $15 | 2,365M | 356M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | Anthropic `Claude Sonnet 5` | $15 | 2,365M | 356M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 4,731M | 356M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | DeepSeek `deepseek-v4-flash` | $0.28 | 126,720M | 356M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | DeepSeek `deepseek-v4-flash` | $0.28 | 126,720M | 356M | no | no |
+| qwen3.5 | 8x H100 | $11,462 | OpenAI `gpt-5.6-terra` | $12 | 955M | 367M | no | yes |
+| qwen3.5 | 8x H100 | $11,462 | Anthropic `Claude Sonnet 5` | $10 | 1,146M | 367M | no | no |
+| qwen3.5 | 8x H100 | $11,462 | Anthropic `Claude Sonnet 5` | $10 | 1,146M | 367M | no | no |
+| qwen3.5 | 8x H100 | $11,462 | Anthropic `Claude Sonnet 5` | $15 | 764M | 367M | no | yes |
+| qwen3.5 | 8x H100 | $11,462 | Anthropic `Claude Sonnet 5` | $15 | 764M | 367M | no | yes |
+| qwen3.5 | 8x H100 | $11,462 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 1,528M | 367M | no | no |
+| qwen3.5 | 8x H100 | $11,462 | DeepSeek `deepseek-v4-flash` | $0.28 | 40,937M | 367M | no | no |
+| qwen3.5 | 8x H100 | $11,462 | DeepSeek `deepseek-v4-flash` | $0.28 | 40,937M | 367M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | OpenAI `gpt-5.6-terra` | $12 | 2,957M | 367M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | Anthropic `Claude Sonnet 5` | $10 | 3,548M | 367M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | Anthropic `Claude Sonnet 5` | $10 | 3,548M | 367M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | Anthropic `Claude Sonnet 5` | $15 | 2,365M | 367M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | Anthropic `Claude Sonnet 5` | $15 | 2,365M | 367M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 4,731M | 367M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | DeepSeek `deepseek-v4-flash` | $0.28 | 126,720M | 367M | no | no |
+| qwen3.5 | 8x H100 | $35,482 | DeepSeek `deepseek-v4-flash` | $0.28 | 126,720M | 367M | no | no |
+| llama_13b | 1x H200 | $2,585 | OpenAI `gpt-5.6-terra` | $12 | 215M | 9,190M | yes | yes |
+| llama_13b | 1x H200 | $2,585 | Anthropic `Claude Sonnet 5` | $10 | 258M | 9,190M | yes | yes |
+| llama_13b | 1x H200 | $2,585 | Anthropic `Claude Sonnet 5` | $10 | 258M | 9,190M | yes | yes |
+| llama_13b | 1x H200 | $2,585 | Anthropic `Claude Sonnet 5` | $15 | 172M | 9,190M | yes | yes |
+| llama_13b | 1x H200 | $2,585 | Anthropic `Claude Sonnet 5` | $15 | 172M | 9,190M | yes | yes |
+| llama_13b | 1x H200 | $2,585 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 345M | 9,190M | yes | yes |
+| llama_13b | 1x H200 | $2,585 | DeepSeek `deepseek-v4-flash` | $0.28 | 9,231M | 9,190M | no | yes |
+| llama_13b | 1x H200 | $2,585 | DeepSeek `deepseek-v4-flash` | $0.28 | 9,231M | 9,190M | no | yes |
+| llama_13b | 1x H200 | $4,543 | OpenAI `gpt-5.6-terra` | $12 | 379M | 9,190M | yes | yes |
+| llama_13b | 1x H200 | $4,543 | Anthropic `Claude Sonnet 5` | $10 | 454M | 9,190M | yes | yes |
+| llama_13b | 1x H200 | $4,543 | Anthropic `Claude Sonnet 5` | $10 | 454M | 9,190M | yes | yes |
+| llama_13b | 1x H200 | $4,543 | Anthropic `Claude Sonnet 5` | $15 | 303M | 9,190M | yes | yes |
+| llama_13b | 1x H200 | $4,543 | Anthropic `Claude Sonnet 5` | $15 | 303M | 9,190M | yes | yes |
+| llama_13b | 1x H200 | $4,543 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 606M | 9,190M | yes | yes |
+| llama_13b | 1x H200 | $4,543 | DeepSeek `deepseek-v4-flash` | $0.28 | 16,226M | 9,190M | no | yes |
+| llama_13b | 1x H200 | $4,543 | DeepSeek `deepseek-v4-flash` | $0.28 | 16,226M | 9,190M | no | yes |
+| llama_13b | 1x H200 | $2,585 | OpenAI `gpt-5.6-terra` | $12 | 215M | 3,694M | yes | yes |
+| llama_13b | 1x H200 | $2,585 | Anthropic `Claude Sonnet 5` | $10 | 258M | 3,694M | yes | yes |
+| llama_13b | 1x H200 | $2,585 | Anthropic `Claude Sonnet 5` | $10 | 258M | 3,694M | yes | yes |
+| llama_13b | 1x H200 | $2,585 | Anthropic `Claude Sonnet 5` | $15 | 172M | 3,694M | yes | yes |
+| llama_13b | 1x H200 | $2,585 | Anthropic `Claude Sonnet 5` | $15 | 172M | 3,694M | yes | yes |
+| llama_13b | 1x H200 | $2,585 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 345M | 3,694M | yes | yes |
+| llama_13b | 1x H200 | $2,585 | DeepSeek `deepseek-v4-flash` | $0.28 | 9,231M | 3,694M | no | yes |
+| llama_13b | 1x H200 | $2,585 | DeepSeek `deepseek-v4-flash` | $0.28 | 9,231M | 3,694M | no | yes |
+| llama_13b | 1x H200 | $4,543 | OpenAI `gpt-5.6-terra` | $12 | 379M | 3,694M | yes | yes |
+| llama_13b | 1x H200 | $4,543 | Anthropic `Claude Sonnet 5` | $10 | 454M | 3,694M | yes | yes |
+| llama_13b | 1x H200 | $4,543 | Anthropic `Claude Sonnet 5` | $10 | 454M | 3,694M | yes | yes |
+| llama_13b | 1x H200 | $4,543 | Anthropic `Claude Sonnet 5` | $15 | 303M | 3,694M | yes | yes |
+| llama_13b | 1x H200 | $4,543 | Anthropic `Claude Sonnet 5` | $15 | 303M | 3,694M | yes | yes |
+| llama_13b | 1x H200 | $4,543 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 606M | 3,694M | yes | yes |
+| llama_13b | 1x H200 | $4,543 | DeepSeek `deepseek-v4-flash` | $0.28 | 16,226M | 3,694M | no | no |
+| llama_13b | 1x H200 | $4,543 | DeepSeek `deepseek-v4-flash` | $0.28 | 16,226M | 3,694M | no | no |
+| llama_13b | 1x H200 | $2,585 | OpenAI `gpt-5.6-terra` | $12 | 215M | 1,049M | yes | yes |
+| llama_13b | 1x H200 | $2,585 | Anthropic `Claude Sonnet 5` | $10 | 258M | 1,049M | yes | yes |
+| llama_13b | 1x H200 | $2,585 | Anthropic `Claude Sonnet 5` | $10 | 258M | 1,049M | yes | yes |
+| llama_13b | 1x H200 | $2,585 | Anthropic `Claude Sonnet 5` | $15 | 172M | 1,049M | yes | yes |
+| llama_13b | 1x H200 | $2,585 | Anthropic `Claude Sonnet 5` | $15 | 172M | 1,049M | yes | yes |
+| llama_13b | 1x H200 | $2,585 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 345M | 1,049M | yes | yes |
+| llama_13b | 1x H200 | $2,585 | DeepSeek `deepseek-v4-flash` | $0.28 | 9,231M | 1,049M | no | no |
+| llama_13b | 1x H200 | $2,585 | DeepSeek `deepseek-v4-flash` | $0.28 | 9,231M | 1,049M | no | no |
+| llama_13b | 1x H200 | $4,543 | OpenAI `gpt-5.6-terra` | $12 | 379M | 1,049M | yes | yes |
+| llama_13b | 1x H200 | $4,543 | Anthropic `Claude Sonnet 5` | $10 | 454M | 1,049M | yes | yes |
+| llama_13b | 1x H200 | $4,543 | Anthropic `Claude Sonnet 5` | $10 | 454M | 1,049M | yes | yes |
+| llama_13b | 1x H200 | $4,543 | Anthropic `Claude Sonnet 5` | $15 | 303M | 1,049M | yes | yes |
+| llama_13b | 1x H200 | $4,543 | Anthropic `Claude Sonnet 5` | $15 | 303M | 1,049M | yes | yes |
+| llama_13b | 1x H200 | $4,543 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 606M | 1,049M | yes | yes |
+| llama_13b | 1x H200 | $4,543 | DeepSeek `deepseek-v4-flash` | $0.28 | 16,226M | 1,049M | no | no |
+| llama_13b | 1x H200 | $4,543 | DeepSeek `deepseek-v4-flash` | $0.28 | 16,226M | 1,049M | no | no |
+| Llama-70B | 1x H200 | $2,585 | OpenAI `gpt-5.6-terra` | $12 | 215M | 2,957M | yes | yes |
+| Llama-70B | 1x H200 | $2,585 | Anthropic `Claude Sonnet 5` | $10 | 258M | 2,957M | yes | yes |
+| Llama-70B | 1x H200 | $2,585 | Anthropic `Claude Sonnet 5` | $10 | 258M | 2,957M | yes | yes |
+| Llama-70B | 1x H200 | $2,585 | Anthropic `Claude Sonnet 5` | $15 | 172M | 2,957M | yes | yes |
+| Llama-70B | 1x H200 | $2,585 | Anthropic `Claude Sonnet 5` | $15 | 172M | 2,957M | yes | yes |
+| Llama-70B | 1x H200 | $2,585 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 345M | 2,957M | yes | yes |
+| Llama-70B | 1x H200 | $2,585 | DeepSeek `deepseek-v4-flash` | $0.28 | 9,231M | 2,957M | no | no |
+| Llama-70B | 1x H200 | $2,585 | DeepSeek `deepseek-v4-flash` | $0.28 | 9,231M | 2,957M | no | no |
+| Llama-70B | 1x H200 | $4,543 | OpenAI `gpt-5.6-terra` | $12 | 379M | 2,957M | yes | yes |
+| Llama-70B | 1x H200 | $4,543 | Anthropic `Claude Sonnet 5` | $10 | 454M | 2,957M | yes | yes |
+| Llama-70B | 1x H200 | $4,543 | Anthropic `Claude Sonnet 5` | $10 | 454M | 2,957M | yes | yes |
+| Llama-70B | 1x H200 | $4,543 | Anthropic `Claude Sonnet 5` | $15 | 303M | 2,957M | yes | yes |
+| Llama-70B | 1x H200 | $4,543 | Anthropic `Claude Sonnet 5` | $15 | 303M | 2,957M | yes | yes |
+| Llama-70B | 1x H200 | $4,543 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 606M | 2,957M | yes | yes |
+| Llama-70B | 1x H200 | $4,543 | DeepSeek `deepseek-v4-flash` | $0.28 | 16,226M | 2,957M | no | no |
+| Llama-70B | 1x H200 | $4,543 | DeepSeek `deepseek-v4-flash` | $0.28 | 16,226M | 2,957M | no | no |
+| Llama-70B | 8x H200 | $20,678 | OpenAI `gpt-5.6-terra` | $12 | 1,723M | 2,957M | yes | yes |
+| Llama-70B | 8x H200 | $20,678 | Anthropic `Claude Sonnet 5` | $10 | 2,068M | 2,957M | yes | yes |
+| Llama-70B | 8x H200 | $20,678 | Anthropic `Claude Sonnet 5` | $10 | 2,068M | 2,957M | yes | yes |
+| Llama-70B | 8x H200 | $20,678 | Anthropic `Claude Sonnet 5` | $15 | 1,379M | 2,957M | yes | yes |
+| Llama-70B | 8x H200 | $20,678 | Anthropic `Claude Sonnet 5` | $15 | 1,379M | 2,957M | yes | yes |
+| Llama-70B | 8x H200 | $20,678 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 2,757M | 2,957M | yes | yes |
+| Llama-70B | 8x H200 | $20,678 | DeepSeek `deepseek-v4-flash` | $0.28 | 73,851M | 2,957M | no | no |
+| Llama-70B | 8x H200 | $20,678 | DeepSeek `deepseek-v4-flash` | $0.28 | 73,851M | 2,957M | no | no |
+| Llama-70B | 8x H200 | $36,346 | OpenAI `gpt-5.6-terra` | $12 | 3,029M | 2,957M | no | yes |
+| Llama-70B | 8x H200 | $36,346 | Anthropic `Claude Sonnet 5` | $10 | 3,635M | 2,957M | no | yes |
+| Llama-70B | 8x H200 | $36,346 | Anthropic `Claude Sonnet 5` | $10 | 3,635M | 2,957M | no | yes |
+| Llama-70B | 8x H200 | $36,346 | Anthropic `Claude Sonnet 5` | $15 | 2,423M | 2,957M | yes | yes |
+| Llama-70B | 8x H200 | $36,346 | Anthropic `Claude Sonnet 5` | $15 | 2,423M | 2,957M | yes | yes |
+| Llama-70B | 8x H200 | $36,346 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 4,846M | 2,957M | no | yes |
+| Llama-70B | 8x H200 | $36,346 | DeepSeek `deepseek-v4-flash` | $0.28 | 129,806M | 2,957M | no | no |
+| Llama-70B | 8x H200 | $36,346 | DeepSeek `deepseek-v4-flash` | $0.28 | 129,806M | 2,957M | no | no |
+| Llama-70B | 1x H200 | $2,585 | OpenAI `gpt-5.6-terra` | $12 | 215M | 2,287M | yes | yes |
+| Llama-70B | 1x H200 | $2,585 | Anthropic `Claude Sonnet 5` | $10 | 258M | 2,287M | yes | yes |
+| Llama-70B | 1x H200 | $2,585 | Anthropic `Claude Sonnet 5` | $10 | 258M | 2,287M | yes | yes |
+| Llama-70B | 1x H200 | $2,585 | Anthropic `Claude Sonnet 5` | $15 | 172M | 2,287M | yes | yes |
+| Llama-70B | 1x H200 | $2,585 | Anthropic `Claude Sonnet 5` | $15 | 172M | 2,287M | yes | yes |
+| Llama-70B | 1x H200 | $2,585 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 345M | 2,287M | yes | yes |
+| Llama-70B | 1x H200 | $2,585 | DeepSeek `deepseek-v4-flash` | $0.28 | 9,231M | 2,287M | no | no |
+| Llama-70B | 1x H200 | $2,585 | DeepSeek `deepseek-v4-flash` | $0.28 | 9,231M | 2,287M | no | no |
+| Llama-70B | 1x H200 | $4,543 | OpenAI `gpt-5.6-terra` | $12 | 379M | 2,287M | yes | yes |
+| Llama-70B | 1x H200 | $4,543 | Anthropic `Claude Sonnet 5` | $10 | 454M | 2,287M | yes | yes |
+| Llama-70B | 1x H200 | $4,543 | Anthropic `Claude Sonnet 5` | $10 | 454M | 2,287M | yes | yes |
+| Llama-70B | 1x H200 | $4,543 | Anthropic `Claude Sonnet 5` | $15 | 303M | 2,287M | yes | yes |
+| Llama-70B | 1x H200 | $4,543 | Anthropic `Claude Sonnet 5` | $15 | 303M | 2,287M | yes | yes |
+| Llama-70B | 1x H200 | $4,543 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 606M | 2,287M | yes | yes |
+| Llama-70B | 1x H200 | $4,543 | DeepSeek `deepseek-v4-flash` | $0.28 | 16,226M | 2,287M | no | no |
+| Llama-70B | 1x H200 | $4,543 | DeepSeek `deepseek-v4-flash` | $0.28 | 16,226M | 2,287M | no | no |
+| Llama-70B | 8x H200 | $20,678 | OpenAI `gpt-5.6-terra` | $12 | 1,723M | 2,460M | yes | yes |
+| Llama-70B | 8x H200 | $20,678 | Anthropic `Claude Sonnet 5` | $10 | 2,068M | 2,460M | yes | yes |
+| Llama-70B | 8x H200 | $20,678 | Anthropic `Claude Sonnet 5` | $10 | 2,068M | 2,460M | yes | yes |
+| Llama-70B | 8x H200 | $20,678 | Anthropic `Claude Sonnet 5` | $15 | 1,379M | 2,460M | yes | yes |
+| Llama-70B | 8x H200 | $20,678 | Anthropic `Claude Sonnet 5` | $15 | 1,379M | 2,460M | yes | yes |
+| Llama-70B | 8x H200 | $20,678 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 2,757M | 2,460M | no | yes |
+| Llama-70B | 8x H200 | $20,678 | DeepSeek `deepseek-v4-flash` | $0.28 | 73,851M | 2,460M | no | no |
+| Llama-70B | 8x H200 | $20,678 | DeepSeek `deepseek-v4-flash` | $0.28 | 73,851M | 2,460M | no | no |
+| Llama-70B | 8x H200 | $36,346 | OpenAI `gpt-5.6-terra` | $12 | 3,029M | 2,460M | no | yes |
+| Llama-70B | 8x H200 | $36,346 | Anthropic `Claude Sonnet 5` | $10 | 3,635M | 2,460M | no | yes |
+| Llama-70B | 8x H200 | $36,346 | Anthropic `Claude Sonnet 5` | $10 | 3,635M | 2,460M | no | yes |
+| Llama-70B | 8x H200 | $36,346 | Anthropic `Claude Sonnet 5` | $15 | 2,423M | 2,460M | yes | yes |
+| Llama-70B | 8x H200 | $36,346 | Anthropic `Claude Sonnet 5` | $15 | 2,423M | 2,460M | yes | yes |
+| Llama-70B | 8x H200 | $36,346 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 4,846M | 2,460M | no | yes |
+| Llama-70B | 8x H200 | $36,346 | DeepSeek `deepseek-v4-flash` | $0.28 | 129,806M | 2,460M | no | no |
+| Llama-70B | 8x H200 | $36,346 | DeepSeek `deepseek-v4-flash` | $0.28 | 129,806M | 2,460M | no | no |
+| Llama-70B | 1x H200 | $2,585 | OpenAI `gpt-5.6-terra` | $12 | 215M | 1,513M | yes | yes |
+| Llama-70B | 1x H200 | $2,585 | Anthropic `Claude Sonnet 5` | $10 | 258M | 1,513M | yes | yes |
+| Llama-70B | 1x H200 | $2,585 | Anthropic `Claude Sonnet 5` | $10 | 258M | 1,513M | yes | yes |
+| Llama-70B | 1x H200 | $2,585 | Anthropic `Claude Sonnet 5` | $15 | 172M | 1,513M | yes | yes |
+| Llama-70B | 1x H200 | $2,585 | Anthropic `Claude Sonnet 5` | $15 | 172M | 1,513M | yes | yes |
+| Llama-70B | 1x H200 | $2,585 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 345M | 1,513M | yes | yes |
+| Llama-70B | 1x H200 | $2,585 | DeepSeek `deepseek-v4-flash` | $0.28 | 9,231M | 1,513M | no | no |
+| Llama-70B | 1x H200 | $2,585 | DeepSeek `deepseek-v4-flash` | $0.28 | 9,231M | 1,513M | no | no |
+| Llama-70B | 1x H200 | $4,543 | OpenAI `gpt-5.6-terra` | $12 | 379M | 1,513M | yes | yes |
+| Llama-70B | 1x H200 | $4,543 | Anthropic `Claude Sonnet 5` | $10 | 454M | 1,513M | yes | yes |
+| Llama-70B | 1x H200 | $4,543 | Anthropic `Claude Sonnet 5` | $10 | 454M | 1,513M | yes | yes |
+| Llama-70B | 1x H200 | $4,543 | Anthropic `Claude Sonnet 5` | $15 | 303M | 1,513M | yes | yes |
+| Llama-70B | 1x H200 | $4,543 | Anthropic `Claude Sonnet 5` | $15 | 303M | 1,513M | yes | yes |
+| Llama-70B | 1x H200 | $4,543 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 606M | 1,513M | yes | yes |
+| Llama-70B | 1x H200 | $4,543 | DeepSeek `deepseek-v4-flash` | $0.28 | 16,226M | 1,513M | no | no |
+| Llama-70B | 1x H200 | $4,543 | DeepSeek `deepseek-v4-flash` | $0.28 | 16,226M | 1,513M | no | no |
+| Llama-70B | 8x H200 | $20,678 | OpenAI `gpt-5.6-terra` | $12 | 1,723M | 1,760M | yes | yes |
+| Llama-70B | 8x H200 | $20,678 | Anthropic `Claude Sonnet 5` | $10 | 2,068M | 1,760M | no | yes |
+| Llama-70B | 8x H200 | $20,678 | Anthropic `Claude Sonnet 5` | $10 | 2,068M | 1,760M | no | yes |
+| Llama-70B | 8x H200 | $20,678 | Anthropic `Claude Sonnet 5` | $15 | 1,379M | 1,760M | yes | yes |
+| Llama-70B | 8x H200 | $20,678 | Anthropic `Claude Sonnet 5` | $15 | 1,379M | 1,760M | yes | yes |
+| Llama-70B | 8x H200 | $20,678 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 2,757M | 1,760M | no | yes |
+| Llama-70B | 8x H200 | $20,678 | DeepSeek `deepseek-v4-flash` | $0.28 | 73,851M | 1,760M | no | no |
+| Llama-70B | 8x H200 | $20,678 | DeepSeek `deepseek-v4-flash` | $0.28 | 73,851M | 1,760M | no | no |
+| Llama-70B | 8x H200 | $36,346 | OpenAI `gpt-5.6-terra` | $12 | 3,029M | 1,760M | no | yes |
+| Llama-70B | 8x H200 | $36,346 | Anthropic `Claude Sonnet 5` | $10 | 3,635M | 1,760M | no | yes |
+| Llama-70B | 8x H200 | $36,346 | Anthropic `Claude Sonnet 5` | $10 | 3,635M | 1,760M | no | yes |
+| Llama-70B | 8x H200 | $36,346 | Anthropic `Claude Sonnet 5` | $15 | 2,423M | 1,760M | no | yes |
+| Llama-70B | 8x H200 | $36,346 | Anthropic `Claude Sonnet 5` | $15 | 2,423M | 1,760M | no | yes |
+| Llama-70B | 8x H200 | $36,346 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 4,846M | 1,760M | no | yes |
+| Llama-70B | 8x H200 | $36,346 | DeepSeek `deepseek-v4-flash` | $0.28 | 129,806M | 1,760M | no | no |
+| Llama-70B | 8x H200 | $36,346 | DeepSeek `deepseek-v4-flash` | $0.28 | 129,806M | 1,760M | no | no |
 
 When capacity is below break-even, the box cannot emit enough tokens to ever
 beat that API price, at any volume. That is the common case against cheap

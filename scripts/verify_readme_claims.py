@@ -162,11 +162,18 @@ def main() -> int:
     # --- the headline honesty claim, asserted like-for-like on exact model ids.
     # A fuzzy match here would pull in distills and quietly make the API look
     # ten times better than it is, so the ids are exact.
+    # (hosted model id -> canonical key the self-host model must CONTAIN).
+    # Never match on a family prefix: "llama" also matches llama_13b, and
+    # pricing a 13B model against a 70B API price reverses the conclusion.
     HEAD = {
-        "deepseek-ai/deepseek-r1-0528": "DeepSeek-R1",
-        "minimaxai/minimax-m3": "MiniMax-M3",
-        "meta-llama/llama-3.3-70b-instruct": "Llama-3.3-70B",
+        "deepseek-ai/deepseek-r1-0528": "deepseek-r1-0528",
+        "minimaxai/minimax-m3": "minimax-m3",
+        "meta-llama/llama-3.3-70b-instruct": "llama-3.3-70b",
     }
+    import re as _re
+
+    def _key(x):
+        return _re.sub(r"[^a-z0-9.]+", "-", str(x).lower())
     api_wins_at_30 = 0
     compared = 0
     for mid, shkey in HEAD.items():
@@ -178,7 +185,7 @@ def main() -> int:
             and str(r.get("model_name", "")).lower().replace("-turbo", "") == mid
             and num(r.get("output_per_1m"))
         ]
-        rows = [r for r in sh["rows"] if shkey.split("-")[0].lower() in str(r["model"]).lower()]
+        rows = [r for r in sh["rows"] if shkey in _key(r["model"])]
         if not hosted or not rows:
             continue
         compared += 1

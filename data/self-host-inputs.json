@@ -348,12 +348,990 @@
         }
       ],
       "notes": "InferenceX row 40677 reports image=null. The endpoint's current display bucket retains FP8 in its name, while this individual row's precision field is fp4; both are preserved exactly rather than reconciled. Throughput is output_tput_per_gpu."
+    },
+    {
+      "id": "gptoss120b-2xH100",
+      "model": "gptoss120b",
+      "gpu_model": "H100",
+      "gpu_model_as_benchmarked": "H100",
+      "gpu_count": 2,
+      "engine": "vllm",
+      "engine_version": "v0.21.0",
+      "precision": "fp4",
+      "batch_or_concurrency": "concurrency=4",
+      "input_len": 8192,
+      "output_len": 1024,
+      "throughput_tok_per_s": 657.95,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "output_tput_per_gpu multiplied by gpu_count",
+      "per_gpu_correction_applied": true,
+      "throughput_source_url": "https://inferencex.semianalysis.com/api/v1/benchmarks?model=gpt-oss-120b",
+      "throughput_measured": false,
+      "throughput_status": "COMPLETE",
+      "throughput_missing_fields": [],
+      "vendor_reported": false,
+      "rates": [
+        {
+          "provider": "RunPod",
+          "gpu_model_as_listed": "H100 PCIe",
+          "hourly_per_gpu": 1.99,
+          "tier": "on_demand",
+          "source_url": "https://www.runpod.io/pricing",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "CoreWeave",
+          "gpu_model_as_listed": "NVIDIA HGX H100",
+          "hourly_per_gpu": 6.16,
+          "tier": "on_demand",
+          "source_url": "https://www.coreweave.com/pricing",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "InferenceX row 409813 is non-disaggregated; num_prefill_gpu and num_decode_gpu both equal 2, so gpu_count is 2, not their sum. Throughput uses the literal output_tput_per_gpu field. Engine build comes from image vllm/vllm-openai:v0.21.0."
+    },
+    {
+      "id": "gptoss120b-2xH100",
+      "model": "gptoss120b",
+      "gpu_model": "H100",
+      "gpu_model_as_benchmarked": "H100",
+      "gpu_count": 2,
+      "engine": "vllm",
+      "engine_version": "v0.21.0",
+      "precision": "fp4",
+      "batch_or_concurrency": "concurrency=8",
+      "input_len": 8192,
+      "output_len": 1024,
+      "throughput_tok_per_s": 998.26,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "output_tput_per_gpu multiplied by gpu_count",
+      "per_gpu_correction_applied": true,
+      "throughput_source_url": "https://inferencex.semianalysis.com/api/v1/benchmarks?model=gpt-oss-120b",
+      "throughput_measured": false,
+      "throughput_status": "COMPLETE",
+      "throughput_missing_fields": [],
+      "vendor_reported": false,
+      "rates": [
+        {
+          "provider": "RunPod",
+          "gpu_model_as_listed": "H100 PCIe",
+          "hourly_per_gpu": 1.99,
+          "tier": "on_demand",
+          "source_url": "https://www.runpod.io/pricing",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "CoreWeave",
+          "gpu_model_as_listed": "NVIDIA HGX H100",
+          "hourly_per_gpu": 6.16,
+          "tier": "on_demand",
+          "source_url": "https://www.coreweave.com/pricing",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "InferenceX row 409814 is non-disaggregated; num_prefill_gpu and num_decode_gpu both equal 2, so gpu_count is 2, not their sum. Throughput uses the literal output_tput_per_gpu field. Engine build comes from image vllm/vllm-openai:v0.21.0."
+    },
+    {
+      "id": "gptoss120b-2xH100",
+      "model": "gptoss120b",
+      "gpu_model": "H100",
+      "gpu_model_as_benchmarked": "H100",
+      "gpu_count": 2,
+      "engine": "vllm",
+      "engine_version": "v0.21.0",
+      "precision": "fp4",
+      "batch_or_concurrency": "concurrency=16",
+      "input_len": 8192,
+      "output_len": 1024,
+      "throughput_tok_per_s": 1385.34,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "output_tput_per_gpu multiplied by gpu_count",
+      "per_gpu_correction_applied": true,
+      "throughput_source_url": "https://inferencex.semianalysis.com/api/v1/benchmarks?model=gpt-oss-120b",
+      "throughput_measured": false,
+      "throughput_status": "COMPLETE",
+      "throughput_missing_fields": [],
+      "vendor_reported": false,
+      "rates": [
+        {
+          "provider": "RunPod",
+          "gpu_model_as_listed": "H100 PCIe",
+          "hourly_per_gpu": 1.99,
+          "tier": "on_demand",
+          "source_url": "https://www.runpod.io/pricing",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "CoreWeave",
+          "gpu_model_as_listed": "NVIDIA HGX H100",
+          "hourly_per_gpu": 6.16,
+          "tier": "on_demand",
+          "source_url": "https://www.coreweave.com/pricing",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "InferenceX row 409802 is non-disaggregated; num_prefill_gpu and num_decode_gpu both equal 2, so gpu_count is 2, not their sum. Throughput uses the literal output_tput_per_gpu field. Engine build comes from image vllm/vllm-openai:v0.21.0."
+    },
+    {
+      "id": "gptoss120b-2xH100",
+      "model": "gptoss120b",
+      "gpu_model": "H100",
+      "gpu_model_as_benchmarked": "H100",
+      "gpu_count": 2,
+      "engine": "vllm",
+      "engine_version": "v0.21.0",
+      "precision": "fp4",
+      "batch_or_concurrency": "concurrency=32",
+      "input_len": 8192,
+      "output_len": 1024,
+      "throughput_tok_per_s": 1824.97,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "output_tput_per_gpu multiplied by gpu_count",
+      "per_gpu_correction_applied": true,
+      "throughput_source_url": "https://inferencex.semianalysis.com/api/v1/benchmarks?model=gpt-oss-120b",
+      "throughput_measured": false,
+      "throughput_status": "COMPLETE",
+      "throughput_missing_fields": [],
+      "vendor_reported": false,
+      "rates": [
+        {
+          "provider": "RunPod",
+          "gpu_model_as_listed": "H100 PCIe",
+          "hourly_per_gpu": 1.99,
+          "tier": "on_demand",
+          "source_url": "https://www.runpod.io/pricing",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "CoreWeave",
+          "gpu_model_as_listed": "NVIDIA HGX H100",
+          "hourly_per_gpu": 6.16,
+          "tier": "on_demand",
+          "source_url": "https://www.coreweave.com/pricing",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "InferenceX row 409801 is non-disaggregated; num_prefill_gpu and num_decode_gpu both equal 2, so gpu_count is 2, not their sum. Throughput uses the literal output_tput_per_gpu field. Engine build comes from image vllm/vllm-openai:v0.21.0."
+    },
+    {
+      "id": "gptoss120b-2xH100",
+      "model": "gptoss120b",
+      "gpu_model": "H100",
+      "gpu_model_as_benchmarked": "H100",
+      "gpu_count": 2,
+      "engine": "vllm",
+      "engine_version": "v0.21.0",
+      "precision": "fp4",
+      "batch_or_concurrency": "concurrency=64",
+      "input_len": 8192,
+      "output_len": 1024,
+      "throughput_tok_per_s": 2281.87,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "output_tput_per_gpu multiplied by gpu_count",
+      "per_gpu_correction_applied": true,
+      "throughput_source_url": "https://inferencex.semianalysis.com/api/v1/benchmarks?model=gpt-oss-120b",
+      "throughput_measured": false,
+      "throughput_status": "COMPLETE",
+      "throughput_missing_fields": [],
+      "vendor_reported": false,
+      "rates": [
+        {
+          "provider": "RunPod",
+          "gpu_model_as_listed": "H100 PCIe",
+          "hourly_per_gpu": 1.99,
+          "tier": "on_demand",
+          "source_url": "https://www.runpod.io/pricing",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "CoreWeave",
+          "gpu_model_as_listed": "NVIDIA HGX H100",
+          "hourly_per_gpu": 6.16,
+          "tier": "on_demand",
+          "source_url": "https://www.coreweave.com/pricing",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "InferenceX row 409793 is non-disaggregated; num_prefill_gpu and num_decode_gpu both equal 2, so gpu_count is 2, not their sum. Throughput uses the literal output_tput_per_gpu field. Engine build comes from image vllm/vllm-openai:v0.21.0."
+    },
+    {
+      "id": "gptoss120b-2xH200",
+      "model": "gptoss120b",
+      "gpu_model": "H200",
+      "gpu_model_as_benchmarked": "H200",
+      "gpu_count": 2,
+      "engine": "vllm",
+      "engine_version": "v0.22.0",
+      "precision": "fp4",
+      "batch_or_concurrency": "concurrency=4",
+      "input_len": 8192,
+      "output_len": 1024,
+      "throughput_tok_per_s": 693.76,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "output_tput_per_gpu multiplied by gpu_count",
+      "per_gpu_correction_applied": true,
+      "throughput_source_url": "https://inferencex.semianalysis.com/api/v1/benchmarks?model=gpt-oss-120b",
+      "throughput_measured": false,
+      "throughput_status": "COMPLETE",
+      "throughput_missing_fields": [],
+      "vendor_reported": false,
+      "rates": [
+        {
+          "provider": "RunPod",
+          "gpu_model_as_listed": "H200",
+          "hourly_per_gpu": 3.59,
+          "tier": "on_demand",
+          "source_url": "https://www.runpod.io/pricing",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "CoreWeave",
+          "gpu_model_as_listed": "NVIDIA HGX H200",
+          "hourly_per_gpu": 6.31,
+          "tier": "on_demand",
+          "source_url": "https://www.coreweave.com/pricing",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "InferenceX row 416886 is non-disaggregated; num_prefill_gpu and num_decode_gpu both equal 2, so gpu_count is 2, not their sum. Throughput uses the literal output_tput_per_gpu field. Engine build comes from image vllm/vllm-openai:v0.22.0."
+    },
+    {
+      "id": "gptoss120b-2xH200",
+      "model": "gptoss120b",
+      "gpu_model": "H200",
+      "gpu_model_as_benchmarked": "H200",
+      "gpu_count": 2,
+      "engine": "vllm",
+      "engine_version": "v0.22.0",
+      "precision": "fp4",
+      "batch_or_concurrency": "concurrency=8",
+      "input_len": 8192,
+      "output_len": 1024,
+      "throughput_tok_per_s": 431.34,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "output_tput_per_gpu multiplied by gpu_count",
+      "per_gpu_correction_applied": true,
+      "throughput_source_url": "https://inferencex.semianalysis.com/api/v1/benchmarks?model=gpt-oss-120b",
+      "throughput_measured": false,
+      "throughput_status": "COMPLETE",
+      "throughput_missing_fields": [],
+      "vendor_reported": false,
+      "rates": [
+        {
+          "provider": "RunPod",
+          "gpu_model_as_listed": "H200",
+          "hourly_per_gpu": 3.59,
+          "tier": "on_demand",
+          "source_url": "https://www.runpod.io/pricing",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "CoreWeave",
+          "gpu_model_as_listed": "NVIDIA HGX H200",
+          "hourly_per_gpu": 6.31,
+          "tier": "on_demand",
+          "source_url": "https://www.coreweave.com/pricing",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "InferenceX row 416875 is non-disaggregated; num_prefill_gpu and num_decode_gpu both equal 2, so gpu_count is 2, not their sum. Throughput uses the literal output_tput_per_gpu field. Engine build comes from image vllm/vllm-openai:v0.22.0."
+    },
+    {
+      "id": "gptoss120b-2xH200",
+      "model": "gptoss120b",
+      "gpu_model": "H200",
+      "gpu_model_as_benchmarked": "H200",
+      "gpu_count": 2,
+      "engine": "vllm",
+      "engine_version": "v0.22.0",
+      "precision": "fp4",
+      "batch_or_concurrency": "concurrency=16",
+      "input_len": 8192,
+      "output_len": 1024,
+      "throughput_tok_per_s": 1453.16,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "output_tput_per_gpu multiplied by gpu_count",
+      "per_gpu_correction_applied": true,
+      "throughput_source_url": "https://inferencex.semianalysis.com/api/v1/benchmarks?model=gpt-oss-120b",
+      "throughput_measured": false,
+      "throughput_status": "COMPLETE",
+      "throughput_missing_fields": [],
+      "vendor_reported": false,
+      "rates": [
+        {
+          "provider": "RunPod",
+          "gpu_model_as_listed": "H200",
+          "hourly_per_gpu": 3.59,
+          "tier": "on_demand",
+          "source_url": "https://www.runpod.io/pricing",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "CoreWeave",
+          "gpu_model_as_listed": "NVIDIA HGX H200",
+          "hourly_per_gpu": 6.31,
+          "tier": "on_demand",
+          "source_url": "https://www.coreweave.com/pricing",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "InferenceX row 416883 is non-disaggregated; num_prefill_gpu and num_decode_gpu both equal 2, so gpu_count is 2, not their sum. Throughput uses the literal output_tput_per_gpu field. Engine build comes from image vllm/vllm-openai:v0.22.0."
+    },
+    {
+      "id": "gptoss120b-2xH200",
+      "model": "gptoss120b",
+      "gpu_model": "H200",
+      "gpu_model_as_benchmarked": "H200",
+      "gpu_count": 2,
+      "engine": "vllm",
+      "engine_version": "v0.22.0",
+      "precision": "fp4",
+      "batch_or_concurrency": "concurrency=32",
+      "input_len": 8192,
+      "output_len": 1024,
+      "throughput_tok_per_s": 1237.81,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "output_tput_per_gpu multiplied by gpu_count",
+      "per_gpu_correction_applied": true,
+      "throughput_source_url": "https://inferencex.semianalysis.com/api/v1/benchmarks?model=gpt-oss-120b",
+      "throughput_measured": false,
+      "throughput_status": "COMPLETE",
+      "throughput_missing_fields": [],
+      "vendor_reported": false,
+      "rates": [
+        {
+          "provider": "RunPod",
+          "gpu_model_as_listed": "H200",
+          "hourly_per_gpu": 3.59,
+          "tier": "on_demand",
+          "source_url": "https://www.runpod.io/pricing",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "CoreWeave",
+          "gpu_model_as_listed": "NVIDIA HGX H200",
+          "hourly_per_gpu": 6.31,
+          "tier": "on_demand",
+          "source_url": "https://www.coreweave.com/pricing",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "InferenceX row 416863 is non-disaggregated; num_prefill_gpu and num_decode_gpu both equal 2, so gpu_count is 2, not their sum. Throughput uses the literal output_tput_per_gpu field. Engine build comes from image vllm/vllm-openai:v0.22.0."
+    },
+    {
+      "id": "gptoss120b-2xH200",
+      "model": "gptoss120b",
+      "gpu_model": "H200",
+      "gpu_model_as_benchmarked": "H200",
+      "gpu_count": 2,
+      "engine": "vllm",
+      "engine_version": "v0.22.0",
+      "precision": "fp4",
+      "batch_or_concurrency": "concurrency=64",
+      "input_len": 8192,
+      "output_len": 1024,
+      "throughput_tok_per_s": 2421.48,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "output_tput_per_gpu multiplied by gpu_count",
+      "per_gpu_correction_applied": true,
+      "throughput_source_url": "https://inferencex.semianalysis.com/api/v1/benchmarks?model=gpt-oss-120b",
+      "throughput_measured": false,
+      "throughput_status": "COMPLETE",
+      "throughput_missing_fields": [],
+      "vendor_reported": false,
+      "rates": [
+        {
+          "provider": "RunPod",
+          "gpu_model_as_listed": "H200",
+          "hourly_per_gpu": 3.59,
+          "tier": "on_demand",
+          "source_url": "https://www.runpod.io/pricing",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "CoreWeave",
+          "gpu_model_as_listed": "NVIDIA HGX H200",
+          "hourly_per_gpu": 6.31,
+          "tier": "on_demand",
+          "source_url": "https://www.coreweave.com/pricing",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "InferenceX row 416885 is non-disaggregated; num_prefill_gpu and num_decode_gpu both equal 2, so gpu_count is 2, not their sum. Throughput uses the literal output_tput_per_gpu field. Engine build comes from image vllm/vllm-openai:v0.22.0."
+    },
+    {
+      "id": "qwen3.5-8xH100",
+      "model": "qwen3.5",
+      "gpu_model": "H100",
+      "gpu_model_as_benchmarked": "H100",
+      "gpu_count": 8,
+      "engine": "sglang",
+      "engine_version": "v0.5.14-cu130",
+      "precision": "fp8",
+      "batch_or_concurrency": "concurrency=1",
+      "input_len": 8192,
+      "output_len": 1024,
+      "throughput_tok_per_s": 159.78,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "output_tput_per_gpu multiplied by gpu_count",
+      "per_gpu_correction_applied": true,
+      "throughput_source_url": "https://inferencex.semianalysis.com/api/v1/benchmarks?model=Qwen-3.5-397B-A17B",
+      "throughput_measured": false,
+      "throughput_status": "COMPLETE",
+      "throughput_missing_fields": [],
+      "vendor_reported": false,
+      "rates": [
+        {
+          "provider": "RunPod",
+          "gpu_model_as_listed": "H100 PCIe",
+          "hourly_per_gpu": 1.99,
+          "tier": "on_demand",
+          "source_url": "https://www.runpod.io/pricing",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "CoreWeave",
+          "gpu_model_as_listed": "NVIDIA HGX H100",
+          "hourly_per_gpu": 6.16,
+          "tier": "on_demand",
+          "source_url": "https://www.coreweave.com/pricing",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "InferenceX row 432611 is non-disaggregated; num_prefill_gpu and num_decode_gpu both equal 8, so gpu_count is 8, not their sum. Throughput uses the literal output_tput_per_gpu field. Engine build comes from image lmsysorg/sglang:v0.5.14-cu130."
+    },
+    {
+      "id": "qwen3.5-8xH100",
+      "model": "qwen3.5",
+      "gpu_model": "H100",
+      "gpu_model_as_benchmarked": "H100",
+      "gpu_count": 8,
+      "engine": "sglang",
+      "engine_version": "v0.5.14-cu130",
+      "precision": "fp8",
+      "batch_or_concurrency": "concurrency=2",
+      "input_len": 8192,
+      "output_len": 1024,
+      "throughput_tok_per_s": 279.43,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "output_tput_per_gpu multiplied by gpu_count",
+      "per_gpu_correction_applied": true,
+      "throughput_source_url": "https://inferencex.semianalysis.com/api/v1/benchmarks?model=Qwen-3.5-397B-A17B",
+      "throughput_measured": false,
+      "throughput_status": "COMPLETE",
+      "throughput_missing_fields": [],
+      "vendor_reported": false,
+      "rates": [
+        {
+          "provider": "RunPod",
+          "gpu_model_as_listed": "H100 PCIe",
+          "hourly_per_gpu": 1.99,
+          "tier": "on_demand",
+          "source_url": "https://www.runpod.io/pricing",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "CoreWeave",
+          "gpu_model_as_listed": "NVIDIA HGX H100",
+          "hourly_per_gpu": 6.16,
+          "tier": "on_demand",
+          "source_url": "https://www.coreweave.com/pricing",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "InferenceX row 432595 is non-disaggregated; num_prefill_gpu and num_decode_gpu both equal 8, so gpu_count is 8, not their sum. Throughput uses the literal output_tput_per_gpu field. Engine build comes from image lmsysorg/sglang:v0.5.14-cu130."
+    },
+    {
+      "id": "qwen3.5-8xH100",
+      "model": "qwen3.5",
+      "gpu_model": "H100",
+      "gpu_model_as_benchmarked": "H100",
+      "gpu_count": 8,
+      "engine": "sglang",
+      "engine_version": "v0.5.14-cu130",
+      "precision": "fp8",
+      "batch_or_concurrency": "concurrency=4",
+      "input_len": 8192,
+      "output_len": 1024,
+      "throughput_tok_per_s": 457.37,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "output_tput_per_gpu multiplied by gpu_count",
+      "per_gpu_correction_applied": true,
+      "throughput_source_url": "https://inferencex.semianalysis.com/api/v1/benchmarks?model=Qwen-3.5-397B-A17B",
+      "throughput_measured": false,
+      "throughput_status": "COMPLETE",
+      "throughput_missing_fields": [],
+      "vendor_reported": false,
+      "rates": [
+        {
+          "provider": "RunPod",
+          "gpu_model_as_listed": "H100 PCIe",
+          "hourly_per_gpu": 1.99,
+          "tier": "on_demand",
+          "source_url": "https://www.runpod.io/pricing",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "CoreWeave",
+          "gpu_model_as_listed": "NVIDIA HGX H100",
+          "hourly_per_gpu": 6.16,
+          "tier": "on_demand",
+          "source_url": "https://www.coreweave.com/pricing",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "InferenceX row 432598 is non-disaggregated; num_prefill_gpu and num_decode_gpu both equal 8, so gpu_count is 8, not their sum. Throughput uses the literal output_tput_per_gpu field. Engine build comes from image lmsysorg/sglang:v0.5.14-cu130."
+    },
+    {
+      "id": "qwen3.5-8xH100",
+      "model": "qwen3.5",
+      "gpu_model": "H100",
+      "gpu_model_as_benchmarked": "H100",
+      "gpu_count": 8,
+      "engine": "sglang",
+      "engine_version": "v0.5.14-cu130",
+      "precision": "fp8",
+      "batch_or_concurrency": "concurrency=8",
+      "input_len": 8192,
+      "output_len": 1024,
+      "throughput_tok_per_s": 471.83,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "output_tput_per_gpu multiplied by gpu_count",
+      "per_gpu_correction_applied": true,
+      "throughput_source_url": "https://inferencex.semianalysis.com/api/v1/benchmarks?model=Qwen-3.5-397B-A17B",
+      "throughput_measured": false,
+      "throughput_status": "COMPLETE",
+      "throughput_missing_fields": [],
+      "vendor_reported": false,
+      "rates": [
+        {
+          "provider": "RunPod",
+          "gpu_model_as_listed": "H100 PCIe",
+          "hourly_per_gpu": 1.99,
+          "tier": "on_demand",
+          "source_url": "https://www.runpod.io/pricing",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "CoreWeave",
+          "gpu_model_as_listed": "NVIDIA HGX H100",
+          "hourly_per_gpu": 6.16,
+          "tier": "on_demand",
+          "source_url": "https://www.coreweave.com/pricing",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "InferenceX row 432603 is non-disaggregated; num_prefill_gpu and num_decode_gpu both equal 8, so gpu_count is 8, not their sum. Throughput uses the literal output_tput_per_gpu field. Engine build comes from image lmsysorg/sglang:v0.5.14-cu130."
+    },
+    {
+      "id": "llama_13b-1xH200",
+      "model": "llama_13b",
+      "gpu_model": "H200",
+      "gpu_model_as_benchmarked": "H200",
+      "gpu_count": 1,
+      "engine": "TensorRT LLM",
+      "engine_version": "v0.5.0",
+      "precision": "FP8",
+      "batch_or_concurrency": "batch_size=1024",
+      "input_len": 128,
+      "output_len": 128,
+      "throughput_tok_per_s": 11819,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "source reported total output throughput directly",
+      "per_gpu_correction_applied": false,
+      "throughput_source_url": "https://raw.githubusercontent.com/NVIDIA/TensorRT-LLM/main/docs/source/blogs/H200launch.md",
+      "throughput_measured": false,
+      "throughput_status": "COMPLETE",
+      "throughput_missing_fields": [],
+      "vendor_reported": true,
+      "rates": [
+        {
+          "provider": "RunPod",
+          "gpu_model_as_listed": "H200",
+          "hourly_per_gpu": 3.59,
+          "tier": "on_demand",
+          "source_url": "https://www.runpod.io/pricing",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "CoreWeave",
+          "gpu_model_as_listed": "NVIDIA HGX H200",
+          "hourly_per_gpu": 6.31,
+          "tier": "on_demand",
+          "source_url": "https://www.coreweave.com/pricing",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "The source states llama_13b performance is on a single H200 GPU. The table column is Throughput (out tok/s/GPU), and the footnote pins TensorRT LLM v0.5.0 and FP8."
+    },
+    {
+      "id": "llama_13b-1xH200",
+      "model": "llama_13b",
+      "gpu_model": "H200",
+      "gpu_model_as_benchmarked": "H200",
+      "gpu_count": 1,
+      "engine": "TensorRT LLM",
+      "engine_version": "v0.5.0",
+      "precision": "FP8",
+      "batch_or_concurrency": "batch_size=128",
+      "input_len": 128,
+      "output_len": 2048,
+      "throughput_tok_per_s": 4750,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "source reported total output throughput directly",
+      "per_gpu_correction_applied": false,
+      "throughput_source_url": "https://raw.githubusercontent.com/NVIDIA/TensorRT-LLM/main/docs/source/blogs/H200launch.md",
+      "throughput_measured": false,
+      "throughput_status": "COMPLETE",
+      "throughput_missing_fields": [],
+      "vendor_reported": true,
+      "rates": [
+        {
+          "provider": "RunPod",
+          "gpu_model_as_listed": "H200",
+          "hourly_per_gpu": 3.59,
+          "tier": "on_demand",
+          "source_url": "https://www.runpod.io/pricing",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "CoreWeave",
+          "gpu_model_as_listed": "NVIDIA HGX H200",
+          "hourly_per_gpu": 6.31,
+          "tier": "on_demand",
+          "source_url": "https://www.coreweave.com/pricing",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "The source states llama_13b performance is on a single H200 GPU. The table column is Throughput (out tok/s/GPU), and the footnote pins TensorRT LLM v0.5.0 and FP8."
+    },
+    {
+      "id": "llama_13b-1xH200",
+      "model": "llama_13b",
+      "gpu_model": "H200",
+      "gpu_model_as_benchmarked": "H200",
+      "gpu_count": 1,
+      "engine": "TensorRT LLM",
+      "engine_version": "v0.5.0",
+      "precision": "FP8",
+      "batch_or_concurrency": "batch_size=64",
+      "input_len": 2048,
+      "output_len": 128,
+      "throughput_tok_per_s": 1349,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "source reported total output throughput directly",
+      "per_gpu_correction_applied": false,
+      "throughput_source_url": "https://raw.githubusercontent.com/NVIDIA/TensorRT-LLM/main/docs/source/blogs/H200launch.md",
+      "throughput_measured": false,
+      "throughput_status": "COMPLETE",
+      "throughput_missing_fields": [],
+      "vendor_reported": true,
+      "rates": [
+        {
+          "provider": "RunPod",
+          "gpu_model_as_listed": "H200",
+          "hourly_per_gpu": 3.59,
+          "tier": "on_demand",
+          "source_url": "https://www.runpod.io/pricing",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "CoreWeave",
+          "gpu_model_as_listed": "NVIDIA HGX H200",
+          "hourly_per_gpu": 6.31,
+          "tier": "on_demand",
+          "source_url": "https://www.coreweave.com/pricing",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "The source states llama_13b performance is on a single H200 GPU. The table column is Throughput (out tok/s/GPU), and the footnote pins TensorRT LLM v0.5.0 and FP8."
+    },
+    {
+      "id": "Llama-70B-1xH200",
+      "model": "Llama-70B",
+      "gpu_model": "H200",
+      "gpu_model_as_benchmarked": "H200",
+      "gpu_count": 1,
+      "engine": "TensorRT LLM",
+      "engine_version": "v0.7a",
+      "precision": "FP8",
+      "batch_or_concurrency": "batch_size=960",
+      "input_len": 128,
+      "output_len": 128,
+      "throughput_tok_per_s": 3803,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "source reported total output throughput directly",
+      "per_gpu_correction_applied": false,
+      "throughput_source_url": "https://raw.githubusercontent.com/NVIDIA/TensorRT-LLM/main/docs/source/blogs/Falcon180B-H200.md",
+      "throughput_measured": false,
+      "throughput_status": "COMPLETE",
+      "throughput_missing_fields": [],
+      "vendor_reported": true,
+      "rates": [
+        {
+          "provider": "RunPod",
+          "gpu_model_as_listed": "H200",
+          "hourly_per_gpu": 3.59,
+          "tier": "on_demand",
+          "source_url": "https://www.runpod.io/pricing",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "CoreWeave",
+          "gpu_model_as_listed": "NVIDIA HGX H200",
+          "hourly_per_gpu": 6.31,
+          "tier": "on_demand",
+          "source_url": "https://www.coreweave.com/pricing",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "The table explicitly gives 1x or 8x H200, ISL/OSL, and throughput per GPU. The immediately following ordered batch list maps to the six table rows, and the source pins TensorRT LLM v0.7a with FP8."
+    },
+    {
+      "id": "Llama-70B-8xH200",
+      "model": "Llama-70B",
+      "gpu_model": "H200",
+      "gpu_model_as_benchmarked": "H200",
+      "gpu_count": 8,
+      "engine": "TensorRT LLM",
+      "engine_version": "v0.7a",
+      "precision": "FP8",
+      "batch_or_concurrency": "batch_size=960",
+      "input_len": 128,
+      "output_len": 128,
+      "throughput_tok_per_s": 3803,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "source reported total output throughput directly",
+      "per_gpu_correction_applied": false,
+      "throughput_source_url": "https://raw.githubusercontent.com/NVIDIA/TensorRT-LLM/main/docs/source/blogs/Falcon180B-H200.md",
+      "throughput_measured": false,
+      "throughput_status": "COMPLETE",
+      "throughput_missing_fields": [],
+      "vendor_reported": true,
+      "rates": [
+        {
+          "provider": "RunPod",
+          "gpu_model_as_listed": "H200",
+          "hourly_per_gpu": 3.59,
+          "tier": "on_demand",
+          "source_url": "https://www.runpod.io/pricing",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "CoreWeave",
+          "gpu_model_as_listed": "NVIDIA HGX H200",
+          "hourly_per_gpu": 6.31,
+          "tier": "on_demand",
+          "source_url": "https://www.coreweave.com/pricing",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "The table explicitly gives 1x or 8x H200, ISL/OSL, and throughput per GPU. The immediately following ordered batch list maps to the six table rows, and the source pins TensorRT LLM v0.7a with FP8."
+    },
+    {
+      "id": "Llama-70B-1xH200",
+      "model": "Llama-70B",
+      "gpu_model": "H200",
+      "gpu_model_as_benchmarked": "H200",
+      "gpu_count": 1,
+      "engine": "TensorRT LLM",
+      "engine_version": "v0.7a",
+      "precision": "FP8",
+      "batch_or_concurrency": "batch_size=192",
+      "input_len": 128,
+      "output_len": 2048,
+      "throughput_tok_per_s": 2941,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "source reported total output throughput directly",
+      "per_gpu_correction_applied": false,
+      "throughput_source_url": "https://raw.githubusercontent.com/NVIDIA/TensorRT-LLM/main/docs/source/blogs/Falcon180B-H200.md",
+      "throughput_measured": false,
+      "throughput_status": "COMPLETE",
+      "throughput_missing_fields": [],
+      "vendor_reported": true,
+      "rates": [
+        {
+          "provider": "RunPod",
+          "gpu_model_as_listed": "H200",
+          "hourly_per_gpu": 3.59,
+          "tier": "on_demand",
+          "source_url": "https://www.runpod.io/pricing",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "CoreWeave",
+          "gpu_model_as_listed": "NVIDIA HGX H200",
+          "hourly_per_gpu": 6.31,
+          "tier": "on_demand",
+          "source_url": "https://www.coreweave.com/pricing",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "The table explicitly gives 1x or 8x H200, ISL/OSL, and throughput per GPU. The immediately following ordered batch list maps to the six table rows, and the source pins TensorRT LLM v0.7a with FP8."
+    },
+    {
+      "id": "Llama-70B-8xH200",
+      "model": "Llama-70B",
+      "gpu_model": "H200",
+      "gpu_model_as_benchmarked": "H200",
+      "gpu_count": 8,
+      "engine": "TensorRT LLM",
+      "engine_version": "v0.7a",
+      "precision": "FP8",
+      "batch_or_concurrency": "batch_size=560",
+      "input_len": 128,
+      "output_len": 2048,
+      "throughput_tok_per_s": 3163,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "source reported total output throughput directly",
+      "per_gpu_correction_applied": false,
+      "throughput_source_url": "https://raw.githubusercontent.com/NVIDIA/TensorRT-LLM/main/docs/source/blogs/Falcon180B-H200.md",
+      "throughput_measured": false,
+      "throughput_status": "COMPLETE",
+      "throughput_missing_fields": [],
+      "vendor_reported": true,
+      "rates": [
+        {
+          "provider": "RunPod",
+          "gpu_model_as_listed": "H200",
+          "hourly_per_gpu": 3.59,
+          "tier": "on_demand",
+          "source_url": "https://www.runpod.io/pricing",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "CoreWeave",
+          "gpu_model_as_listed": "NVIDIA HGX H200",
+          "hourly_per_gpu": 6.31,
+          "tier": "on_demand",
+          "source_url": "https://www.coreweave.com/pricing",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "The table explicitly gives 1x or 8x H200, ISL/OSL, and throughput per GPU. The immediately following ordered batch list maps to the six table rows, and the source pins TensorRT LLM v0.7a with FP8."
+    },
+    {
+      "id": "Llama-70B-1xH200",
+      "model": "Llama-70B",
+      "gpu_model": "H200",
+      "gpu_model_as_benchmarked": "H200",
+      "gpu_count": 1,
+      "engine": "TensorRT LLM",
+      "engine_version": "v0.7a",
+      "precision": "FP8",
+      "batch_or_concurrency": "batch_size=96",
+      "input_len": 128,
+      "output_len": 4096,
+      "throughput_tok_per_s": 1946,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "source reported total output throughput directly",
+      "per_gpu_correction_applied": false,
+      "throughput_source_url": "https://raw.githubusercontent.com/NVIDIA/TensorRT-LLM/main/docs/source/blogs/Falcon180B-H200.md",
+      "throughput_measured": false,
+      "throughput_status": "COMPLETE",
+      "throughput_missing_fields": [],
+      "vendor_reported": true,
+      "rates": [
+        {
+          "provider": "RunPod",
+          "gpu_model_as_listed": "H200",
+          "hourly_per_gpu": 3.59,
+          "tier": "on_demand",
+          "source_url": "https://www.runpod.io/pricing",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "CoreWeave",
+          "gpu_model_as_listed": "NVIDIA HGX H200",
+          "hourly_per_gpu": 6.31,
+          "tier": "on_demand",
+          "source_url": "https://www.coreweave.com/pricing",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "The table explicitly gives 1x or 8x H200, ISL/OSL, and throughput per GPU. The immediately following ordered batch list maps to the six table rows, and the source pins TensorRT LLM v0.7a with FP8."
+    },
+    {
+      "id": "Llama-70B-8xH200",
+      "model": "Llama-70B",
+      "gpu_model": "H200",
+      "gpu_model_as_benchmarked": "H200",
+      "gpu_count": 8,
+      "engine": "TensorRT LLM",
+      "engine_version": "v0.7a",
+      "precision": "FP8",
+      "batch_or_concurrency": "batch_size=640",
+      "input_len": 128,
+      "output_len": 4096,
+      "throughput_tok_per_s": 2263,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "source reported total output throughput directly",
+      "per_gpu_correction_applied": false,
+      "throughput_source_url": "https://raw.githubusercontent.com/NVIDIA/TensorRT-LLM/main/docs/source/blogs/Falcon180B-H200.md",
+      "throughput_measured": false,
+      "throughput_status": "COMPLETE",
+      "throughput_missing_fields": [],
+      "vendor_reported": true,
+      "rates": [
+        {
+          "provider": "RunPod",
+          "gpu_model_as_listed": "H200",
+          "hourly_per_gpu": 3.59,
+          "tier": "on_demand",
+          "source_url": "https://www.runpod.io/pricing",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "CoreWeave",
+          "gpu_model_as_listed": "NVIDIA HGX H200",
+          "hourly_per_gpu": 6.31,
+          "tier": "on_demand",
+          "source_url": "https://www.coreweave.com/pricing",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "The table explicitly gives 1x or 8x H200, ISL/OSL, and throughput per GPU. The immediately following ordered batch list maps to the six table rows, and the source pins TensorRT LLM v0.7a with FP8."
     }
   ],
   "dropped_for_lack_of_a_published_rate": [
     {
       "model": "nvidia/DeepSeek-R1-FP4",
       "gpu": "B200",
+      "reason": "gpu_count or throughput missing"
+    },
+    {
+      "model": "llama_70b",
+      "gpu": "H200",
+      "reason": "gpu_count or throughput missing"
+    },
+    {
+      "model": "llama_70b",
+      "gpu": "H200",
+      "reason": "gpu_count or throughput missing"
+    },
+    {
+      "model": "llama_70b",
+      "gpu": "H200",
+      "reason": "gpu_count or throughput missing"
+    },
+    {
+      "model": "llama_70b",
+      "gpu": "H200",
+      "reason": "gpu_count or throughput missing"
+    },
+    {
+      "model": "GPT-J 6B",
+      "gpu": "H100",
+      "reason": "gpu_count or throughput missing"
+    },
+    {
+      "model": "GPT-J 6B",
+      "gpu": "A100",
+      "reason": "gpu_count or throughput missing"
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-R1",
+      "gpu": "H200",
       "reason": "gpu_count or throughput missing"
     }
   ]

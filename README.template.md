@@ -59,6 +59,60 @@ is less than half the cheapest B200 rate we found, while delivering higher
 measured throughput on DeepSeek-R1. If you are going to self-host, the
 accelerator you pick matters more than the model does.
 
+## Nine things this data says that the comparisons get wrong
+
+Each of these is derived from the tables below, not from anyone's opinion.
+
+**1. The same open weights cost up to 3.2x more depending on who runs them.**
+Identical model id, identical weights, standard tier, one API call away from
+each other. This is the cheapest saving on this page and it requires changing a
+base URL.
+
+{{TABLE:SPREADS}}
+
+**2. Your batching config moves cost more than your GPU choice does.** Same
+model, same 2x H100, same rental rate. Only concurrency changes:
+
+{{TABLE:OPPOINT}}
+
+That is a 3.5x swing in cost per token from a config flag. People agonise over
+which accelerator to buy and then run it at concurrency 8.
+
+**3. Reasoning tokens are the largest hidden multiplier in the whole stack.**
+A 14.3x gap between the tokens you see and the tokens you pay for dwarfs every
+price difference between vendors. Optimising your provider choice while
+ignoring reasoning-token volume is optimising the wrong term.
+
+**4. Cache writes are not free, and almost nobody accounts for them.** Across
+the rows here that price it, writing a cache entry costs 1.25x the input rate
+on 61 models and 2.0x on 16. If your prefix changes every request you are
+paying a premium to populate a cache you never read.
+
+**5. Tokenizer normalization barely matters for English and does matter for
+code.** Measured across 10 tokenizers on fixed text: English spans 3.0%, code
+spans 9.7%. The standard blog-post advice to normalize before comparing prices
+is right in principle and nearly irrelevant for prose.
+
+**6. Tier multipliers are not uniform, so you cannot derive one from another.**
+Across OpenAI models, batch output is 0.5x standard on 41 models but 0.562x,
+0.833x and 1.0x on three others; fast ranges 1.667x to 2.5x. Assuming "batch is
+half" is wrong often enough to matter.
+
+**7. Multi-tier pricing is a scraping trap, not just a pricing detail.**
+Fireworks prints Standard and Priority as adjacent columns of one table. Take
+the wrong column and every number is 50% high. We shipped that bug ourselves
+and caught it in audit. Any comparison built by scraping is likely carrying it.
+
+**8. If you self-host, the accelerator decides more than the model does.** AMD
+MI355X at $2.59/GPU/hr is under half the cheapest B200 rate at $5.89, against
+higher measured throughput on DeepSeek-R1. It is also the hardest rate to find:
+none of the eight mainstream GPU providers we surveyed first published one.
+
+**9. At any utilization you will actually hit, the API wins.** See the
+head-to-head table. Self-hosting only wins at 90% utilization, and 90%
+utilization means a saturated box, which means a queue, which means the latency
+you were trying to avoid.
+
 ## API pricing, closed vendors
 
 Standard realtime tier. Batch, flex, fast, and long-context tiers are separate

@@ -70,10 +70,28 @@ def is_long_context(notes: str | None) -> bool:
     return "long context" in (notes or "").lower()
 
 
+def mislabelled_keys() -> set:
+    """(provider, model_name) pairs the tier-audit lane proved are wrong.
+
+    These are rows where a variant's price landed on the base model's name, for
+    example Baseten's GLM-5.2 carrying the GLM-5.2 Fast price. They are dropped
+    rather than corrected: the corrected value would come from a different
+    lane's read of the page than the row's own evidence_literal, and a row whose
+    number and quote come from different fetches is exactly the kind of thing
+    this repo exists not to publish.
+    """
+    keys = set()
+    for r in load("tier-audit"):
+        if str(r.get("verdict")) == "mislabelled":
+            keys.add((r.get("provider"), str(r.get("model_name"))))
+    return keys
+
+
 def main() -> int:
     rows = []
+    dropped_mislabelled = mislabelled_keys()
 
-    for r in load("pricing-closed"):
+    for r in load("pricing-closed") + load("pricing-fill"):
         notes = r.get("notes")
         rows.append(
             {
@@ -101,6 +119,8 @@ def main() -> int:
         )
 
     for r in load("pricing-hosted"):
+        if (r.get("provider"), str(r.get("model_name"))) in dropped_mislabelled:
+            continue
         rt = r.get("row_type") or "serverless_per_token"
         if rt == "dedicated_gpu_hour":
             rows.append(
@@ -202,6 +222,7 @@ def main() -> int:
 
     print("  categories:", dict(Counter(r["category"] for r in rows)))
     print("  tiers:", dict(Counter(r.get("service_tier") for r in rows)))
+    print(f"  dropped as mislabelled by tier-audit: {len(dropped_mislabelled)}")
     return 0
 
 

@@ -72,7 +72,9 @@ def load(lane: str, key_hint: str | None = None):
 
 
 def main() -> int:
-    thr_rows = load("throughput", "findings")
+    thr_rows = list(load("throughput", "findings")) + list(
+        load("throughput2", "findings")
+    )
     # The gaps lane supplies the AMD Instinct rates the first survey missed.
     gpu_rows = list(load("gpu-rental")) + [
         r

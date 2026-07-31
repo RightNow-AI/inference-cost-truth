@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import json
 import pathlib
+import re
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
@@ -138,10 +139,32 @@ def build_break_even(self_host: dict, providers: dict) -> dict:
         if price is None:
             continue
         api_rows.append({**r, "output_per_1m": price})
+    # Comparing every self-host row against every API row produces tens of
+    # thousands of meaningless pairs. Restrict to comparisons a reader would
+    # actually make: the same open model bought from a hosted API, plus a small
+    # fixed set of reference closed-vendor models.
+    REFERENCE = {
+        ("DeepSeek", "deepseek-v4-flash"),
+        ("Anthropic", "Claude Sonnet 5"),
+        ("OpenAI", "gpt-5.6-terra"),
+        ("Google Gemini", "Gemini 3.6 Flash"),
+    }
+
+    def relevant(sh_row, api):
+        if (api.get("provider"), str(api.get("model_name"))) in REFERENCE:
+            return True
+        if api.get("category") != "B_hosted_open_api":
+            return False
+        # like-for-like: same open model family as the self-hosted config
+        stem = re.split(r"[-_ ]", str(sh_row["model"]).split("/")[-1])[0].lower()
+        return len(stem) > 3 and stem in str(api.get("model_name", "")).lower()
+
     out = []
     for sh in self_host["rows"]:
         monthly_fixed = sh["deployment_hourly"] * HOURS_PER_MONTH
         for api in api_rows:
+            if not relevant(sh, api):
+                continue
             api_price = api["output_per_1m"]
             if api_price <= 0:
                 continue

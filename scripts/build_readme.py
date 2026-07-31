@@ -125,6 +125,8 @@ def t_api_hosted(prov):
         "Llama-3.3-70B-Instruct": "llama-3.3-70b-instruct",
         "MiniMax-M3": "minimax-m3",
         "GLM-4.7": "glm-4.7",
+        "Kimi-K3": "kimi-k3",
+        "GLM-5.2": "glm-5.2",
     }
     out = []
     for label, needle in fams.items():
@@ -291,11 +293,85 @@ def t_breakeven(be, sh):
     )
 
 
+def t_spreads(prov, min_providers=3, top=8):
+    """Same open weights, different host, wildly different price.
+
+    This is the cheapest saving available to most readers and almost nobody
+    publishes it, because it requires normalising model ids across providers
+    rather than comparing vendor marketing pages.
+    """
+    by_model = defaultdict(list)
+    for r in prov["rows"]:
+        if r.get("category") != "B_hosted_open_api":
+            continue
+        if r.get("service_tier") not in (None, "standard"):
+            continue
+        o = num(r.get("output_per_1m"))
+        if o:
+            key = str(r.get("model_name", "")).lower().replace("-turbo", "")
+            by_model[key].append((o, r.get("provider")))
+    rows = []
+    for model, lst in by_model.items():
+        if len(lst) < min_providers:
+            continue
+        lo, hi = min(lst), max(lst)
+        if lo[0] > 0:
+            rows.append((hi[0] / lo[0], model, lo, hi, len(lst)))
+    rows.sort(reverse=True)
+    out = []
+    for spread, model, lo, hi, n in rows[:top]:
+        out.append([
+            f"`{model[:46]}`", n,
+            f"${lo[0]:g} ({lo[1]})", f"${hi[0]:g} ({hi[1]})",
+            f"**{spread:.1f}x**",
+        ])
+    return table(
+        ["Open model", "Providers", "Cheapest output /1M",
+         "Dearest output /1M", "Spread"],
+        out,
+    )
+
+
+def t_operating_point(sh):
+    """One model, one GPU pair, one rental price. Only concurrency changes."""
+    rows = [
+        r for r in sh["rows"]
+        if "gptoss" in str(r["model"]).lower()
+        and r["gpu_model"] == "H100"
+        and "RunPod" in str(r["gpu_provider"])
+    ]
+    rows.sort(key=lambda r: r["throughput_tok_per_s"])
+    out = []
+    for r in rows:
+        u = r["cost_per_1m_by_utilization"]
+        out.append([
+            f"{r['throughput_tok_per_s']:,.0f}",
+            f"${u['90pct']:.3f}", f"${u['60pct']:.3f}",
+            f"${u['30pct']:.3f}", f"${u['10pct']:.3f}",
+        ])
+    return table(
+        ["Total output tok/s", "@90% util", "@60%", "@30%", "@10%"], out
+    )
+
+
 HEAD_TO_HEAD = {
-    "DeepSeek-R1-0528": "deepseek-ai/deepseek-r1-0528",
-    "MiniMax-M3": "minimaxai/minimax-m3",
-    "Llama-3.3-70B-Instruct": "meta-llama/llama-3.3-70b-instruct",
+    # label: (exact hosted model id, canonical key the self-host model must contain)
+    "DeepSeek-R1-0528": ("deepseek-ai/deepseek-r1-0528", "deepseek-r1-0528"),
+    "MiniMax-M3": ("minimaxai/minimax-m3", "minimax-m3"),
+    "Llama-3.3-70B-Instruct": ("meta-llama/llama-3.3-70b-instruct", "llama-3.3-70b"),
 }
+
+
+def model_key(s: str) -> str:
+    """Normalise a model string so size and version survive the comparison.
+
+    The self-host side must be matched on a full canonical key, never on a
+    family prefix. Matching "Llama-3.3-70B" by its first token, "llama", also
+    matches a row for `llama_13b`, and comparing a 13B model's serving cost
+    against a 70B model's API price silently reverses the repo's headline
+    conclusion. That happened; hence this function.
+    """
+    return re.sub(r"[^a-z0-9.]+", "-", str(s).lower())
 
 
 def head_to_head(prov, sh):
@@ -309,7 +385,7 @@ def head_to_head(prov, sh):
     API look ten times better than it is.
     """
     out = []
-    for label, mid in HEAD_TO_HEAD.items():
+    for label, (mid, canon) in HEAD_TO_HEAD.items():
         hosted = [
             (num(r.get("output_per_1m")), r.get("provider"))
             for r in prov["rows"]
@@ -318,10 +394,7 @@ def head_to_head(prov, sh):
             and str(r.get("model_name", "")).lower().replace("-turbo", "") == mid
             and num(r.get("output_per_1m"))
         ]
-        rows = [
-            r for r in sh["rows"]
-            if label.split("-")[0].lower() in str(r["model"]).lower()
-        ]
+        rows = [r for r in sh["rows"] if canon in model_key(r["model"])]
         if not hosted or not rows:
             continue
         price, provider = min(hosted)
@@ -404,6 +477,8 @@ def main() -> int:
         "BREAKEVEN": t_breakeven(be, sh),
         "STACK": t_stack(),
         "HEADTOHEAD": t_headtohead(prov, sh),
+        "SPREADS": t_spreads(prov),
+        "OPPOINT": t_operating_point(sh),
     }
 
     tpl = (ROOT / "README.template.md").read_text(encoding="utf-8")
