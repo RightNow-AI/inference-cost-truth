@@ -28,10 +28,18 @@ Notable findings recorded at baseline, each of which is the kind of thing that
 silently corrupts a cost comparison:
 
 - **OpenAI publishes four service tiers on one page** (standard, batch, flex,
-  fast) plus a separate long-context tier for newer models. Batch is 50% of
-  standard, fast is 200%, and the long-context tier is 200% of standard input
-  and 150% of standard output. Reading the wrong table is a 2x to 4x error.
-  These are separate rows here and are never blended.
+  fast) plus a separate long-context tier for newer models. Reading the wrong
+  table is a 2x to 4x error. These are separate rows here and never blended.
+  The tier multipliers are NOT uniform, which is worth stating because it is
+  tempting to assume they are: across OpenAI models, batch output is 0.5x
+  standard on 41 models but 0.562x, 0.833x and 1.0x on three others, and fast
+  output ranges from 1.667x to 2.5x, hitting exactly 2.0x on only 10. Do not
+  derive one tier's price from another.
+- **Multi-tier pricing is not just an OpenAI habit.** Google Gemini publishes a
+  Priority tier at 1.8x standard, Anthropic publishes a Fast mode tier at 2.0x
+  standard on some models, and Fireworks publishes Standard and Priority as two
+  adjacent columns of the same table, where the naive read takes the wrong
+  column and overstates price by 50%. Each is a separate row here.
 - **OpenAI now prices cache writes** as a fourth column at 1.25x the input
   rate on models that carry it. Most published comparisons omit this entirely.
 - **SemiAnalysis InferenceX reports `output_tput_per_gpu`**, not whole-system

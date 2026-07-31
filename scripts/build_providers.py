@@ -57,8 +57,10 @@ def tier_of(notes: str | None) -> str:
         return "batch"
     if "service tier: flex" in n:
         return "flex"
-    if "service tier: fast" in n or "priority" in n and "renamed" not in n:
+    if "service tier: fast" in n:
         return "fast"
+    if "service tier: priority" in n:
+        return "priority"
     if "service tier: standard" in n:
         return "standard"
     return "standard"
@@ -124,7 +126,12 @@ def main() -> int:
                 "row_type": "serverless_per_token",
                 "provider": r.get("provider"),
                 "model_name": r.get("model_name"),
-                "service_tier": "standard",
+                # Read the tier the lane recorded. Hardcoding "standard" here
+                # mislabelled 11 Fireworks rows that carry Priority-tier
+                # prices, because Fireworks lists Standard and Priority as two
+                # columns of the same table and the lane correctly emitted one
+                # row per tier.
+                "service_tier": tier_of(r.get("notes")),
                 "long_context_tier": False,
                 "input_per_1m": r.get("input_per_1m"),
                 "cached_input_per_1m": r.get("cached_input_per_1m"),

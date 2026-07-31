@@ -3679,30 +3679,6 @@
       "gpu_model": "B200",
       "gpu_count": 4,
       "monthly_fixed_usd": 16963.2,
-      "api_model": "Kimi K3",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 18.75,
-      "break_even_output_tokens_per_month": 904704000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 385609248,
-        "30pct": 1156827744,
-        "60pct": 2313655488,
-        "90pct": 3470483232
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": true,
-        "60pct": true,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "DeepSeek-R1-0528-4xB200::RunPod::on_demand",
-      "self_host_model": "DeepSeek-R1-0528",
-      "gpu_model": "B200",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 16963.2,
       "api_model": "Kimi K3 Fast",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 22.5,
@@ -3751,30 +3727,6 @@
       "gpu_model": "B200",
       "gpu_count": 4,
       "monthly_fixed_usd": 16963.2,
-      "api_model": "Kimi K3 US",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 20.625,
-      "break_even_output_tokens_per_month": 822458182,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 385609248,
-        "30pct": 1156827744,
-        "60pct": 2313655488,
-        "90pct": 3470483232
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": true,
-        "60pct": true,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "DeepSeek-R1-0528-4xB200::RunPod::on_demand",
-      "self_host_model": "DeepSeek-R1-0528",
-      "gpu_model": "B200",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 16963.2,
       "api_model": "Kimi K2.7 Code",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 4.0,
@@ -3790,30 +3742,6 @@
         "30pct": false,
         "60pct": false,
         "90pct": false
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "DeepSeek-R1-0528-4xB200::RunPod::on_demand",
-      "self_host_model": "DeepSeek-R1-0528",
-      "gpu_model": "B200",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 16963.2,
-      "api_model": "Kimi K2.7 Code",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 6.0,
-      "break_even_output_tokens_per_month": 2827200000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 385609248,
-        "30pct": 1156827744,
-        "60pct": 2313655488,
-        "90pct": 3470483232
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": true
       },
       "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
     },
@@ -3871,30 +3799,6 @@
       "gpu_model": "B200",
       "gpu_count": 4,
       "monthly_fixed_usd": 16963.2,
-      "api_model": "Kimi K2.6",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 6.0,
-      "break_even_output_tokens_per_month": 2827200000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 385609248,
-        "30pct": 1156827744,
-        "60pct": 2313655488,
-        "90pct": 3470483232
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "DeepSeek-R1-0528-4xB200::RunPod::on_demand",
-      "self_host_model": "DeepSeek-R1-0528",
-      "gpu_model": "B200",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 16963.2,
       "api_model": "Kimi K2.6 Fast",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 8.0,
@@ -3943,58 +3847,10 @@
       "gpu_model": "B200",
       "gpu_count": 4,
       "monthly_fixed_usd": 16963.2,
-      "api_model": "DeepSeek V4 Pro",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 5.22,
-      "break_even_output_tokens_per_month": 3249655172,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 385609248,
-        "30pct": 1156827744,
-        "60pct": 2313655488,
-        "90pct": 3470483232
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "DeepSeek-R1-0528-4xB200::RunPod::on_demand",
-      "self_host_model": "DeepSeek-R1-0528",
-      "gpu_model": "B200",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 16963.2,
       "api_model": "DeepSeek V4 Flash",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 0.28,
       "break_even_output_tokens_per_month": 60582857143,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 385609248,
-        "30pct": 1156827744,
-        "60pct": 2313655488,
-        "90pct": 3470483232
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": false
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "DeepSeek-R1-0528-4xB200::RunPod::on_demand",
-      "self_host_model": "DeepSeek-R1-0528",
-      "gpu_model": "B200",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 16963.2,
-      "api_model": "DeepSeek V4 Flash",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 0.42,
-      "break_even_output_tokens_per_month": 40388571429,
       "monthly_output_capacity_by_utilization": {
         "10pct": 385609248,
         "30pct": 1156827744,
@@ -4030,30 +3886,6 @@
         "30pct": false,
         "60pct": false,
         "90pct": false
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "DeepSeek-R1-0528-4xB200::RunPod::on_demand",
-      "self_host_model": "DeepSeek-R1-0528",
-      "gpu_model": "B200",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 16963.2,
-      "api_model": "GLM 5.2",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 5.5,
-      "break_even_output_tokens_per_month": 3084218182,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 385609248,
-        "30pct": 1156827744,
-        "60pct": 2313655488,
-        "90pct": 3470483232
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": true
       },
       "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
     },
@@ -4102,30 +3934,6 @@
         "30pct": false,
         "60pct": false,
         "90pct": false
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "DeepSeek-R1-0528-4xB200::RunPod::on_demand",
-      "self_host_model": "DeepSeek-R1-0528",
-      "gpu_model": "B200",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 16963.2,
-      "api_model": "GLM 5.1",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 6.6,
-      "break_even_output_tokens_per_month": 2570181818,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 385609248,
-        "30pct": 1156827744,
-        "60pct": 2313655488,
-        "90pct": 3470483232
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": true
       },
       "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
     },
@@ -4207,30 +4015,6 @@
       "gpu_model": "B200",
       "gpu_count": 4,
       "monthly_fixed_usd": 16963.2,
-      "api_model": "MiniMax M3",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 1.8,
-      "break_even_output_tokens_per_month": 9424000000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 385609248,
-        "30pct": 1156827744,
-        "60pct": 2313655488,
-        "90pct": 3470483232
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": false
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "DeepSeek-R1-0528-4xB200::RunPod::on_demand",
-      "self_host_model": "DeepSeek-R1-0528",
-      "gpu_model": "B200",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 16963.2,
       "api_model": "MiniMax M2.7",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 1.2,
@@ -4255,58 +4039,10 @@
       "gpu_model": "B200",
       "gpu_count": 4,
       "monthly_fixed_usd": 16963.2,
-      "api_model": "MiniMax M2.7",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 1.8,
-      "break_even_output_tokens_per_month": 9424000000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 385609248,
-        "30pct": 1156827744,
-        "60pct": 2313655488,
-        "90pct": 3470483232
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": false
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "DeepSeek-R1-0528-4xB200::RunPod::on_demand",
-      "self_host_model": "DeepSeek-R1-0528",
-      "gpu_model": "B200",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 16963.2,
       "api_model": "OpenAI GPT OSS 120B",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 0.6,
       "break_even_output_tokens_per_month": 28272000000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 385609248,
-        "30pct": 1156827744,
-        "60pct": 2313655488,
-        "90pct": 3470483232
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": false
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "DeepSeek-R1-0528-4xB200::RunPod::on_demand",
-      "self_host_model": "DeepSeek-R1-0528",
-      "gpu_model": "B200",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 16963.2,
-      "api_model": "OpenAI GPT OSS 120B",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 0.72,
-      "break_even_output_tokens_per_month": 23560000000,
       "monthly_output_capacity_by_utilization": {
         "10pct": 385609248,
         "30pct": 1156827744,
@@ -12511,30 +12247,6 @@
       "gpu_model": "B200",
       "gpu_count": 4,
       "monthly_fixed_usd": 24768.0,
-      "api_model": "Kimi K3",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 18.75,
-      "break_even_output_tokens_per_month": 1320960000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 385609248,
-        "30pct": 1156827744,
-        "60pct": 2313655488,
-        "90pct": 3470483232
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": true,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "DeepSeek-R1-0528-4xB200::CoreWeave::on_demand",
-      "self_host_model": "DeepSeek-R1-0528",
-      "gpu_model": "B200",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 24768.0,
       "api_model": "Kimi K3 Fast",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 22.5,
@@ -12583,58 +12295,10 @@
       "gpu_model": "B200",
       "gpu_count": 4,
       "monthly_fixed_usd": 24768.0,
-      "api_model": "Kimi K3 US",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 20.625,
-      "break_even_output_tokens_per_month": 1200872727,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 385609248,
-        "30pct": 1156827744,
-        "60pct": 2313655488,
-        "90pct": 3470483232
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": true,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "DeepSeek-R1-0528-4xB200::CoreWeave::on_demand",
-      "self_host_model": "DeepSeek-R1-0528",
-      "gpu_model": "B200",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 24768.0,
       "api_model": "Kimi K2.7 Code",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 4.0,
       "break_even_output_tokens_per_month": 6192000000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 385609248,
-        "30pct": 1156827744,
-        "60pct": 2313655488,
-        "90pct": 3470483232
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": false
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "DeepSeek-R1-0528-4xB200::CoreWeave::on_demand",
-      "self_host_model": "DeepSeek-R1-0528",
-      "gpu_model": "B200",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 24768.0,
-      "api_model": "Kimi K2.7 Code",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 6.0,
-      "break_even_output_tokens_per_month": 4128000000,
       "monthly_output_capacity_by_utilization": {
         "10pct": 385609248,
         "30pct": 1156827744,
@@ -12703,30 +12367,6 @@
       "gpu_model": "B200",
       "gpu_count": 4,
       "monthly_fixed_usd": 24768.0,
-      "api_model": "Kimi K2.6",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 6.0,
-      "break_even_output_tokens_per_month": 4128000000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 385609248,
-        "30pct": 1156827744,
-        "60pct": 2313655488,
-        "90pct": 3470483232
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": false
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "DeepSeek-R1-0528-4xB200::CoreWeave::on_demand",
-      "self_host_model": "DeepSeek-R1-0528",
-      "gpu_model": "B200",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 24768.0,
       "api_model": "Kimi K2.6 Fast",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 8.0,
@@ -12775,30 +12415,6 @@
       "gpu_model": "B200",
       "gpu_count": 4,
       "monthly_fixed_usd": 24768.0,
-      "api_model": "DeepSeek V4 Pro",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 5.22,
-      "break_even_output_tokens_per_month": 4744827586,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 385609248,
-        "30pct": 1156827744,
-        "60pct": 2313655488,
-        "90pct": 3470483232
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": false
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "DeepSeek-R1-0528-4xB200::CoreWeave::on_demand",
-      "self_host_model": "DeepSeek-R1-0528",
-      "gpu_model": "B200",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 24768.0,
       "api_model": "DeepSeek V4 Flash",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 0.28,
@@ -12823,58 +12439,10 @@
       "gpu_model": "B200",
       "gpu_count": 4,
       "monthly_fixed_usd": 24768.0,
-      "api_model": "DeepSeek V4 Flash",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 0.42,
-      "break_even_output_tokens_per_month": 58971428571,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 385609248,
-        "30pct": 1156827744,
-        "60pct": 2313655488,
-        "90pct": 3470483232
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": false
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "DeepSeek-R1-0528-4xB200::CoreWeave::on_demand",
-      "self_host_model": "DeepSeek-R1-0528",
-      "gpu_model": "B200",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 24768.0,
       "api_model": "GLM 5.2",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 4.4,
       "break_even_output_tokens_per_month": 5629090909,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 385609248,
-        "30pct": 1156827744,
-        "60pct": 2313655488,
-        "90pct": 3470483232
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": false
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "DeepSeek-R1-0528-4xB200::CoreWeave::on_demand",
-      "self_host_model": "DeepSeek-R1-0528",
-      "gpu_model": "B200",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 24768.0,
-      "api_model": "GLM 5.2",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 5.5,
-      "break_even_output_tokens_per_month": 4503272727,
       "monthly_output_capacity_by_utilization": {
         "10pct": 385609248,
         "30pct": 1156827744,
@@ -12923,30 +12491,6 @@
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 4.4,
       "break_even_output_tokens_per_month": 5629090909,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 385609248,
-        "30pct": 1156827744,
-        "60pct": 2313655488,
-        "90pct": 3470483232
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": false
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "DeepSeek-R1-0528-4xB200::CoreWeave::on_demand",
-      "self_host_model": "DeepSeek-R1-0528",
-      "gpu_model": "B200",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 24768.0,
-      "api_model": "GLM 5.1",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 6.6,
-      "break_even_output_tokens_per_month": 3752727273,
       "monthly_output_capacity_by_utilization": {
         "10pct": 385609248,
         "30pct": 1156827744,
@@ -13039,30 +12583,6 @@
       "gpu_model": "B200",
       "gpu_count": 4,
       "monthly_fixed_usd": 24768.0,
-      "api_model": "MiniMax M3",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 1.8,
-      "break_even_output_tokens_per_month": 13760000000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 385609248,
-        "30pct": 1156827744,
-        "60pct": 2313655488,
-        "90pct": 3470483232
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": false
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "DeepSeek-R1-0528-4xB200::CoreWeave::on_demand",
-      "self_host_model": "DeepSeek-R1-0528",
-      "gpu_model": "B200",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 24768.0,
       "api_model": "MiniMax M2.7",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 1.2,
@@ -13087,58 +12607,10 @@
       "gpu_model": "B200",
       "gpu_count": 4,
       "monthly_fixed_usd": 24768.0,
-      "api_model": "MiniMax M2.7",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 1.8,
-      "break_even_output_tokens_per_month": 13760000000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 385609248,
-        "30pct": 1156827744,
-        "60pct": 2313655488,
-        "90pct": 3470483232
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": false
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "DeepSeek-R1-0528-4xB200::CoreWeave::on_demand",
-      "self_host_model": "DeepSeek-R1-0528",
-      "gpu_model": "B200",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 24768.0,
       "api_model": "OpenAI GPT OSS 120B",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 0.6,
       "break_even_output_tokens_per_month": 41280000000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 385609248,
-        "30pct": 1156827744,
-        "60pct": 2313655488,
-        "90pct": 3470483232
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": false
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "DeepSeek-R1-0528-4xB200::CoreWeave::on_demand",
-      "self_host_model": "DeepSeek-R1-0528",
-      "gpu_model": "B200",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 24768.0,
-      "api_model": "OpenAI GPT OSS 120B",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 0.72,
-      "break_even_output_tokens_per_month": 34400000000,
       "monthly_output_capacity_by_utilization": {
         "10pct": 385609248,
         "30pct": 1156827744,
@@ -21343,30 +20815,6 @@
       "gpu_model": "B300",
       "gpu_count": 4,
       "monthly_fixed_usd": 19987.2,
-      "api_model": "Kimi K3",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 18.75,
-      "break_even_output_tokens_per_month": 1065984000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 1627781184,
-        "30pct": 4883343552,
-        "60pct": 9766687104,
-        "90pct": 14650030656
-      },
-      "reachable_at_utilization": {
-        "10pct": true,
-        "30pct": true,
-        "60pct": true,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "MiniMax-M3-4xB300::RunPod::on_demand",
-      "self_host_model": "MiniMax-M3",
-      "gpu_model": "B300",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 19987.2,
       "api_model": "Kimi K3 Fast",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 22.5,
@@ -21415,30 +20863,6 @@
       "gpu_model": "B300",
       "gpu_count": 4,
       "monthly_fixed_usd": 19987.2,
-      "api_model": "Kimi K3 US",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 20.625,
-      "break_even_output_tokens_per_month": 969076364,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 1627781184,
-        "30pct": 4883343552,
-        "60pct": 9766687104,
-        "90pct": 14650030656
-      },
-      "reachable_at_utilization": {
-        "10pct": true,
-        "30pct": true,
-        "60pct": true,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "MiniMax-M3-4xB300::RunPod::on_demand",
-      "self_host_model": "MiniMax-M3",
-      "gpu_model": "B300",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 19987.2,
       "api_model": "Kimi K2.7 Code",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 4.0,
@@ -21452,30 +20876,6 @@
       "reachable_at_utilization": {
         "10pct": false,
         "30pct": false,
-        "60pct": true,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "MiniMax-M3-4xB300::RunPod::on_demand",
-      "self_host_model": "MiniMax-M3",
-      "gpu_model": "B300",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 19987.2,
-      "api_model": "Kimi K2.7 Code",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 6.0,
-      "break_even_output_tokens_per_month": 3331200000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 1627781184,
-        "30pct": 4883343552,
-        "60pct": 9766687104,
-        "90pct": 14650030656
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": true,
         "60pct": true,
         "90pct": true
       },
@@ -21535,30 +20935,6 @@
       "gpu_model": "B300",
       "gpu_count": 4,
       "monthly_fixed_usd": 19987.2,
-      "api_model": "Kimi K2.6",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 6.0,
-      "break_even_output_tokens_per_month": 3331200000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 1627781184,
-        "30pct": 4883343552,
-        "60pct": 9766687104,
-        "90pct": 14650030656
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": true,
-        "60pct": true,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "MiniMax-M3-4xB300::RunPod::on_demand",
-      "self_host_model": "MiniMax-M3",
-      "gpu_model": "B300",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 19987.2,
       "api_model": "Kimi K2.6 Fast",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 8.0,
@@ -21607,30 +20983,6 @@
       "gpu_model": "B300",
       "gpu_count": 4,
       "monthly_fixed_usd": 19987.2,
-      "api_model": "DeepSeek V4 Pro",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 5.22,
-      "break_even_output_tokens_per_month": 3828965517,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 1627781184,
-        "30pct": 4883343552,
-        "60pct": 9766687104,
-        "90pct": 14650030656
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": true,
-        "60pct": true,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "MiniMax-M3-4xB300::RunPod::on_demand",
-      "self_host_model": "MiniMax-M3",
-      "gpu_model": "B300",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 19987.2,
       "api_model": "DeepSeek V4 Flash",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 0.28,
@@ -21655,58 +21007,10 @@
       "gpu_model": "B300",
       "gpu_count": 4,
       "monthly_fixed_usd": 19987.2,
-      "api_model": "DeepSeek V4 Flash",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 0.42,
-      "break_even_output_tokens_per_month": 47588571429,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 1627781184,
-        "30pct": 4883343552,
-        "60pct": 9766687104,
-        "90pct": 14650030656
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": false
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "MiniMax-M3-4xB300::RunPod::on_demand",
-      "self_host_model": "MiniMax-M3",
-      "gpu_model": "B300",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 19987.2,
       "api_model": "GLM 5.2",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 4.4,
       "break_even_output_tokens_per_month": 4542545455,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 1627781184,
-        "30pct": 4883343552,
-        "60pct": 9766687104,
-        "90pct": 14650030656
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": true,
-        "60pct": true,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "MiniMax-M3-4xB300::RunPod::on_demand",
-      "self_host_model": "MiniMax-M3",
-      "gpu_model": "B300",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 19987.2,
-      "api_model": "GLM 5.2",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 5.5,
-      "break_even_output_tokens_per_month": 3634036364,
       "monthly_output_capacity_by_utilization": {
         "10pct": 1627781184,
         "30pct": 4883343552,
@@ -21755,30 +21059,6 @@
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 4.4,
       "break_even_output_tokens_per_month": 4542545455,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 1627781184,
-        "30pct": 4883343552,
-        "60pct": 9766687104,
-        "90pct": 14650030656
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": true,
-        "60pct": true,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "MiniMax-M3-4xB300::RunPod::on_demand",
-      "self_host_model": "MiniMax-M3",
-      "gpu_model": "B300",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 19987.2,
-      "api_model": "GLM 5.1",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 6.6,
-      "break_even_output_tokens_per_month": 3028363636,
       "monthly_output_capacity_by_utilization": {
         "10pct": 1627781184,
         "30pct": 4883343552,
@@ -21871,30 +21151,6 @@
       "gpu_model": "B300",
       "gpu_count": 4,
       "monthly_fixed_usd": 19987.2,
-      "api_model": "MiniMax M3",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 1.8,
-      "break_even_output_tokens_per_month": 11104000000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 1627781184,
-        "30pct": 4883343552,
-        "60pct": 9766687104,
-        "90pct": 14650030656
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "MiniMax-M3-4xB300::RunPod::on_demand",
-      "self_host_model": "MiniMax-M3",
-      "gpu_model": "B300",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 19987.2,
       "api_model": "MiniMax M2.7",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 1.2,
@@ -21919,58 +21175,10 @@
       "gpu_model": "B300",
       "gpu_count": 4,
       "monthly_fixed_usd": 19987.2,
-      "api_model": "MiniMax M2.7",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 1.8,
-      "break_even_output_tokens_per_month": 11104000000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 1627781184,
-        "30pct": 4883343552,
-        "60pct": 9766687104,
-        "90pct": 14650030656
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "MiniMax-M3-4xB300::RunPod::on_demand",
-      "self_host_model": "MiniMax-M3",
-      "gpu_model": "B300",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 19987.2,
       "api_model": "OpenAI GPT OSS 120B",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 0.6,
       "break_even_output_tokens_per_month": 33312000000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 1627781184,
-        "30pct": 4883343552,
-        "60pct": 9766687104,
-        "90pct": 14650030656
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": false
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "MiniMax-M3-4xB300::RunPod::on_demand",
-      "self_host_model": "MiniMax-M3",
-      "gpu_model": "B300",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 19987.2,
-      "api_model": "OpenAI GPT OSS 120B",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 0.72,
-      "break_even_output_tokens_per_month": 27760000000,
       "monthly_output_capacity_by_utilization": {
         "10pct": 1627781184,
         "30pct": 4883343552,
@@ -30175,30 +29383,6 @@
       "gpu_model": "B300",
       "gpu_count": 4,
       "monthly_fixed_usd": 22608.0,
-      "api_model": "Kimi K3",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 18.75,
-      "break_even_output_tokens_per_month": 1205760000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 1627781184,
-        "30pct": 4883343552,
-        "60pct": 9766687104,
-        "90pct": 14650030656
-      },
-      "reachable_at_utilization": {
-        "10pct": true,
-        "30pct": true,
-        "60pct": true,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "MiniMax-M3-4xB300::Nebius::on_demand",
-      "self_host_model": "MiniMax-M3",
-      "gpu_model": "B300",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 22608.0,
       "api_model": "Kimi K3 Fast",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 22.5,
@@ -30247,30 +29431,6 @@
       "gpu_model": "B300",
       "gpu_count": 4,
       "monthly_fixed_usd": 22608.0,
-      "api_model": "Kimi K3 US",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 20.625,
-      "break_even_output_tokens_per_month": 1096145455,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 1627781184,
-        "30pct": 4883343552,
-        "60pct": 9766687104,
-        "90pct": 14650030656
-      },
-      "reachable_at_utilization": {
-        "10pct": true,
-        "30pct": true,
-        "60pct": true,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "MiniMax-M3-4xB300::Nebius::on_demand",
-      "self_host_model": "MiniMax-M3",
-      "gpu_model": "B300",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 22608.0,
       "api_model": "Kimi K2.7 Code",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 4.0,
@@ -30284,30 +29444,6 @@
       "reachable_at_utilization": {
         "10pct": false,
         "30pct": false,
-        "60pct": true,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "MiniMax-M3-4xB300::Nebius::on_demand",
-      "self_host_model": "MiniMax-M3",
-      "gpu_model": "B300",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 22608.0,
-      "api_model": "Kimi K2.7 Code",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 6.0,
-      "break_even_output_tokens_per_month": 3768000000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 1627781184,
-        "30pct": 4883343552,
-        "60pct": 9766687104,
-        "90pct": 14650030656
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": true,
         "60pct": true,
         "90pct": true
       },
@@ -30367,30 +29503,6 @@
       "gpu_model": "B300",
       "gpu_count": 4,
       "monthly_fixed_usd": 22608.0,
-      "api_model": "Kimi K2.6",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 6.0,
-      "break_even_output_tokens_per_month": 3768000000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 1627781184,
-        "30pct": 4883343552,
-        "60pct": 9766687104,
-        "90pct": 14650030656
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": true,
-        "60pct": true,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "MiniMax-M3-4xB300::Nebius::on_demand",
-      "self_host_model": "MiniMax-M3",
-      "gpu_model": "B300",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 22608.0,
       "api_model": "Kimi K2.6 Fast",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 8.0,
@@ -30439,58 +29551,10 @@
       "gpu_model": "B300",
       "gpu_count": 4,
       "monthly_fixed_usd": 22608.0,
-      "api_model": "DeepSeek V4 Pro",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 5.22,
-      "break_even_output_tokens_per_month": 4331034483,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 1627781184,
-        "30pct": 4883343552,
-        "60pct": 9766687104,
-        "90pct": 14650030656
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": true,
-        "60pct": true,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "MiniMax-M3-4xB300::Nebius::on_demand",
-      "self_host_model": "MiniMax-M3",
-      "gpu_model": "B300",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 22608.0,
       "api_model": "DeepSeek V4 Flash",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 0.28,
       "break_even_output_tokens_per_month": 80742857143,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 1627781184,
-        "30pct": 4883343552,
-        "60pct": 9766687104,
-        "90pct": 14650030656
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": false
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "MiniMax-M3-4xB300::Nebius::on_demand",
-      "self_host_model": "MiniMax-M3",
-      "gpu_model": "B300",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 22608.0,
-      "api_model": "DeepSeek V4 Flash",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 0.42,
-      "break_even_output_tokens_per_month": 53828571429,
       "monthly_output_capacity_by_utilization": {
         "10pct": 1627781184,
         "30pct": 4883343552,
@@ -30524,30 +29588,6 @@
       "reachable_at_utilization": {
         "10pct": false,
         "30pct": false,
-        "60pct": true,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "MiniMax-M3-4xB300::Nebius::on_demand",
-      "self_host_model": "MiniMax-M3",
-      "gpu_model": "B300",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 22608.0,
-      "api_model": "GLM 5.2",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 5.5,
-      "break_even_output_tokens_per_month": 4110545455,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 1627781184,
-        "30pct": 4883343552,
-        "60pct": 9766687104,
-        "90pct": 14650030656
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": true,
         "60pct": true,
         "90pct": true
       },
@@ -30596,30 +29636,6 @@
       "reachable_at_utilization": {
         "10pct": false,
         "30pct": false,
-        "60pct": true,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "MiniMax-M3-4xB300::Nebius::on_demand",
-      "self_host_model": "MiniMax-M3",
-      "gpu_model": "B300",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 22608.0,
-      "api_model": "GLM 5.1",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 6.6,
-      "break_even_output_tokens_per_month": 3425454545,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 1627781184,
-        "30pct": 4883343552,
-        "60pct": 9766687104,
-        "90pct": 14650030656
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": true,
         "60pct": true,
         "90pct": true
       },
@@ -30703,30 +29719,6 @@
       "gpu_model": "B300",
       "gpu_count": 4,
       "monthly_fixed_usd": 22608.0,
-      "api_model": "MiniMax M3",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 1.8,
-      "break_even_output_tokens_per_month": 12560000000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 1627781184,
-        "30pct": 4883343552,
-        "60pct": 9766687104,
-        "90pct": 14650030656
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "MiniMax-M3-4xB300::Nebius::on_demand",
-      "self_host_model": "MiniMax-M3",
-      "gpu_model": "B300",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 22608.0,
       "api_model": "MiniMax M2.7",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 1.2,
@@ -30751,58 +29743,10 @@
       "gpu_model": "B300",
       "gpu_count": 4,
       "monthly_fixed_usd": 22608.0,
-      "api_model": "MiniMax M2.7",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 1.8,
-      "break_even_output_tokens_per_month": 12560000000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 1627781184,
-        "30pct": 4883343552,
-        "60pct": 9766687104,
-        "90pct": 14650030656
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "MiniMax-M3-4xB300::Nebius::on_demand",
-      "self_host_model": "MiniMax-M3",
-      "gpu_model": "B300",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 22608.0,
       "api_model": "OpenAI GPT OSS 120B",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 0.6,
       "break_even_output_tokens_per_month": 37680000000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 1627781184,
-        "30pct": 4883343552,
-        "60pct": 9766687104,
-        "90pct": 14650030656
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": false
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "MiniMax-M3-4xB300::Nebius::on_demand",
-      "self_host_model": "MiniMax-M3",
-      "gpu_model": "B300",
-      "gpu_count": 4,
-      "monthly_fixed_usd": 22608.0,
-      "api_model": "OpenAI GPT OSS 120B",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 0.72,
-      "break_even_output_tokens_per_month": 31400000000,
       "monthly_output_capacity_by_utilization": {
         "10pct": 1627781184,
         "30pct": 4883343552,
@@ -39007,30 +37951,6 @@
       "gpu_model": "H200",
       "gpu_count": 2,
       "monthly_fixed_usd": 5169.6,
-      "api_model": "Kimi K3",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 18.75,
-      "break_even_output_tokens_per_month": 275712000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 290672064,
-        "30pct": 872016192,
-        "60pct": 1744032384,
-        "90pct": 2616048576
-      },
-      "reachable_at_utilization": {
-        "10pct": true,
-        "30pct": true,
-        "60pct": true,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "Llama-3.3-70B-Instruct-FP8-(InferenceX-key:-llama70b)-2xH200::RunPod::on_demand",
-      "self_host_model": "Llama-3.3-70B-Instruct-FP8 (InferenceX key: llama70b)",
-      "gpu_model": "H200",
-      "gpu_count": 2,
-      "monthly_fixed_usd": 5169.6,
       "api_model": "Kimi K3 Fast",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 22.5,
@@ -39079,30 +37999,6 @@
       "gpu_model": "H200",
       "gpu_count": 2,
       "monthly_fixed_usd": 5169.6,
-      "api_model": "Kimi K3 US",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 20.625,
-      "break_even_output_tokens_per_month": 250647273,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 290672064,
-        "30pct": 872016192,
-        "60pct": 1744032384,
-        "90pct": 2616048576
-      },
-      "reachable_at_utilization": {
-        "10pct": true,
-        "30pct": true,
-        "60pct": true,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "Llama-3.3-70B-Instruct-FP8-(InferenceX-key:-llama70b)-2xH200::RunPod::on_demand",
-      "self_host_model": "Llama-3.3-70B-Instruct-FP8 (InferenceX key: llama70b)",
-      "gpu_model": "H200",
-      "gpu_count": 2,
-      "monthly_fixed_usd": 5169.6,
       "api_model": "Kimi K2.7 Code",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 4.0,
@@ -39116,30 +38012,6 @@
       "reachable_at_utilization": {
         "10pct": false,
         "30pct": false,
-        "60pct": true,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "Llama-3.3-70B-Instruct-FP8-(InferenceX-key:-llama70b)-2xH200::RunPod::on_demand",
-      "self_host_model": "Llama-3.3-70B-Instruct-FP8 (InferenceX key: llama70b)",
-      "gpu_model": "H200",
-      "gpu_count": 2,
-      "monthly_fixed_usd": 5169.6,
-      "api_model": "Kimi K2.7 Code",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 6.0,
-      "break_even_output_tokens_per_month": 861600000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 290672064,
-        "30pct": 872016192,
-        "60pct": 1744032384,
-        "90pct": 2616048576
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": true,
         "60pct": true,
         "90pct": true
       },
@@ -39199,30 +38071,6 @@
       "gpu_model": "H200",
       "gpu_count": 2,
       "monthly_fixed_usd": 5169.6,
-      "api_model": "Kimi K2.6",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 6.0,
-      "break_even_output_tokens_per_month": 861600000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 290672064,
-        "30pct": 872016192,
-        "60pct": 1744032384,
-        "90pct": 2616048576
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": true,
-        "60pct": true,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "Llama-3.3-70B-Instruct-FP8-(InferenceX-key:-llama70b)-2xH200::RunPod::on_demand",
-      "self_host_model": "Llama-3.3-70B-Instruct-FP8 (InferenceX key: llama70b)",
-      "gpu_model": "H200",
-      "gpu_count": 2,
-      "monthly_fixed_usd": 5169.6,
       "api_model": "Kimi K2.6 Fast",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 8.0,
@@ -39271,30 +38119,6 @@
       "gpu_model": "H200",
       "gpu_count": 2,
       "monthly_fixed_usd": 5169.6,
-      "api_model": "DeepSeek V4 Pro",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 5.22,
-      "break_even_output_tokens_per_month": 990344828,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 290672064,
-        "30pct": 872016192,
-        "60pct": 1744032384,
-        "90pct": 2616048576
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": true,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "Llama-3.3-70B-Instruct-FP8-(InferenceX-key:-llama70b)-2xH200::RunPod::on_demand",
-      "self_host_model": "Llama-3.3-70B-Instruct-FP8 (InferenceX key: llama70b)",
-      "gpu_model": "H200",
-      "gpu_count": 2,
-      "monthly_fixed_usd": 5169.6,
       "api_model": "DeepSeek V4 Flash",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 0.28,
@@ -39319,58 +38143,10 @@
       "gpu_model": "H200",
       "gpu_count": 2,
       "monthly_fixed_usd": 5169.6,
-      "api_model": "DeepSeek V4 Flash",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 0.42,
-      "break_even_output_tokens_per_month": 12308571429,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 290672064,
-        "30pct": 872016192,
-        "60pct": 1744032384,
-        "90pct": 2616048576
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": false
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "Llama-3.3-70B-Instruct-FP8-(InferenceX-key:-llama70b)-2xH200::RunPod::on_demand",
-      "self_host_model": "Llama-3.3-70B-Instruct-FP8 (InferenceX key: llama70b)",
-      "gpu_model": "H200",
-      "gpu_count": 2,
-      "monthly_fixed_usd": 5169.6,
       "api_model": "GLM 5.2",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 4.4,
       "break_even_output_tokens_per_month": 1174909091,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 290672064,
-        "30pct": 872016192,
-        "60pct": 1744032384,
-        "90pct": 2616048576
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": true,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "Llama-3.3-70B-Instruct-FP8-(InferenceX-key:-llama70b)-2xH200::RunPod::on_demand",
-      "self_host_model": "Llama-3.3-70B-Instruct-FP8 (InferenceX key: llama70b)",
-      "gpu_model": "H200",
-      "gpu_count": 2,
-      "monthly_fixed_usd": 5169.6,
-      "api_model": "GLM 5.2",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 5.5,
-      "break_even_output_tokens_per_month": 939927273,
       "monthly_output_capacity_by_utilization": {
         "10pct": 290672064,
         "30pct": 872016192,
@@ -39428,30 +38204,6 @@
       "reachable_at_utilization": {
         "10pct": false,
         "30pct": false,
-        "60pct": true,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "Llama-3.3-70B-Instruct-FP8-(InferenceX-key:-llama70b)-2xH200::RunPod::on_demand",
-      "self_host_model": "Llama-3.3-70B-Instruct-FP8 (InferenceX key: llama70b)",
-      "gpu_model": "H200",
-      "gpu_count": 2,
-      "monthly_fixed_usd": 5169.6,
-      "api_model": "GLM 5.1",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 6.6,
-      "break_even_output_tokens_per_month": 783272727,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 290672064,
-        "30pct": 872016192,
-        "60pct": 1744032384,
-        "90pct": 2616048576
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": true,
         "60pct": true,
         "90pct": true
       },
@@ -39535,30 +38287,6 @@
       "gpu_model": "H200",
       "gpu_count": 2,
       "monthly_fixed_usd": 5169.6,
-      "api_model": "MiniMax M3",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 1.8,
-      "break_even_output_tokens_per_month": 2872000000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 290672064,
-        "30pct": 872016192,
-        "60pct": 1744032384,
-        "90pct": 2616048576
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": false
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "Llama-3.3-70B-Instruct-FP8-(InferenceX-key:-llama70b)-2xH200::RunPod::on_demand",
-      "self_host_model": "Llama-3.3-70B-Instruct-FP8 (InferenceX key: llama70b)",
-      "gpu_model": "H200",
-      "gpu_count": 2,
-      "monthly_fixed_usd": 5169.6,
       "api_model": "MiniMax M2.7",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 1.2,
@@ -39583,58 +38311,10 @@
       "gpu_model": "H200",
       "gpu_count": 2,
       "monthly_fixed_usd": 5169.6,
-      "api_model": "MiniMax M2.7",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 1.8,
-      "break_even_output_tokens_per_month": 2872000000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 290672064,
-        "30pct": 872016192,
-        "60pct": 1744032384,
-        "90pct": 2616048576
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": false
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "Llama-3.3-70B-Instruct-FP8-(InferenceX-key:-llama70b)-2xH200::RunPod::on_demand",
-      "self_host_model": "Llama-3.3-70B-Instruct-FP8 (InferenceX key: llama70b)",
-      "gpu_model": "H200",
-      "gpu_count": 2,
-      "monthly_fixed_usd": 5169.6,
       "api_model": "OpenAI GPT OSS 120B",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 0.6,
       "break_even_output_tokens_per_month": 8616000000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 290672064,
-        "30pct": 872016192,
-        "60pct": 1744032384,
-        "90pct": 2616048576
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": false
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "Llama-3.3-70B-Instruct-FP8-(InferenceX-key:-llama70b)-2xH200::RunPod::on_demand",
-      "self_host_model": "Llama-3.3-70B-Instruct-FP8 (InferenceX key: llama70b)",
-      "gpu_model": "H200",
-      "gpu_count": 2,
-      "monthly_fixed_usd": 5169.6,
-      "api_model": "OpenAI GPT OSS 120B",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 0.72,
-      "break_even_output_tokens_per_month": 7180000000,
       "monthly_output_capacity_by_utilization": {
         "10pct": 290672064,
         "30pct": 872016192,
@@ -47839,30 +46519,6 @@
       "gpu_model": "H200",
       "gpu_count": 2,
       "monthly_fixed_usd": 9086.4,
-      "api_model": "Kimi K3",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 18.75,
-      "break_even_output_tokens_per_month": 484608000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 290672064,
-        "30pct": 872016192,
-        "60pct": 1744032384,
-        "90pct": 2616048576
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": true,
-        "60pct": true,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "Llama-3.3-70B-Instruct-FP8-(InferenceX-key:-llama70b)-2xH200::CoreWeave::on_demand",
-      "self_host_model": "Llama-3.3-70B-Instruct-FP8 (InferenceX key: llama70b)",
-      "gpu_model": "H200",
-      "gpu_count": 2,
-      "monthly_fixed_usd": 9086.4,
       "api_model": "Kimi K3 Fast",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 22.5,
@@ -47911,30 +46567,6 @@
       "gpu_model": "H200",
       "gpu_count": 2,
       "monthly_fixed_usd": 9086.4,
-      "api_model": "Kimi K3 US",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 20.625,
-      "break_even_output_tokens_per_month": 440552727,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 290672064,
-        "30pct": 872016192,
-        "60pct": 1744032384,
-        "90pct": 2616048576
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": true,
-        "60pct": true,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "Llama-3.3-70B-Instruct-FP8-(InferenceX-key:-llama70b)-2xH200::CoreWeave::on_demand",
-      "self_host_model": "Llama-3.3-70B-Instruct-FP8 (InferenceX key: llama70b)",
-      "gpu_model": "H200",
-      "gpu_count": 2,
-      "monthly_fixed_usd": 9086.4,
       "api_model": "Kimi K2.7 Code",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 4.0,
@@ -47949,30 +46581,6 @@
         "10pct": false,
         "30pct": false,
         "60pct": false,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "Llama-3.3-70B-Instruct-FP8-(InferenceX-key:-llama70b)-2xH200::CoreWeave::on_demand",
-      "self_host_model": "Llama-3.3-70B-Instruct-FP8 (InferenceX key: llama70b)",
-      "gpu_model": "H200",
-      "gpu_count": 2,
-      "monthly_fixed_usd": 9086.4,
-      "api_model": "Kimi K2.7 Code",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 6.0,
-      "break_even_output_tokens_per_month": 1514400000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 290672064,
-        "30pct": 872016192,
-        "60pct": 1744032384,
-        "90pct": 2616048576
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": true,
         "90pct": true
       },
       "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
@@ -48031,30 +46639,6 @@
       "gpu_model": "H200",
       "gpu_count": 2,
       "monthly_fixed_usd": 9086.4,
-      "api_model": "Kimi K2.6",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 6.0,
-      "break_even_output_tokens_per_month": 1514400000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 290672064,
-        "30pct": 872016192,
-        "60pct": 1744032384,
-        "90pct": 2616048576
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": true,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "Llama-3.3-70B-Instruct-FP8-(InferenceX-key:-llama70b)-2xH200::CoreWeave::on_demand",
-      "self_host_model": "Llama-3.3-70B-Instruct-FP8 (InferenceX key: llama70b)",
-      "gpu_model": "H200",
-      "gpu_count": 2,
-      "monthly_fixed_usd": 9086.4,
       "api_model": "Kimi K2.6 Fast",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 8.0,
@@ -48103,58 +46687,10 @@
       "gpu_model": "H200",
       "gpu_count": 2,
       "monthly_fixed_usd": 9086.4,
-      "api_model": "DeepSeek V4 Pro",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 5.22,
-      "break_even_output_tokens_per_month": 1740689655,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 290672064,
-        "30pct": 872016192,
-        "60pct": 1744032384,
-        "90pct": 2616048576
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": true,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "Llama-3.3-70B-Instruct-FP8-(InferenceX-key:-llama70b)-2xH200::CoreWeave::on_demand",
-      "self_host_model": "Llama-3.3-70B-Instruct-FP8 (InferenceX key: llama70b)",
-      "gpu_model": "H200",
-      "gpu_count": 2,
-      "monthly_fixed_usd": 9086.4,
       "api_model": "DeepSeek V4 Flash",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 0.28,
       "break_even_output_tokens_per_month": 32451428571,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 290672064,
-        "30pct": 872016192,
-        "60pct": 1744032384,
-        "90pct": 2616048576
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": false
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "Llama-3.3-70B-Instruct-FP8-(InferenceX-key:-llama70b)-2xH200::CoreWeave::on_demand",
-      "self_host_model": "Llama-3.3-70B-Instruct-FP8 (InferenceX key: llama70b)",
-      "gpu_model": "H200",
-      "gpu_count": 2,
-      "monthly_fixed_usd": 9086.4,
-      "api_model": "DeepSeek V4 Flash",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 0.42,
-      "break_even_output_tokens_per_month": 21634285714,
       "monthly_output_capacity_by_utilization": {
         "10pct": 290672064,
         "30pct": 872016192,
@@ -48189,30 +46725,6 @@
         "10pct": false,
         "30pct": false,
         "60pct": false,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "Llama-3.3-70B-Instruct-FP8-(InferenceX-key:-llama70b)-2xH200::CoreWeave::on_demand",
-      "self_host_model": "Llama-3.3-70B-Instruct-FP8 (InferenceX key: llama70b)",
-      "gpu_model": "H200",
-      "gpu_count": 2,
-      "monthly_fixed_usd": 9086.4,
-      "api_model": "GLM 5.2",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 5.5,
-      "break_even_output_tokens_per_month": 1652072727,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 290672064,
-        "30pct": 872016192,
-        "60pct": 1744032384,
-        "90pct": 2616048576
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": true,
         "90pct": true
       },
       "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
@@ -48261,30 +46773,6 @@
         "10pct": false,
         "30pct": false,
         "60pct": false,
-        "90pct": true
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "Llama-3.3-70B-Instruct-FP8-(InferenceX-key:-llama70b)-2xH200::CoreWeave::on_demand",
-      "self_host_model": "Llama-3.3-70B-Instruct-FP8 (InferenceX key: llama70b)",
-      "gpu_model": "H200",
-      "gpu_count": 2,
-      "monthly_fixed_usd": 9086.4,
-      "api_model": "GLM 5.1",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 6.6,
-      "break_even_output_tokens_per_month": 1376727273,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 290672064,
-        "30pct": 872016192,
-        "60pct": 1744032384,
-        "90pct": 2616048576
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": true,
         "90pct": true
       },
       "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
@@ -48367,30 +46855,6 @@
       "gpu_model": "H200",
       "gpu_count": 2,
       "monthly_fixed_usd": 9086.4,
-      "api_model": "MiniMax M3",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 1.8,
-      "break_even_output_tokens_per_month": 5048000000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 290672064,
-        "30pct": 872016192,
-        "60pct": 1744032384,
-        "90pct": 2616048576
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": false
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "Llama-3.3-70B-Instruct-FP8-(InferenceX-key:-llama70b)-2xH200::CoreWeave::on_demand",
-      "self_host_model": "Llama-3.3-70B-Instruct-FP8 (InferenceX key: llama70b)",
-      "gpu_model": "H200",
-      "gpu_count": 2,
-      "monthly_fixed_usd": 9086.4,
       "api_model": "MiniMax M2.7",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 1.2,
@@ -48415,58 +46879,10 @@
       "gpu_model": "H200",
       "gpu_count": 2,
       "monthly_fixed_usd": 9086.4,
-      "api_model": "MiniMax M2.7",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 1.8,
-      "break_even_output_tokens_per_month": 5048000000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 290672064,
-        "30pct": 872016192,
-        "60pct": 1744032384,
-        "90pct": 2616048576
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": false
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "Llama-3.3-70B-Instruct-FP8-(InferenceX-key:-llama70b)-2xH200::CoreWeave::on_demand",
-      "self_host_model": "Llama-3.3-70B-Instruct-FP8 (InferenceX key: llama70b)",
-      "gpu_model": "H200",
-      "gpu_count": 2,
-      "monthly_fixed_usd": 9086.4,
       "api_model": "OpenAI GPT OSS 120B",
       "api_provider": "Fireworks AI",
       "api_output_per_1m": 0.6,
       "break_even_output_tokens_per_month": 15144000000,
-      "monthly_output_capacity_by_utilization": {
-        "10pct": 290672064,
-        "30pct": 872016192,
-        "60pct": 1744032384,
-        "90pct": 2616048576
-      },
-      "reachable_at_utilization": {
-        "10pct": false,
-        "30pct": false,
-        "60pct": false,
-        "90pct": false
-      },
-      "note": "Below the break-even volume the API is cheaper. 'reachable' false means the box cannot physically emit enough tokens at that utilization to ever break even against this API price."
-    },
-    {
-      "self_host_id": "Llama-3.3-70B-Instruct-FP8-(InferenceX-key:-llama70b)-2xH200::CoreWeave::on_demand",
-      "self_host_model": "Llama-3.3-70B-Instruct-FP8 (InferenceX key: llama70b)",
-      "gpu_model": "H200",
-      "gpu_count": 2,
-      "monthly_fixed_usd": 9086.4,
-      "api_model": "OpenAI GPT OSS 120B",
-      "api_provider": "Fireworks AI",
-      "api_output_per_1m": 0.72,
-      "break_even_output_tokens_per_month": 12620000000,
       "monthly_output_capacity_by_utilization": {
         "10pct": 290672064,
         "30pct": 872016192,
