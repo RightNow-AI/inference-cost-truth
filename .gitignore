@@ -1,0 +1,4 @@
+research/
+evidence/
+*.tmp
+__pycache__/
