@@ -41,7 +41,7 @@ def lane(name):
     f = LANES / f"ict-{name}" / "findings.json"
     if not f.exists():
         return []
-    payload = json.loads(f.read_text(encoding="utf-8"))
+    payload = json.loads(f.read_text(encoding="utf-8-sig"))
     if isinstance(payload, list):
         return payload
     for k in ("rows", "findings", "data"):
@@ -291,6 +291,70 @@ def t_breakeven(be, sh):
     )
 
 
+HEAD_TO_HEAD = {
+    "DeepSeek-R1-0528": "deepseek-ai/deepseek-r1-0528",
+    "MiniMax-M3": "minimaxai/minimax-m3",
+    "Llama-3.3-70B-Instruct": "meta-llama/llama-3.3-70b-instruct",
+}
+
+
+def head_to_head(prov, sh):
+    """Same open model, bought from an API versus served on rented GPUs.
+
+    This is the only comparison in the repo that is truly like-for-like, so it
+    is the one the headline claim is allowed to rest on. Matching is on exact
+    model id, because a fuzzy match silently pulls in distills: searching
+    "deepseek-r1-0528" also hits "deepseek-r1-0528-qwen3-8b" at $0.09, which is
+    a different and far smaller model, and comparing against it would make the
+    API look ten times better than it is.
+    """
+    out = []
+    for label, mid in HEAD_TO_HEAD.items():
+        hosted = [
+            (num(r.get("output_per_1m")), r.get("provider"))
+            for r in prov["rows"]
+            if r.get("category") == "B_hosted_open_api"
+            and r.get("service_tier") in (None, "standard")
+            and str(r.get("model_name", "")).lower().replace("-turbo", "") == mid
+            and num(r.get("output_per_1m"))
+        ]
+        rows = [
+            r for r in sh["rows"]
+            if label.split("-")[0].lower() in str(r["model"]).lower()
+        ]
+        if not hosted or not rows:
+            continue
+        price, provider = min(hosted)
+        best = min(rows, key=lambda r: r["cost_per_1m_by_utilization"]["90pct"])
+        u = best["cost_per_1m_by_utilization"]
+        out.append({
+            "label": label, "price": price, "provider": provider,
+            "gpus": f"{best['gpu_count']}x {best['gpu_model']}",
+            "rental": best["gpu_provider"],
+            "u90": u["90pct"], "u30": u["30pct"], "u60": u["60pct"],
+        })
+    return out
+
+
+def t_headtohead(prov, sh):
+    rows = []
+    for h in head_to_head(prov, sh):
+        w90 = "self-host" if h["u90"] < h["price"] else "**API**"
+        w30 = "self-host" if h["u30"] < h["price"] else "**API**"
+        rows.append([
+            f"`{h['label']}`",
+            f"${h['price']:g} ({h['provider']})",
+            f"{h['gpus']} on {h['rental']}",
+            f"${h['u90']:.2f}", f"${h['u60']:.2f}", f"${h['u30']:.2f}",
+            w90, w30,
+        ])
+    return table(
+        ["Open model", "Cheapest hosted API out /1M", "Cheapest self-host",
+         "Self-host @90%", "@60%", "@30%", "Winner @90%", "Winner @30%"],
+        rows,
+    )
+
+
 def t_stack():
     """Runnable stack. Rendered only from verified registry data."""
     p = LANES / "ict-models" / "stack.json"
@@ -339,6 +403,7 @@ def main() -> int:
         "REASONING": t_reasoning(bm),
         "BREAKEVEN": t_breakeven(be, sh),
         "STACK": t_stack(),
+        "HEADTOHEAD": t_headtohead(prov, sh),
     }
 
     tpl = (ROOT / "README.template.md").read_text(encoding="utf-8")

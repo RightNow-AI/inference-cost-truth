@@ -116,7 +116,7 @@ def main(argv: list[str]) -> int:
             print(f"{lane.name}: no findings.json")
             rc = 1
             continue
-        rows = list(iter_rows(json.loads(f.read_text(encoding="utf-8"))))
+        rows = list(iter_rows(json.loads(f.read_text(encoding="utf-8-sig"))))
         clean = 0
         problems = []
         for i, row in enumerate(rows):

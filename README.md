@@ -8,11 +8,14 @@ and the date it was read. Verified on **2026-07-31**.
 RightNow AI, which sells GPU kernel optimization at
 [runinfra.ai](https://runinfra.ai). We make money when people run models on
 their own GPUs. That is a direct conflict of interest with the question this
-repo answers, so read the numbers adversarially. We have tried to earn the
-benefit of the doubt by publishing the cases where our commercial interest
-loses: at every operating point we could verify, renting GPUs and serving an
-open model yourself costs **more** per token than buying the same model from a
-hosted API. That is in the tables below, not buried in a footnote.
+repo answers, so read the numbers adversarially.
+
+The finding that cuts against us is in the head-to-head table below. **At 30%
+utilization, which is generous for most real deployments, buying the open model
+from a hosted API is cheaper than renting GPUs to serve it yourself in every
+comparison we could make.** Self-hosting only pulls ahead at 90% utilization,
+on the cheapest AMD capacity we could find a published rate for, and even then
+only for two of three models. Before counting a single hour of engineer time.
 
 ## What this repo is not
 
@@ -34,16 +37,31 @@ category. Full tables below.
 | Tier | A: closed vendor API | B: open model, hosted API | C: open model, self-hosted |
 |---|---|---|---|
 | Frontier | `gpt-5.6-sol` $5 in / $30 out | no open model at this tier | not applicable |
-| Strong general | `Claude Sonnet 5` $2 in / $10 out | `DeepSeek-V3.2` on DeepInfra $0.26 in / $0.38 out | DeepSeek-R1 on 4x B200, $4.89 out at 90% util |
-| Cheap general | `deepseek-v4-flash` $0.14 in / $0.28 out | `gpt-oss-120b` on Novita $0.05 in / $0.25 out | Llama-3.3-70B on 2x H200, $1.98 out at 90% util |
-
-Read that bottom-right cell against the cell to its left. Self-hosting
-Llama-3.3-70B at 90% utilization costs about 6x what DeepInfra charges to serve
-the same model, and 90% utilization is a fiction for almost everyone.
+| Strong general | `Claude Sonnet 5` $2 in / $10 out | `DeepSeek-V3.2` on DeepInfra $0.26 in / $0.38 out | DeepSeek-R1 on 4x MI355X, $1.97 out at 90% util, $5.91 at 30% |
+| Cheap general | `deepseek-v4-flash` $0.14 in / $0.28 out | `gpt-oss-120b` on Novita $0.05 in / $0.25 out | Llama-3.3-70B on 1x MI355X, $0.82 out at 90% util, $2.47 at 30% |
 
 **Category B is usually the right answer** and it is the one most comparisons
 skip, because "GPT-4 versus self-hosting" is a more exciting headline than
 "someone else already runs the open model cheaper than you can".
+
+## Head to head: the same open model, API versus your own GPUs
+
+The only truly like-for-like comparison in this repo. Same weights, same model
+id, cheapest published option on each side. Self-host column is the cheapest
+GPU rental we found a published on-demand per-GPU rate for.
+
+| Open model | Cheapest hosted API out /1M | Cheapest self-host | Self-host @90% | @60% | @30% | Winner @90% | Winner @30% |
+|---|---|---|---|---|---|---|---|
+| `DeepSeek-R1-0528` | $2.15 (DeepInfra) | 4x MI355X on Vultr | $1.97 | $2.95 | $5.91 | self-host | **API** |
+| `MiniMax-M3` | $1.2 (Nebius AI Studio) | 4x MI355X on Vultr | $0.84 | $1.26 | $2.51 | self-host | **API** |
+| `Llama-3.3-70B-Instruct` | $0.32 (DeepInfra) | 1x MI355X on Vultr | $0.82 | $1.24 | $2.47 | **API** | **API** |
+
+Two things to take from this. First, the utilization column you believe about
+yourself decides the answer, and it is the number teams are most optimistic
+about. Second, self-hosting wins here only on AMD MI355X at $2.59/GPU/hr, which
+is less than half the cheapest B200 rate we found, while delivering higher
+measured throughput on DeepSeek-R1. If you are going to self-host, the
+accelerator you pick matters more than the model does.
 
 ## API pricing, closed vendors
 
@@ -299,10 +317,20 @@ GPU count, so check it before reusing any throughput number.
 |---|---|---|---|---|---|---|---|---|---|
 | DeepSeek-R1-0528 | 4x B200 | RunPod | $5.89 | 1,488 | cited | $43.99 | $14.66 | $7.33 | $4.89 |
 | DeepSeek-R1-0528 | 4x B200 | CoreWeave | $8.6 | 1,488 | cited | $64.23 | $21.41 | $10.71 | $7.14 |
+| DeepSeek-R1-0528 | 4x MI355X | Vultr | $2.59 | 1,624 | cited | $17.73 | $5.91 | $2.95 | $1.97 |
+| DeepSeek-R1-0528 | 4x MI355X | Oracle Cloud | $8.6 | 1,624 | cited | $58.86 | $19.62 | $9.81 | $6.54 |
 | MiniMax-M3 | 4x B300 | RunPod | $6.94 | 6,280 | cited | $12.28 | $4.09 | $2.05 | $1.36 |
 | MiniMax-M3 | 4x B300 | Nebius | $7.85 | 6,280 | cited | $13.89 | $4.63 | $2.31 | $1.54 |
+| MiniMax-M3 | 4x MI355X | Vultr | $2.59 | 3,817 | cited | $7.54 | $2.51 | $1.26 | $0.84 |
+| MiniMax-M3 | 4x MI355X | Oracle Cloud | $8.6 | 3,817 | cited | $25.03 | $8.34 | $4.17 | $2.78 |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | Vultr | $2.59 | 165 | cited | $348.19 | $116.06 | $58.03 | $38.69 |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | Oracle Cloud | $8.6 | 165 | cited | $1156.15 | $385.38 | $192.69 | $128.46 |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | Vultr | $2.59 | 1,056 | cited | $54.51 | $18.17 | $9.08 | $6.06 |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | Oracle Cloud | $8.6 | 1,056 | cited | $180.99 | $60.33 | $30.16 | $20.11 |
 | Llama-3.3-70B-Instruct-FP8 (In | 2x H200 | RunPod | $3.59 | 1,121 | cited | $17.79 | $5.93 | $2.96 | $1.98 |
 | Llama-3.3-70B-Instruct-FP8 (In | 2x H200 | CoreWeave | $6.31 | 1,121 | cited | $31.26 | $10.42 | $5.21 | $3.47 |
+| Llama-3.3-70B-Instruct-FP8 (In | 1x MI355X | Vultr | $2.59 | 971 | cited | $7.41 | $2.47 | $1.24 | $0.82 |
+| Llama-3.3-70B-Instruct-FP8 (In | 1x MI355X | Oracle Cloud | $8.6 | 971 | cited | $24.61 | $8.20 | $4.10 | $2.73 |
 
 Utilization is the assumption that moves these numbers most, by 9x across the
 range shown. It is also the one nobody measures honestly before committing.
@@ -334,6 +362,20 @@ where the fixed bill divided by monthly volume equals the API's unit price.
 | DeepSeek-R1-0528 | 4x B200 | $24,768 | Anthropic `Claude Sonnet 5` | $15 | 1,651M | 1,157M | no | yes |
 | DeepSeek-R1-0528 | 4x B200 | $24,768 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 3,302M | 1,157M | no | yes |
 | DeepSeek-R1-0528 | 4x B200 | $24,768 | DeepSeek `deepseek-v4-flash` | $0.28 | 88,457M | 1,157M | no | no |
+| DeepSeek-R1-0528 | 4x MI355X | $7,459 | OpenAI `gpt-5.6-terra` | $12 | 622M | 1,262M | yes | yes |
+| DeepSeek-R1-0528 | 4x MI355X | $7,459 | Anthropic `Claude Sonnet 5` | $10 | 746M | 1,262M | yes | yes |
+| DeepSeek-R1-0528 | 4x MI355X | $7,459 | Anthropic `Claude Sonnet 5` | $10 | 746M | 1,262M | yes | yes |
+| DeepSeek-R1-0528 | 4x MI355X | $7,459 | Anthropic `Claude Sonnet 5` | $15 | 497M | 1,262M | yes | yes |
+| DeepSeek-R1-0528 | 4x MI355X | $7,459 | Anthropic `Claude Sonnet 5` | $15 | 497M | 1,262M | yes | yes |
+| DeepSeek-R1-0528 | 4x MI355X | $7,459 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 995M | 1,262M | yes | yes |
+| DeepSeek-R1-0528 | 4x MI355X | $7,459 | DeepSeek `deepseek-v4-flash` | $0.28 | 26,640M | 1,262M | no | no |
+| DeepSeek-R1-0528 | 4x MI355X | $24,768 | OpenAI `gpt-5.6-terra` | $12 | 2,064M | 1,262M | no | yes |
+| DeepSeek-R1-0528 | 4x MI355X | $24,768 | Anthropic `Claude Sonnet 5` | $10 | 2,477M | 1,262M | no | yes |
+| DeepSeek-R1-0528 | 4x MI355X | $24,768 | Anthropic `Claude Sonnet 5` | $10 | 2,477M | 1,262M | no | yes |
+| DeepSeek-R1-0528 | 4x MI355X | $24,768 | Anthropic `Claude Sonnet 5` | $15 | 1,651M | 1,262M | no | yes |
+| DeepSeek-R1-0528 | 4x MI355X | $24,768 | Anthropic `Claude Sonnet 5` | $15 | 1,651M | 1,262M | no | yes |
+| DeepSeek-R1-0528 | 4x MI355X | $24,768 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 3,302M | 1,262M | no | yes |
+| DeepSeek-R1-0528 | 4x MI355X | $24,768 | DeepSeek `deepseek-v4-flash` | $0.28 | 88,457M | 1,262M | no | no |
 | MiniMax-M3 | 4x B300 | $19,987 | OpenAI `gpt-5.6-terra` | $12 | 1,666M | 4,883M | yes | yes |
 | MiniMax-M3 | 4x B300 | $19,987 | Anthropic `Claude Sonnet 5` | $10 | 1,999M | 4,883M | yes | yes |
 | MiniMax-M3 | 4x B300 | $19,987 | Anthropic `Claude Sonnet 5` | $10 | 1,999M | 4,883M | yes | yes |
@@ -348,6 +390,48 @@ where the fixed bill divided by monthly volume equals the API's unit price.
 | MiniMax-M3 | 4x B300 | $22,608 | Anthropic `Claude Sonnet 5` | $15 | 1,507M | 4,883M | yes | yes |
 | MiniMax-M3 | 4x B300 | $22,608 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 3,014M | 4,883M | yes | yes |
 | MiniMax-M3 | 4x B300 | $22,608 | DeepSeek `deepseek-v4-flash` | $0.28 | 80,743M | 4,883M | no | no |
+| MiniMax-M3 | 4x MI355X | $7,459 | OpenAI `gpt-5.6-terra` | $12 | 622M | 2,968M | yes | yes |
+| MiniMax-M3 | 4x MI355X | $7,459 | Anthropic `Claude Sonnet 5` | $10 | 746M | 2,968M | yes | yes |
+| MiniMax-M3 | 4x MI355X | $7,459 | Anthropic `Claude Sonnet 5` | $10 | 746M | 2,968M | yes | yes |
+| MiniMax-M3 | 4x MI355X | $7,459 | Anthropic `Claude Sonnet 5` | $15 | 497M | 2,968M | yes | yes |
+| MiniMax-M3 | 4x MI355X | $7,459 | Anthropic `Claude Sonnet 5` | $15 | 497M | 2,968M | yes | yes |
+| MiniMax-M3 | 4x MI355X | $7,459 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 995M | 2,968M | yes | yes |
+| MiniMax-M3 | 4x MI355X | $7,459 | DeepSeek `deepseek-v4-flash` | $0.28 | 26,640M | 2,968M | no | no |
+| MiniMax-M3 | 4x MI355X | $24,768 | OpenAI `gpt-5.6-terra` | $12 | 2,064M | 2,968M | yes | yes |
+| MiniMax-M3 | 4x MI355X | $24,768 | Anthropic `Claude Sonnet 5` | $10 | 2,477M | 2,968M | yes | yes |
+| MiniMax-M3 | 4x MI355X | $24,768 | Anthropic `Claude Sonnet 5` | $10 | 2,477M | 2,968M | yes | yes |
+| MiniMax-M3 | 4x MI355X | $24,768 | Anthropic `Claude Sonnet 5` | $15 | 1,651M | 2,968M | yes | yes |
+| MiniMax-M3 | 4x MI355X | $24,768 | Anthropic `Claude Sonnet 5` | $15 | 1,651M | 2,968M | yes | yes |
+| MiniMax-M3 | 4x MI355X | $24,768 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 3,302M | 2,968M | no | yes |
+| MiniMax-M3 | 4x MI355X | $24,768 | DeepSeek `deepseek-v4-flash` | $0.28 | 88,457M | 2,968M | no | no |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $14,918 | OpenAI `gpt-5.6-terra` | $12 | 1,243M | 129M | no | no |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $14,918 | Anthropic `Claude Sonnet 5` | $10 | 1,492M | 129M | no | no |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $14,918 | Anthropic `Claude Sonnet 5` | $10 | 1,492M | 129M | no | no |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $14,918 | Anthropic `Claude Sonnet 5` | $15 | 995M | 129M | no | no |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $14,918 | Anthropic `Claude Sonnet 5` | $15 | 995M | 129M | no | no |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $14,918 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 1,989M | 129M | no | no |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $14,918 | DeepSeek `deepseek-v4-flash` | $0.28 | 53,280M | 129M | no | no |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | OpenAI `gpt-5.6-terra` | $12 | 4,128M | 129M | no | no |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | Anthropic `Claude Sonnet 5` | $10 | 4,954M | 129M | no | no |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | Anthropic `Claude Sonnet 5` | $10 | 4,954M | 129M | no | no |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | Anthropic `Claude Sonnet 5` | $15 | 3,302M | 129M | no | no |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | Anthropic `Claude Sonnet 5` | $15 | 3,302M | 129M | no | no |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 6,605M | 129M | no | no |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | DeepSeek `deepseek-v4-flash` | $0.28 | 176,914M | 129M | no | no |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $14,918 | OpenAI `gpt-5.6-terra` | $12 | 1,243M | 821M | no | yes |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $14,918 | Anthropic `Claude Sonnet 5` | $10 | 1,492M | 821M | no | yes |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $14,918 | Anthropic `Claude Sonnet 5` | $10 | 1,492M | 821M | no | yes |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $14,918 | Anthropic `Claude Sonnet 5` | $15 | 995M | 821M | no | yes |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $14,918 | Anthropic `Claude Sonnet 5` | $15 | 995M | 821M | no | yes |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $14,918 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 1,989M | 821M | no | yes |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $14,918 | DeepSeek `deepseek-v4-flash` | $0.28 | 53,280M | 821M | no | no |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | OpenAI `gpt-5.6-terra` | $12 | 4,128M | 821M | no | no |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | Anthropic `Claude Sonnet 5` | $10 | 4,954M | 821M | no | no |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | Anthropic `Claude Sonnet 5` | $10 | 4,954M | 821M | no | no |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | Anthropic `Claude Sonnet 5` | $15 | 3,302M | 821M | no | no |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | Anthropic `Claude Sonnet 5` | $15 | 3,302M | 821M | no | no |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 6,605M | 821M | no | no |
+| amd/Kimi-K2.5-MXFP4 | 8x MI355X | $49,536 | DeepSeek `deepseek-v4-flash` | $0.28 | 176,914M | 821M | no | no |
 | Llama-3.3-70B-Instruct-FP8 | 2x H200 | $5,170 | OpenAI `gpt-5.6-terra` | $12 | 431M | 872M | yes | yes |
 | Llama-3.3-70B-Instruct-FP8 | 2x H200 | $5,170 | Anthropic `Claude Sonnet 5` | $10 | 517M | 872M | yes | yes |
 | Llama-3.3-70B-Instruct-FP8 | 2x H200 | $5,170 | Anthropic `Claude Sonnet 5` | $10 | 517M | 872M | yes | yes |
@@ -362,6 +446,20 @@ where the fixed bill divided by monthly volume equals the API's unit price.
 | Llama-3.3-70B-Instruct-FP8 | 2x H200 | $9,086 | Anthropic `Claude Sonnet 5` | $15 | 606M | 872M | yes | yes |
 | Llama-3.3-70B-Instruct-FP8 | 2x H200 | $9,086 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 1,212M | 872M | no | yes |
 | Llama-3.3-70B-Instruct-FP8 | 2x H200 | $9,086 | DeepSeek `deepseek-v4-flash` | $0.28 | 32,451M | 872M | no | no |
+| Llama-3.3-70B-Instruct-FP8 | 1x MI355X | $1,865 | OpenAI `gpt-5.6-terra` | $12 | 155M | 755M | yes | yes |
+| Llama-3.3-70B-Instruct-FP8 | 1x MI355X | $1,865 | Anthropic `Claude Sonnet 5` | $10 | 186M | 755M | yes | yes |
+| Llama-3.3-70B-Instruct-FP8 | 1x MI355X | $1,865 | Anthropic `Claude Sonnet 5` | $10 | 186M | 755M | yes | yes |
+| Llama-3.3-70B-Instruct-FP8 | 1x MI355X | $1,865 | Anthropic `Claude Sonnet 5` | $15 | 124M | 755M | yes | yes |
+| Llama-3.3-70B-Instruct-FP8 | 1x MI355X | $1,865 | Anthropic `Claude Sonnet 5` | $15 | 124M | 755M | yes | yes |
+| Llama-3.3-70B-Instruct-FP8 | 1x MI355X | $1,865 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 249M | 755M | yes | yes |
+| Llama-3.3-70B-Instruct-FP8 | 1x MI355X | $1,865 | DeepSeek `deepseek-v4-flash` | $0.28 | 6,660M | 755M | no | no |
+| Llama-3.3-70B-Instruct-FP8 | 1x MI355X | $6,192 | OpenAI `gpt-5.6-terra` | $12 | 516M | 755M | yes | yes |
+| Llama-3.3-70B-Instruct-FP8 | 1x MI355X | $6,192 | Anthropic `Claude Sonnet 5` | $10 | 619M | 755M | yes | yes |
+| Llama-3.3-70B-Instruct-FP8 | 1x MI355X | $6,192 | Anthropic `Claude Sonnet 5` | $10 | 619M | 755M | yes | yes |
+| Llama-3.3-70B-Instruct-FP8 | 1x MI355X | $6,192 | Anthropic `Claude Sonnet 5` | $15 | 413M | 755M | yes | yes |
+| Llama-3.3-70B-Instruct-FP8 | 1x MI355X | $6,192 | Anthropic `Claude Sonnet 5` | $15 | 413M | 755M | yes | yes |
+| Llama-3.3-70B-Instruct-FP8 | 1x MI355X | $6,192 | Google Gemini `Gemini 3.6 Flash` | $7.5 | 826M | 755M | no | yes |
+| Llama-3.3-70B-Instruct-FP8 | 1x MI355X | $6,192 | DeepSeek `deepseek-v4-flash` | $0.28 | 22,114M | 755M | no | no |
 
 When capacity is below break-even, the box cannot emit enough tokens to ever
 beat that API price, at any volume. That is the common case against cheap

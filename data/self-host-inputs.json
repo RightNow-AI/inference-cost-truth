@@ -59,6 +59,47 @@
       "notes": "InferenceX row 431560 is non-disaggregated and reports num_prefill_gpu=num_decode_gpu=4. throughput_tok_per_s is the source's output_tput_per_gpu: aggregate output-token throughput normalized per GPU, not whole-system throughput; no multiplication was performed."
     },
     {
+      "id": "DeepSeek-R1-0528-4xMI355X",
+      "model": "DeepSeek-R1-0528",
+      "gpu_model": "MI355X",
+      "gpu_model_as_benchmarked": "MI355X",
+      "gpu_count": 4,
+      "engine": "SGLang",
+      "engine_version": "v0.5.12-rocm700-mi35x",
+      "precision": "fp4",
+      "batch_or_concurrency": "concurrency=64",
+      "input_len": 8192,
+      "output_len": 1024,
+      "throughput_tok_per_s": 1623.57,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "output_tput_per_gpu multiplied by gpu_count",
+      "per_gpu_correction_applied": true,
+      "throughput_source_url": "https://inferencex.semianalysis.com/api/v1/benchmarks?model=DeepSeek-R1-0528",
+      "throughput_measured": false,
+      "throughput_status": "COMPLETE",
+      "throughput_missing_fields": [],
+      "vendor_reported": false,
+      "rates": [
+        {
+          "provider": "Vultr",
+          "gpu_model_as_listed": "AMD Instinct MI355X",
+          "hourly_per_gpu": 2.59,
+          "tier": "on_demand",
+          "source_url": "https://www.vultr.com/pricing/#cloud-gpu",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "Oracle Cloud",
+          "gpu_model_as_listed": "AMD Instinct MI355X",
+          "hourly_per_gpu": 8.6,
+          "tier": "pay_as_you_go",
+          "source_url": "https://www.oracle.com/cloud/price-list",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "InferenceX row 420398 is non-disaggregated and reports num_prefill_gpu=num_decode_gpu=4. throughput_tok_per_s is output_tput_per_gpu, so it is aggregate output throughput normalized per GPU rather than a whole-system total."
+    },
+    {
       "id": "MiniMax-M3-4xB300",
       "model": "MiniMax-M3",
       "gpu_model": "B300",
@@ -98,6 +139,129 @@
         }
       ],
       "notes": "InferenceX row 437393 is non-disaggregated and reports num_prefill_gpu=num_decode_gpu=4. The exact engine build is identified by the vLLM nightly image tag. Throughput is output_tput_per_gpu, not a derived system total."
+    },
+    {
+      "id": "MiniMax-M3-4xMI355X",
+      "model": "MiniMax-M3",
+      "gpu_model": "MI355X",
+      "gpu_model_as_benchmarked": "MI355X",
+      "gpu_count": 4,
+      "engine": "vLLM",
+      "engine_version": "nightly-69715823df89b11ee684b84066390cbb9092d5c1",
+      "precision": "fp4",
+      "batch_or_concurrency": "concurrency=512",
+      "input_len": 8192,
+      "output_len": 1024,
+      "throughput_tok_per_s": 3817.35,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "output_tput_per_gpu multiplied by gpu_count",
+      "per_gpu_correction_applied": true,
+      "throughput_source_url": "https://inferencex.semianalysis.com/api/v1/benchmarks?model=MiniMax-M3",
+      "throughput_measured": false,
+      "throughput_status": "COMPLETE",
+      "throughput_missing_fields": [],
+      "vendor_reported": false,
+      "rates": [
+        {
+          "provider": "Vultr",
+          "gpu_model_as_listed": "AMD Instinct MI355X",
+          "hourly_per_gpu": 2.59,
+          "tier": "on_demand",
+          "source_url": "https://www.vultr.com/pricing/#cloud-gpu",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "Oracle Cloud",
+          "gpu_model_as_listed": "AMD Instinct MI355X",
+          "hourly_per_gpu": 8.6,
+          "tier": "pay_as_you_go",
+          "source_url": "https://www.oracle.com/cloud/price-list",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "InferenceX row 437319 is non-disaggregated and reports num_prefill_gpu=num_decode_gpu=4. The exact engine build is identified by the vLLM ROCm nightly image tag. Throughput is output_tput_per_gpu, not a derived system total."
+    },
+    {
+      "id": "amd_Kimi-K2.5-MXFP4-8xMI355X",
+      "model": "amd/Kimi-K2.5-MXFP4",
+      "gpu_model": "MI355X",
+      "gpu_model_as_benchmarked": "AMD Instinct MI355X",
+      "gpu_count": 8,
+      "engine": "ATOM OpenAI-compatible server with AITER kernels",
+      "engine_version": "rocm/atom-dev:latest@sha256:eba8c90854e5ce6a6f5b5ac4d35d41f7df76981229e5d91f32a9d2176c52a2e8",
+      "precision": "MXFP4 weights; FP8 KV cache",
+      "batch_or_concurrency": "max_concurrency=2; num_prompts=10; request_rate=inf",
+      "input_len": 10240,
+      "output_len": 512,
+      "throughput_tok_per_s": 165.3,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "source reported total output throughput directly",
+      "per_gpu_correction_applied": false,
+      "throughput_source_url": "https://raw.githubusercontent.com/ROCm/rocm-blogs/release/blogs/software-tools-optimization/kimi-k25-mxfp4-atom/README.md",
+      "throughput_measured": false,
+      "throughput_status": "COMPLETE",
+      "throughput_missing_fields": [],
+      "vendor_reported": true,
+      "rates": [
+        {
+          "provider": "Vultr",
+          "gpu_model_as_listed": "AMD Instinct MI355X",
+          "hourly_per_gpu": 2.59,
+          "tier": "on_demand",
+          "source_url": "https://www.vultr.com/pricing/#cloud-gpu",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "Oracle Cloud",
+          "gpu_model_as_listed": "AMD Instinct MI355X",
+          "hourly_per_gpu": 8.6,
+          "tier": "pay_as_you_go",
+          "source_url": "https://www.oracle.com/cloud/price-list",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "AMD describes this as an end-to-end aggregate output-throughput measurement on the full 8-GPU serving stack, not a per-GPU or per-user figure."
+    },
+    {
+      "id": "amd_Kimi-K2.5-MXFP4-8xMI355X",
+      "model": "amd/Kimi-K2.5-MXFP4",
+      "gpu_model": "MI355X",
+      "gpu_model_as_benchmarked": "AMD Instinct MI355X",
+      "gpu_count": 8,
+      "engine": "ATOM OpenAI-compatible server with AITER kernels",
+      "engine_version": "rocm/atom-dev:latest@sha256:eba8c90854e5ce6a6f5b5ac4d35d41f7df76981229e5d91f32a9d2176c52a2e8",
+      "precision": "MXFP4 weights; FP8 KV cache",
+      "batch_or_concurrency": "max_concurrency=40; num_prompts=160; request_rate=inf",
+      "input_len": 10240,
+      "output_len": 512,
+      "throughput_tok_per_s": 1055.95,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "source reported total output throughput directly",
+      "per_gpu_correction_applied": false,
+      "throughput_source_url": "https://raw.githubusercontent.com/ROCm/rocm-blogs/release/blogs/software-tools-optimization/kimi-k25-mxfp4-atom/README.md",
+      "throughput_measured": false,
+      "throughput_status": "COMPLETE",
+      "throughput_missing_fields": [],
+      "vendor_reported": true,
+      "rates": [
+        {
+          "provider": "Vultr",
+          "gpu_model_as_listed": "AMD Instinct MI355X",
+          "hourly_per_gpu": 2.59,
+          "tier": "on_demand",
+          "source_url": "https://www.vultr.com/pricing/#cloud-gpu",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "Oracle Cloud",
+          "gpu_model_as_listed": "AMD Instinct MI355X",
+          "hourly_per_gpu": 8.6,
+          "tier": "pay_as_you_go",
+          "source_url": "https://www.oracle.com/cloud/price-list",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "AMD explicitly calls this aggregate output throughput for the full 8-GPU end-to-end serving run."
     },
     {
       "id": "Llama-3.3-70B-Instruct-FP8-(InferenceX-key:-llama70b)-2xH200",
@@ -141,34 +305,52 @@
         }
       ],
       "notes": "InferenceX row 40216 reports image=null, so the framework version is not recoverable from this source. Throughput is output_tput_per_gpu. No version was borrowed from another page."
+    },
+    {
+      "id": "Llama-3.3-70B-Instruct-FP8-(InferenceX-key:-llama70b)-1xMI355X",
+      "model": "Llama-3.3-70B-Instruct-FP8 (InferenceX key: llama70b)",
+      "gpu_model": "MI355X",
+      "gpu_model_as_benchmarked": "MI355X",
+      "gpu_count": 1,
+      "engine": "vLLM",
+      "engine_version": null,
+      "precision": "fp4",
+      "batch_or_concurrency": "concurrency=64",
+      "input_len": 8192,
+      "output_len": 1024,
+      "throughput_tok_per_s": 970.62,
+      "throughput_basis": "total_output_across_deployment",
+      "throughput_source_field": "output_tput_per_gpu multiplied by gpu_count",
+      "per_gpu_correction_applied": true,
+      "throughput_source_url": "https://inferencex.semianalysis.com/api/v1/benchmarks?model=Llama-3.3-70B-Instruct-FP8",
+      "throughput_measured": false,
+      "throughput_status": "INCOMPLETE",
+      "throughput_missing_fields": [
+        "inference engine version"
+      ],
+      "vendor_reported": false,
+      "rates": [
+        {
+          "provider": "Vultr",
+          "gpu_model_as_listed": "AMD Instinct MI355X",
+          "hourly_per_gpu": 2.59,
+          "tier": "on_demand",
+          "source_url": "https://www.vultr.com/pricing/#cloud-gpu",
+          "retrieved_on": "2026-07-31"
+        },
+        {
+          "provider": "Oracle Cloud",
+          "gpu_model_as_listed": "AMD Instinct MI355X",
+          "hourly_per_gpu": 8.6,
+          "tier": "pay_as_you_go",
+          "source_url": "https://www.oracle.com/cloud/price-list",
+          "retrieved_on": "2026-07-31"
+        }
+      ],
+      "notes": "InferenceX row 40677 reports image=null. The endpoint's current display bucket retains FP8 in its name, while this individual row's precision field is fp4; both are preserved exactly rather than reconciled. Throughput is output_tput_per_gpu."
     }
   ],
   "dropped_for_lack_of_a_published_rate": [
-    {
-      "model": "DeepSeek-R1-0528",
-      "gpu": "MI355X",
-      "reason": "no surveyed provider publishes an on-demand per-GPU rate"
-    },
-    {
-      "model": "MiniMax-M3",
-      "gpu": "MI355X",
-      "reason": "no surveyed provider publishes an on-demand per-GPU rate"
-    },
-    {
-      "model": "amd/Kimi-K2.5-MXFP4",
-      "gpu": "AMD Instinct MI355X",
-      "reason": "no surveyed provider publishes an on-demand per-GPU rate"
-    },
-    {
-      "model": "amd/Kimi-K2.5-MXFP4",
-      "gpu": "AMD Instinct MI355X",
-      "reason": "no surveyed provider publishes an on-demand per-GPU rate"
-    },
-    {
-      "model": "Llama-3.3-70B-Instruct-FP8 (InferenceX key: llama70b)",
-      "gpu": "MI355X",
-      "reason": "no surveyed provider publishes an on-demand per-GPU rate"
-    },
     {
       "model": "nvidia/DeepSeek-R1-FP4",
       "gpu": "B200",

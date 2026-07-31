@@ -8,11 +8,14 @@ and the date it was read. Verified on **2026-07-31**.
 RightNow AI, which sells GPU kernel optimization at
 [runinfra.ai](https://runinfra.ai). We make money when people run models on
 their own GPUs. That is a direct conflict of interest with the question this
-repo answers, so read the numbers adversarially. We have tried to earn the
-benefit of the doubt by publishing the cases where our commercial interest
-loses: at every operating point we could verify, renting GPUs and serving an
-open model yourself costs **more** per token than buying the same model from a
-hosted API. That is in the tables below, not buried in a footnote.
+repo answers, so read the numbers adversarially.
+
+The finding that cuts against us is in the head-to-head table below. **At 30%
+utilization, which is generous for most real deployments, buying the open model
+from a hosted API is cheaper than renting GPUs to serve it yourself in every
+comparison we could make.** Self-hosting only pulls ahead at 90% utilization,
+on the cheapest AMD capacity we could find a published rate for, and even then
+only for two of three models. Before counting a single hour of engineer time.
 
 ## What this repo is not
 
@@ -34,16 +37,27 @@ category. Full tables below.
 | Tier | A: closed vendor API | B: open model, hosted API | C: open model, self-hosted |
 |---|---|---|---|
 | Frontier | `gpt-5.6-sol` $5 in / $30 out | no open model at this tier | not applicable |
-| Strong general | `Claude Sonnet 5` $2 in / $10 out | `DeepSeek-V3.2` on DeepInfra $0.26 in / $0.38 out | DeepSeek-R1 on 4x B200, $4.89 out at 90% util |
-| Cheap general | `deepseek-v4-flash` $0.14 in / $0.28 out | `gpt-oss-120b` on Novita $0.05 in / $0.25 out | Llama-3.3-70B on 2x H200, $1.98 out at 90% util |
-
-Read that bottom-right cell against the cell to its left. Self-hosting
-Llama-3.3-70B at 90% utilization costs about 6x what DeepInfra charges to serve
-the same model, and 90% utilization is a fiction for almost everyone.
+| Strong general | `Claude Sonnet 5` $2 in / $10 out | `DeepSeek-V3.2` on DeepInfra $0.26 in / $0.38 out | DeepSeek-R1 on 4x MI355X, $1.97 out at 90% util, $5.91 at 30% |
+| Cheap general | `deepseek-v4-flash` $0.14 in / $0.28 out | `gpt-oss-120b` on Novita $0.05 in / $0.25 out | Llama-3.3-70B on 1x MI355X, $0.82 out at 90% util, $2.47 at 30% |
 
 **Category B is usually the right answer** and it is the one most comparisons
 skip, because "GPT-4 versus self-hosting" is a more exciting headline than
 "someone else already runs the open model cheaper than you can".
+
+## Head to head: the same open model, API versus your own GPUs
+
+The only truly like-for-like comparison in this repo. Same weights, same model
+id, cheapest published option on each side. Self-host column is the cheapest
+GPU rental we found a published on-demand per-GPU rate for.
+
+{{TABLE:HEADTOHEAD}}
+
+Two things to take from this. First, the utilization column you believe about
+yourself decides the answer, and it is the number teams are most optimistic
+about. Second, self-hosting wins here only on AMD MI355X at $2.59/GPU/hr, which
+is less than half the cheapest B200 rate we found, while delivering higher
+measured throughput on DeepSeek-R1. If you are going to self-host, the
+accelerator you pick matters more than the model does.
 
 ## API pricing, closed vendors
 

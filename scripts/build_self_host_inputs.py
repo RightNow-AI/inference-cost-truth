@@ -35,7 +35,15 @@ GPU_MATCH = {
     "B300": re.compile(r"\bB300\b", re.I),
     "H200": re.compile(r"\bH200\b", re.I),
     "H100": re.compile(r"\bH100\b", re.I),
+    "MI355X": re.compile(r"\bMI355X\b", re.I),
+    "MI300X": re.compile(r"\bMI300X\b", re.I),
 }
+
+# Tier labels that mean "pay this rate now, no commitment". Providers word it
+# differently. Deliberately EXCLUDED: "starting_at", which is a marketing floor
+# price rather than a rate you can actually book, and every reserved or spot
+# tier, which belong in their own rows.
+ON_DEMAND_TIERS = {"on_demand", "pay_as_you_go", "on_demand_vm"}
 
 EXCLUDED = [
     "engineer time to build and operate the deployment",
@@ -52,7 +60,7 @@ EXCLUDED = [
 
 def load(lane: str, key_hint: str | None = None):
     p = LANES / f"ict-{lane}" / "findings.json"
-    payload = json.loads(p.read_text(encoding="utf-8"))
+    payload = json.loads(p.read_text(encoding="utf-8-sig"))
     if isinstance(payload, list):
         return payload
     if key_hint and isinstance(payload.get(key_hint), list):
@@ -65,11 +73,17 @@ def load(lane: str, key_hint: str | None = None):
 
 def main() -> int:
     thr_rows = load("throughput", "findings")
-    gpu_rows = load("gpu-rental")
+    # The gaps lane supplies the AMD Instinct rates the first survey missed.
+    gpu_rows = list(load("gpu-rental")) + [
+        r
+        for r in load("gaps")
+        if str(r.get("gap", "")).startswith(("GAP_1", "GAP_2"))
+        and r.get("hourly_rate_usd") is not None
+    ]
 
     rates_by_gpu: dict[str, list[dict]] = {}
     for r in gpu_rows:
-        if r.get("tier") != "on_demand" or r.get("per_gpu_or_per_node") != "per_gpu":
+        if r.get("tier") not in ON_DEMAND_TIERS or r.get("per_gpu_or_per_node") != "per_gpu":
             continue
         rate = r.get("hourly_rate_usd")
         if not isinstance(rate, (int, float)):
@@ -81,7 +95,7 @@ def main() -> int:
                         "provider": r.get("provider"),
                         "gpu_model_as_listed": r.get("gpu_model"),
                         "hourly_per_gpu": float(rate),
-                        "tier": "on_demand",
+                        "tier": r.get("tier"),
                         "source_url": r.get("source_url"),
                         "retrieved_on": r.get("retrieved_on") or "2026-07-31",
                     }

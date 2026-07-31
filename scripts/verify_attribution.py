@@ -111,7 +111,7 @@ def main(argv: list[str]) -> int:
         if not fp.exists():
             print(f"{lane.name}: no findings.json")
             continue
-        rows = [r for r in iter_rows(json.loads(fp.read_text(encoding="utf-8"))) if isinstance(r, dict)]
+        rows = [r for r in iter_rows(json.loads(fp.read_text(encoding="utf-8-sig"))) if isinstance(r, dict)]
 
         cache: dict[str, str] = {}
         ok = 0

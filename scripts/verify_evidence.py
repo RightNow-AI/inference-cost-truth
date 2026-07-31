@@ -63,7 +63,7 @@ def verify_lane(lane: pathlib.Path) -> dict:
         return {"lane": lane.name, "error": "no findings.json"}
 
     try:
-        payload = json.loads(fpath.read_text(encoding="utf-8"))
+        payload = json.loads(fpath.read_text(encoding="utf-8-sig"))
     except Exception as exc:
         return {"lane": lane.name, "error": f"unparseable findings.json: {exc}"}
 

@@ -30,7 +30,7 @@ def load(lane: str, name: str = "findings.json"):
     p = LANES / f"ict-{lane}" / name
     if not p.exists():
         return []
-    payload = json.loads(p.read_text(encoding="utf-8"))
+    payload = json.loads(p.read_text(encoding="utf-8-sig"))
     if isinstance(payload, list):
         return payload
     for key in ("rows", "findings", "data"):
@@ -151,7 +151,16 @@ def main() -> int:
         )
 
     gpu = []
-    for r in load("gpu-rental"):
+    # The gaps lane closed the AMD Instinct hole: the first round surveyed no
+    # provider that published an on-demand per-GPU MI355X rate, so every AMD
+    # throughput datapoint produced no cost row.
+    gap_gpu = [
+        r
+        for r in load("gaps")
+        if str(r.get("gap", "")).startswith(("GAP_1", "GAP_2"))
+        and r.get("hourly_rate_usd") is not None
+    ]
+    for r in list(load("gpu-rental")) + gap_gpu:
         gpu.append(
             {
                 "category": "C_gpu_rental",

@@ -145,19 +145,54 @@ def main() -> int:
     check("worked example visible cost", round(300 / 1e6 * rate, 3), 0.009)
     check("worked example ratio", round(4300 / 300, 1), 14.3)
 
-    # --- the headline honesty claim: hosted API beats self-host everywhere
-    worst = min(r["cost_per_1m_by_utilization"]["90pct"] for r in sh["rows"])
-    hosted = [
-        num(r.get("output_per_1m"))
-        for r in prov["rows"]
-        if r.get("category") == "B_hosted_open_api"
-        and num(r.get("output_per_1m")) is not None
-    ]
+    # --- TL;DR self-host cells now quote MI355X, re-assert them
+    for start, gpu, provider, u90, u30 in [
+        ("DeepSeek-R1", "MI355X", "Vultr", 1.97, 5.91),
+        ("Llama-3.3-70B", "MI355X", "Vultr", 0.82, 2.47),
+    ]:
+        r = find_selfhost(sh, start, gpu, provider)
+        if r is None:
+            fails.append(f"TL;DR self-host {start} {gpu} {provider} not found")
+            checks += 1
+            continue
+        u = r["cost_per_1m_by_utilization"]
+        check(f"TL;DR {start} MI355X @90%", round(u["90pct"], 2), u90)
+        check(f"TL;DR {start} MI355X @30%", round(u["30pct"], 2), u30)
+
+    # --- the headline honesty claim, asserted like-for-like on exact model ids.
+    # A fuzzy match here would pull in distills and quietly make the API look
+    # ten times better than it is, so the ids are exact.
+    HEAD = {
+        "deepseek-ai/deepseek-r1-0528": "DeepSeek-R1",
+        "minimaxai/minimax-m3": "MiniMax-M3",
+        "meta-llama/llama-3.3-70b-instruct": "Llama-3.3-70B",
+    }
+    api_wins_at_30 = 0
+    compared = 0
+    for mid, shkey in HEAD.items():
+        hosted = [
+            num(r.get("output_per_1m"))
+            for r in prov["rows"]
+            if r.get("category") == "B_hosted_open_api"
+            and r.get("service_tier") in (None, "standard")
+            and str(r.get("model_name", "")).lower().replace("-turbo", "") == mid
+            and num(r.get("output_per_1m"))
+        ]
+        rows = [r for r in sh["rows"] if shkey.split("-")[0].lower() in str(r["model"]).lower()]
+        if not hosted or not rows:
+            continue
+        compared += 1
+        best30 = min(r["cost_per_1m_by_utilization"]["30pct"] for r in rows)
+        if min(hosted) < best30:
+            api_wins_at_30 += 1
     checks += 1
-    if not (min(hosted) < worst):
+    if compared == 0:
+        fails.append("headline claim: no like-for-like pairs could be compared")
+    elif api_wins_at_30 != compared:
         fails.append(
-            "headline claim: cheapest hosted-open output price is NOT below the "
-            "cheapest self-host cost, so the README's central claim is wrong"
+            f"headline claim: README says the API is cheaper in EVERY comparison "
+            f"at 30% utilization, but that holds in only {api_wins_at_30} of "
+            f"{compared} pairs"
         )
 
     print(f"checked {checks} claims")
