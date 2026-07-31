@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import json
 import pathlib
+import re
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
@@ -78,6 +79,60 @@ def tier_of(notes: str | None, explicit: str | None = None) -> str:
 
 def is_long_context(notes: str | None) -> bool:
     return "long context" in (notes or "").lower()
+
+
+def norm_model(name) -> str:
+    """Canonical model key for deduplication.
+
+    Providers and lanes write the same model many ways: `moonshotai/Kimi-K3`,
+    `Kimi K3`, `kimi-k3`. Two lanes covering one provider therefore produce
+    duplicate rows that inflate counts and double-count in the price-spread
+    analysis. The org prefix is dropped because it is not part of the product.
+    """
+    s = str(name).split("/")[-1].lower()
+    return re.sub(r"[^a-z0-9.]+", "-", s).strip("-")
+
+
+def tier_from_name(name, fallback: str) -> str:
+    """A tier word in the model name is more reliable than a lane's label.
+
+    Fireworks sells `Kimi K3 Fast` as its own listing. One lane recorded it as
+    the fast tier and another as standard, so the same product survived
+    deduplication twice. Reading the tier off the name makes it deterministic.
+    """
+    s = str(name).lower()
+    for word in ("fast", "priority", "turbo"):
+        if re.search(rf"\b{word}\b", s):
+            return "fast" if word == "turbo" else word
+    return fallback
+
+
+def dedupe(rows: list[dict]) -> tuple[list[dict], int]:
+    """Collapse rows identical in provider, model, tier and price.
+
+    Tier stays in the key deliberately. Some tiers share a price (OpenAI prices
+    batch and flex identically for several models) and collapsing those would
+    destroy a real distinction rather than a duplicate.
+    """
+    seen, out = set(), []
+    for r in rows:
+        price = (r.get("input_per_1m"), r.get("output_per_1m"))
+        try:
+            price = tuple(round(float(p), 8) if p is not None else None for p in price)
+        except (TypeError, ValueError):
+            price = tuple(str(p) for p in price)
+        key = (
+            r.get("provider"),
+            norm_model(r.get("model_name")),
+            r.get("service_tier"),
+            r.get("long_context_tier"),
+            price,
+        )
+        if key in seen:
+            continue
+        seen.add(key)
+        out.append(r)
+    return out, len(rows) - len(out)
 
 
 def mislabelled_keys() -> set:
@@ -161,7 +216,10 @@ def main() -> int:
                 # prices, because Fireworks lists Standard and Priority as two
                 # columns of the same table and the lane correctly emitted one
                 # row per tier.
-                "service_tier": tier_of(r.get("notes"), r.get("service_tier")),
+                "service_tier": tier_from_name(
+                    r.get("model_name"),
+                    tier_of(r.get("notes"), r.get("service_tier")),
+                ),
                 "long_context_tier": False,
                 "input_per_1m": r.get("input_per_1m"),
                 "cached_input_per_1m": r.get("cached_input_per_1m"),
@@ -211,6 +269,8 @@ def main() -> int:
             }
         )
 
+    rows, n_dupes = dedupe(rows)
+
     out = {
         "verified_on": RETRIEVED,
         "license": "CC-BY-4.0",
@@ -233,6 +293,7 @@ def main() -> int:
     print("  categories:", dict(Counter(r["category"] for r in rows)))
     print("  tiers:", dict(Counter(r.get("service_tier") for r in rows)))
     print(f"  dropped as mislabelled by tier-audit: {len(dropped_mislabelled)}")
+    print(f"  collapsed as cross-lane duplicates: {n_dupes}")
     return 0
 
 

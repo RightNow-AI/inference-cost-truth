@@ -87,6 +87,18 @@ because the protocol is the product:
 5. **Two Baseten rows** carrying a Fast variant's price under the base model
    name, dropped rather than corrected, because a corrected value would have
    come from a different fetch than the row's own quote.
+6. **54 cross-lane duplicate rows.** Two collection lanes covered the same
+   providers and wrote the same model under different names, so
+   `moonshotai/Kimi-K3` and `Kimi K3` from one provider at one price became two
+   rows. Duplicates inflate counts and double-count in the price-spread
+   analysis. Rows are now keyed on provider, canonical model name, tier and
+   price. Tier is kept in that key on purpose: OpenAI prices batch and flex
+   identically for several models, and collapsing those would delete a real
+   distinction rather than a duplicate.
+
+The 2026-07-31 snapshot was cut, then recut the same day after the duplicate
+fix, before any external citation could exist. Snapshots are immutable from
+publication onward; this one is the published state.
 
 ## Next round
 

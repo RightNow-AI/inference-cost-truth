@@ -102,6 +102,10 @@ Identical model id, identical weights, standard tier, one API call away from
 each other. This is the cheapest saving on this page and it requires changing a
 base URL.
 
+The spread is not uniform across models, which is the useful part. Kimi K3 is
+$3 in / $15 out at seven hosts including Moonshot's own API, to the cent.
+Llama-3.3-70B ranges 3.2x. Check before assuming either.
+
 {{CHART_SPREAD}}
 
 {{TABLE:SPREADS}}

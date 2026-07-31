@@ -80,7 +80,7 @@ GPU rental we found a published on-demand per-GPU rate for.
 |---|---|---|---|---|---|---|---|
 | `DeepSeek-R1-0528` | $2.15 (DeepInfra) | 8x MI355X on Vultr | $0.88 | $1.32 | $2.63 | self-host | **API** |
 | `MiniMax-M3` | $1.2 (Nebius AI Studio) | 4x MI355X on Vultr | $0.31 | $0.47 | $0.93 | self-host | self-host |
-| `Llama-3.3-70B-Instruct` | $0.32 (DeepInfra) | 1x MI355X on Vultr | $0.82 | $1.24 | $2.47 | **API** | **API** |
+| `Llama-3.3-70B-Instruct` | $0.4 (Nebius AI Studio) | 1x MI355X on Vultr | $0.82 | $1.24 | $2.47 | **API** | **API** |
 
 **Kimi K3 and GLM 5.2 are deliberately absent from this table.** Both are
 priced by 8+ hosts and both are in the pricing tables below. Neither has a
@@ -106,28 +106,32 @@ Identical model id, identical weights, standard tier, one API call away from
 each other. This is the cheapest saving on this page and it requires changing a
 base URL.
 
+The spread is not uniform across models, which is the useful part. Kimi K3 is
+$3 in / $15 out at seven hosts including Moonshot's own API, to the cent.
+Llama-3.3-70B ranges 3.2x. Check before assuming either.
+
 ```
 output $/1M, cheapest host vs dearest host, same weights
 
-llama-3.3-70b-instruct         ##################################   3.2x  $0.32 -> $1.04
-gpt-oss-120b                   ###############################      3.0x  $0.25 -> $0.75
-gemma-4-31b-it                 ##############################       2.9x  $0.34 -> $0.97
-qwen3.7-max                    #####################                2.0x  $3.75 -> $7.5
-gpt-oss-20b                    #####################                2.0x  $0.15 -> $0.3
-gemma-3-27b-it                 ####################                 1.9x  $0.16 -> $0.3
-glm-5.2                        ###################                  1.8x  $2.4 -> $4.4
+gpt-oss-120b                   ##################################   3.0x  $0.25 -> $0.75
+gemma-4-31b-it                 #############################        2.6x  $0.38 -> $0.97
+qwen3.7-max                    #######################              2.0x  $3.75 -> $7.5
+gpt-oss-20b                    #######################              2.0x  $0.15 -> $0.3
+gemma-3-27b-it                 #####################                1.9x  $0.16 -> $0.3
+glm-5.2                        #####################                1.8x  $2.4 -> $4.4
+kimi-k2.6                      ###############                      1.3x  $3.4 -> $4.5
 ```
 
 | Open model | Providers | Cheapest output /1M | Dearest output /1M | Spread |
 |---|---|---|---|---|
-| `meta-llama/llama-3.3-70b-instruct` | 4 | $0.32 (DeepInfra) | $1.04 (Together AI) | **3.2x** |
 | `openai/gpt-oss-120b` | 6 | $0.25 (Novita AI) | $0.75 (Cerebras) | **3.0x** |
-| `google/gemma-4-31b-it` | 4 | $0.34 (DeepInfra) | $0.97 (Together AI) | **2.9x** |
+| `google/gemma-4-31b-it` | 3 | $0.38 (DeepInfra) | $0.97 (Together AI) | **2.6x** |
 | `qwen/qwen3.7-max` | 3 | $3.75 (Novita AI) | $7.5 (DeepInfra) | **2.0x** |
 | `openai/gpt-oss-20b` | 3 | $0.15 (Novita AI) | $0.3 (Groq) | **2.0x** |
 | `google/gemma-3-27b-it` | 3 | $0.16 (DeepInfra) | $0.3 (Nebius AI Studio) | **1.9x** |
-| `glm-5.2` | 5 | $2.4 (DeepInfra) | $4.4 (Z.ai API) | **1.8x** |
+| `glm-5.2` | 4 | $2.4 (DeepInfra) | $4.4 (Z.ai API) | **1.8x** |
 | `moonshotai/kimi-k2.6` | 4 | $3.4 (Novita AI) | $4.5 (Together AI) | **1.3x** |
+| `qwen/qwen3-235b-a22b-instruct-2507` | 3 | $0.55 (DeepInfra) | $0.6 (Nebius AI Studio) | **1.1x** |
 
 **2. Your batching config moves cost more than your GPU choice does.** Same
 model, same 2x H100, same rental rate. Only concurrency changes:
