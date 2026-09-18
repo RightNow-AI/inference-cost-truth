@@ -1,0 +1,1032 @@
+[
+  {
+    "model_id": "deepseek-ai/DeepSeek-V4-Flash",
+    "family": "DeepSeek V4",
+    "total_params": "284B",
+    "active_params": "13B",
+    "context_window": "1M tokens",
+    "license": "MIT",
+    "license_url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash/blob/main/LICENSE",
+    "tokenizer_name": "PreTrainedTokenizerFast",
+    "hf_url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+    "release_date": null,
+    "hosted_provider": "OpenRouter",
+    "hosted_model_id": "deepseek/deepseek-v4-flash",
+    "notes": "Release date not stated on the captured official card.",
+    "_evidence": [
+      {
+        "fields": ["model_id", "total_params", "active_params", "context_window"],
+        "evidence_file": "evidence/deepseek_ai_deepseek_v4_flash_readme.md",
+        "evidence_literal": "| DeepSeek-V4-Flash | 284B | 13B | 1M | FP4 + FP8 Mixed* |",
+        "source_url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["license", "license_url"],
+        "evidence_file": "evidence/deepseek_ai_deepseek_v4_flash_readme.md",
+        "evidence_literal": "This repository and the model weights are licensed under the [MIT License](LICENSE).",
+        "source_url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["tokenizer_name"],
+        "evidence_file": "evidence/deepseek_ai_deepseek_v4_flash_tokenizer_config.json",
+        "evidence_literal": "\"tokenizer_class\": \"PreTrainedTokenizerFast\"",
+        "source_url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash/resolve/main/tokenizer_config.json",
+        "http_status": 200
+      },
+      {
+        "fields": ["hosted_provider", "hosted_model_id"],
+        "evidence_file": "evidence/openrouter_models_api.json",
+        "evidence_literal": "\"id\":\"deepseek/deepseek-v4-flash\"",
+        "source_url": "https://openrouter.ai/api/v1/models",
+        "http_status": 200
+      }
+    ]
+  },
+  {
+    "model_id": "deepseek-ai/DeepSeek-V4-Pro",
+    "family": "DeepSeek V4",
+    "total_params": "1.6T",
+    "active_params": "49B",
+    "context_window": "1M tokens",
+    "license": "MIT",
+    "license_url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/main/LICENSE",
+    "tokenizer_name": "PreTrainedTokenizerFast",
+    "hf_url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro",
+    "release_date": null,
+    "hosted_provider": "OpenRouter",
+    "hosted_model_id": "deepseek/deepseek-v4-pro",
+    "notes": "Release date not stated on the captured official card.",
+    "_evidence": [
+      {
+        "fields": ["model_id", "total_params", "active_params", "context_window"],
+        "evidence_file": "evidence/deepseek_ai_deepseek_v4_pro_readme.md",
+        "evidence_literal": "| DeepSeek-V4-Pro | 1.6T | 49B | 1M | FP4 + FP8 Mixed* |",
+        "source_url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["license", "license_url"],
+        "evidence_file": "evidence/deepseek_ai_deepseek_v4_pro_readme.md",
+        "evidence_literal": "This repository and the model weights are licensed under the [MIT License](LICENSE).",
+        "source_url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["tokenizer_name"],
+        "evidence_file": "evidence/deepseek_ai_deepseek_v4_pro_tokenizer_config.json",
+        "evidence_literal": "\"tokenizer_class\": \"PreTrainedTokenizerFast\"",
+        "source_url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/resolve/main/tokenizer_config.json",
+        "http_status": 200
+      },
+      {
+        "fields": ["hosted_provider", "hosted_model_id"],
+        "evidence_file": "evidence/openrouter_models_api.json",
+        "evidence_literal": "\"id\":\"deepseek/deepseek-v4-pro\"",
+        "source_url": "https://openrouter.ai/api/v1/models",
+        "http_status": 200
+      }
+    ]
+  },
+  {
+    "model_id": "Qwen/Qwen3.6-35B-A3B",
+    "family": "Qwen3.6",
+    "total_params": "35B",
+    "active_params": "3B",
+    "context_window": "262,144 tokens native",
+    "license": "Apache-2.0",
+    "license_url": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B/blob/main/LICENSE",
+    "tokenizer_name": "Qwen2Tokenizer",
+    "hf_url": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+    "release_date": "April 2026",
+    "hosted_provider": "OpenRouter",
+    "hosted_model_id": "qwen/qwen3.6-35b-a3b",
+    "notes": "Release month and year are stated in the card citation.",
+    "_evidence": [
+      {
+        "fields": ["total_params", "active_params"],
+        "evidence_file": "evidence/qwen_qwen3_6_35b_a3b_readme.md",
+        "evidence_literal": "- Number of Parameters: 35B in total and 3B activated",
+        "source_url": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["context_window"],
+        "evidence_file": "evidence/qwen_qwen3_6_35b_a3b_readme.md",
+        "evidence_literal": "- Context Length: 262,144 natively and extensible up to 1,010,000 tokens.",
+        "source_url": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["license", "license_url"],
+        "evidence_file": "evidence/qwen_qwen3_6_35b_a3b_readme.md",
+        "evidence_literal": "license: apache-2.0",
+        "source_url": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["tokenizer_name"],
+        "evidence_file": "evidence/qwen_qwen3_6_35b_a3b_tokenizer_config.json",
+        "evidence_literal": "\"tokenizer_class\": \"Qwen2Tokenizer\"",
+        "source_url": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B/resolve/main/tokenizer_config.json",
+        "http_status": 200
+      },
+      {
+        "fields": ["release_date"],
+        "evidence_file": "evidence/qwen_qwen3_6_35b_a3b_readme.md",
+        "evidence_literal": "month = {April},",
+        "source_url": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["release_date"],
+        "evidence_file": "evidence/qwen_qwen3_6_35b_a3b_readme.md",
+        "evidence_literal": "year = {2026}",
+        "source_url": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["hosted_provider", "hosted_model_id"],
+        "evidence_file": "evidence/openrouter_models_api.json",
+        "evidence_literal": "\"id\":\"qwen/qwen3.6-35b-a3b\"",
+        "source_url": "https://openrouter.ai/api/v1/models",
+        "http_status": 200
+      }
+    ]
+  },
+  {
+    "model_id": "Qwen/Qwen3.5-397B-A17B",
+    "family": "Qwen3.5",
+    "total_params": "397B",
+    "active_params": "17B",
+    "context_window": "262,144 tokens native",
+    "license": "Apache-2.0",
+    "license_url": "https://huggingface.co/Qwen/Qwen3.5-397B-A17B/blob/main/LICENSE",
+    "tokenizer_name": "Qwen2Tokenizer",
+    "hf_url": "https://huggingface.co/Qwen/Qwen3.5-397B-A17B",
+    "release_date": "February 2026",
+    "hosted_provider": "OpenRouter",
+    "hosted_model_id": "qwen/qwen3.5-397b-a17b",
+    "notes": "Release month and year are stated in the card citation.",
+    "_evidence": [
+      {
+        "fields": ["total_params", "active_params"],
+        "evidence_file": "evidence/qwen_qwen3_5_397b_a17b_readme.md",
+        "evidence_literal": "- Number of Parameters: 397B in total and 17B activated",
+        "source_url": "https://huggingface.co/Qwen/Qwen3.5-397B-A17B/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["context_window"],
+        "evidence_file": "evidence/qwen_qwen3_5_397b_a17b_readme.md",
+        "evidence_literal": "- Context Length: 262,144 natively and extensible up to 1,010,000 tokens.",
+        "source_url": "https://huggingface.co/Qwen/Qwen3.5-397B-A17B/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["license", "license_url"],
+        "evidence_file": "evidence/qwen_qwen3_5_397b_a17b_readme.md",
+        "evidence_literal": "license: apache-2.0",
+        "source_url": "https://huggingface.co/Qwen/Qwen3.5-397B-A17B/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["tokenizer_name"],
+        "evidence_file": "evidence/qwen_qwen3_5_397b_a17b_tokenizer_config.json",
+        "evidence_literal": "\"tokenizer_class\": \"Qwen2Tokenizer\"",
+        "source_url": "https://huggingface.co/Qwen/Qwen3.5-397B-A17B/resolve/main/tokenizer_config.json",
+        "http_status": 200
+      },
+      {
+        "fields": ["release_date"],
+        "evidence_file": "evidence/qwen_qwen3_5_397b_a17b_readme.md",
+        "evidence_literal": "month  = {February},",
+        "source_url": "https://huggingface.co/Qwen/Qwen3.5-397B-A17B/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["release_date"],
+        "evidence_file": "evidence/qwen_qwen3_5_397b_a17b_readme.md",
+        "evidence_literal": "year   = {2026},",
+        "source_url": "https://huggingface.co/Qwen/Qwen3.5-397B-A17B/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["hosted_provider", "hosted_model_id"],
+        "evidence_file": "evidence/openrouter_models_api.json",
+        "evidence_literal": "\"id\":\"qwen/qwen3.5-397b-a17b\"",
+        "source_url": "https://openrouter.ai/api/v1/models",
+        "http_status": 200
+      }
+    ]
+  },
+  {
+    "model_id": "meta-llama/Llama-4-Maverick-17B-128E-Instruct",
+    "family": "Llama 4",
+    "total_params": "400B",
+    "active_params": "17B",
+    "context_window": "1M tokens",
+    "license": "Llama 4 Community License",
+    "license_url": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/LICENSE",
+    "tokenizer_name": null,
+    "hf_url": "https://huggingface.co/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
+    "release_date": "April 5, 2025",
+    "hosted_provider": "OpenRouter",
+    "hosted_model_id": "meta-llama/llama-4-maverick",
+    "notes": "Tokenizer not stated on the accessible card; gated tokenizer_config.json returned HTTP 401.",
+    "_evidence": [
+      {
+        "fields": ["active_params"],
+        "evidence_file": "evidence/meta_llama_llama_4_maverick_17b_128e_instruct_readme.md",
+        "evidence_literal": "    <td>17B (Activated)",
+        "source_url": "https://huggingface.co/meta-llama/Llama-4-Maverick-17B-128E-Instruct/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["total_params"],
+        "evidence_file": "evidence/meta_llama_llama_4_maverick_17b_128e_instruct_readme.md",
+        "evidence_literal": "        400B (Total)",
+        "source_url": "https://huggingface.co/meta-llama/Llama-4-Maverick-17B-128E-Instruct/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["context_window"],
+        "evidence_file": "evidence/meta_llama_llama_4_maverick_17b_128e_instruct_readme.md",
+        "evidence_literal": "    <td>1M</td>",
+        "source_url": "https://huggingface.co/meta-llama/Llama-4-Maverick-17B-128E-Instruct/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["license", "license_url"],
+        "evidence_file": "evidence/meta_llama_llama_4_maverick_17b_128e_instruct_readme.md",
+        "evidence_literal": "**License**: A custom commercial license, the Llama 4 Community License Agreement, is available at:",
+        "source_url": "https://huggingface.co/meta-llama/Llama-4-Maverick-17B-128E-Instruct/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["release_date"],
+        "evidence_file": "evidence/meta_llama_llama_4_maverick_17b_128e_instruct_readme.md",
+        "evidence_literal": "**Model Release Date:** April 5, 2025",
+        "source_url": "https://huggingface.co/meta-llama/Llama-4-Maverick-17B-128E-Instruct/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["hosted_provider", "hosted_model_id"],
+        "evidence_file": "evidence/openrouter_models_api.json",
+        "evidence_literal": "\"id\":\"meta-llama/llama-4-maverick\"",
+        "source_url": "https://openrouter.ai/api/v1/models",
+        "http_status": 200
+      }
+    ]
+  },
+  {
+    "model_id": "meta-llama/Llama-4-Scout-17B-16E-Instruct",
+    "family": "Llama 4",
+    "total_params": "109B",
+    "active_params": "17B",
+    "context_window": "10M tokens",
+    "license": "Llama 4 Community License",
+    "license_url": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/LICENSE",
+    "tokenizer_name": null,
+    "hf_url": "https://huggingface.co/meta-llama/Llama-4-Scout-17B-16E-Instruct",
+    "release_date": "April 5, 2025",
+    "hosted_provider": "OpenRouter",
+    "hosted_model_id": "meta-llama/llama-4-scout",
+    "notes": "Tokenizer not stated on the accessible card; gated tokenizer_config.json returned HTTP 401.",
+    "_evidence": [
+      {
+        "fields": ["active_params"],
+        "evidence_file": "evidence/meta_llama_llama_4_scout_17b_16e_instruct_readme.md",
+        "evidence_literal": "    <td>17B (Activated)",
+        "source_url": "https://huggingface.co/meta-llama/Llama-4-Scout-17B-16E-Instruct/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["total_params"],
+        "evidence_file": "evidence/meta_llama_llama_4_scout_17b_16e_instruct_readme.md",
+        "evidence_literal": "        109B (Total)",
+        "source_url": "https://huggingface.co/meta-llama/Llama-4-Scout-17B-16E-Instruct/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["context_window"],
+        "evidence_file": "evidence/meta_llama_llama_4_scout_17b_16e_instruct_readme.md",
+        "evidence_literal": "    <td>10M</td>",
+        "source_url": "https://huggingface.co/meta-llama/Llama-4-Scout-17B-16E-Instruct/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["license", "license_url"],
+        "evidence_file": "evidence/meta_llama_llama_4_scout_17b_16e_instruct_readme.md",
+        "evidence_literal": "**License**: A custom commercial license, the Llama 4 Community License Agreement, is available at:",
+        "source_url": "https://huggingface.co/meta-llama/Llama-4-Scout-17B-16E-Instruct/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["release_date"],
+        "evidence_file": "evidence/meta_llama_llama_4_scout_17b_16e_instruct_readme.md",
+        "evidence_literal": "**Model Release Date:** April 5, 2025",
+        "source_url": "https://huggingface.co/meta-llama/Llama-4-Scout-17B-16E-Instruct/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["hosted_provider", "hosted_model_id"],
+        "evidence_file": "evidence/openrouter_models_api.json",
+        "evidence_literal": "\"id\":\"meta-llama/llama-4-scout\"",
+        "source_url": "https://openrouter.ai/api/v1/models",
+        "http_status": 200
+      }
+    ]
+  },
+  {
+    "model_id": "mistralai/Mistral-Medium-3.5-128B",
+    "family": "Mistral Medium 3.5",
+    "total_params": "128B",
+    "active_params": "128B",
+    "context_window": "256k tokens",
+    "license": "Modified MIT License",
+    "license_url": "https://huggingface.co/mistralai/Mistral-Medium-3.5-128B/blob/main/LICENSE",
+    "tokenizer_name": "TokenizersBackend",
+    "hf_url": "https://huggingface.co/mistralai/Mistral-Medium-3.5-128B",
+    "release_date": null,
+    "hosted_provider": "OpenRouter",
+    "hosted_model_id": "mistralai/mistral-medium-3-5",
+    "notes": "Dense model, so active_params is set equal to total_params as required. Release date not stated on the captured card.",
+    "_evidence": [
+      {
+        "fields": ["total_params", "active_params", "context_window"],
+        "evidence_file": "evidence/mistralai_mistral_medium_3_5_128b_readme.md",
+        "evidence_literal": "Mistral Medium 3.5 is our first flagship merged model. It is a dense 128B model with a 256k context window",
+        "source_url": "https://huggingface.co/mistralai/Mistral-Medium-3.5-128B/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["license", "license_url"],
+        "evidence_file": "evidence/mistralai_mistral_medium_3_5_128b_readme.md",
+        "evidence_literal": "This model is licensed under a [Modified MIT License]",
+        "source_url": "https://huggingface.co/mistralai/Mistral-Medium-3.5-128B/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["tokenizer_name"],
+        "evidence_file": "evidence/mistralai_mistral_medium_3_5_128b_tokenizer_config.json",
+        "evidence_literal": "\"tokenizer_class\": \"TokenizersBackend\"",
+        "source_url": "https://huggingface.co/mistralai/Mistral-Medium-3.5-128B/resolve/main/tokenizer_config.json",
+        "http_status": 200
+      },
+      {
+        "fields": ["hosted_provider", "hosted_model_id"],
+        "evidence_file": "evidence/openrouter_models_api.json",
+        "evidence_literal": "\"id\":\"mistralai/mistral-medium-3-5\"",
+        "source_url": "https://openrouter.ai/api/v1/models",
+        "http_status": 200
+      }
+    ]
+  },
+  {
+    "model_id": "mistralai/Mistral-Small-4-119B-2603",
+    "family": "Mistral Small 4",
+    "total_params": "119B",
+    "active_params": "6.5B",
+    "context_window": "256k tokens",
+    "license": "Apache 2.0 License",
+    "license_url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+    "tokenizer_name": "TokenizersBackend",
+    "hf_url": "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603",
+    "release_date": null,
+    "hosted_provider": "OpenRouter",
+    "hosted_model_id": "mistralai/mistral-small-2603",
+    "notes": "Release date not stated on the captured card.",
+    "_evidence": [
+      {
+        "fields": ["total_params", "active_params"],
+        "evidence_file": "evidence/mistralai_mistral_small_4_119b_2603_readme.md",
+        "evidence_literal": "- **119B parameters**, with **6.5B activated per token**.",
+        "source_url": "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["context_window"],
+        "evidence_file": "evidence/mistralai_mistral_small_4_119b_2603_readme.md",
+        "evidence_literal": "- **256k context length**.",
+        "source_url": "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["license", "license_url"],
+        "evidence_file": "evidence/mistralai_mistral_small_4_119b_2603_readme.md",
+        "evidence_literal": "This model is licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0.txt).",
+        "source_url": "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["tokenizer_name"],
+        "evidence_file": "evidence/mistralai_mistral_small_4_119b_2603_tokenizer_config.json",
+        "evidence_literal": "\"tokenizer_class\": \"TokenizersBackend\"",
+        "source_url": "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603/resolve/main/tokenizer_config.json",
+        "http_status": 200
+      },
+      {
+        "fields": ["hosted_provider", "hosted_model_id"],
+        "evidence_file": "evidence/openrouter_models_api.json",
+        "evidence_literal": "\"id\":\"mistralai/mistral-small-2603\"",
+        "source_url": "https://openrouter.ai/api/v1/models",
+        "http_status": 200
+      }
+    ]
+  },
+  {
+    "model_id": "zai-org/GLM-5.2",
+    "family": "GLM 5.2",
+    "total_params": null,
+    "active_params": null,
+    "context_window": "1M tokens",
+    "license": "MIT",
+    "license_url": "https://huggingface.co/zai-org/GLM-5.2/blob/main/LICENSE",
+    "tokenizer_name": "TokenizersBackend",
+    "hf_url": "https://huggingface.co/zai-org/GLM-5.2",
+    "release_date": "2026-06-16",
+    "hosted_provider": "OpenRouter",
+    "hosted_model_id": "z-ai/glm-5.2",
+    "notes": "Total and active parameter counts are not stated on the captured official card or official release bundle.",
+    "_evidence": [
+      {
+        "fields": ["context_window"],
+        "evidence_file": "evidence/zai_org_glm_5_2_readme.md",
+        "evidence_literal": "delivers that capability on a **solid 1M-token context**.",
+        "source_url": "https://huggingface.co/zai-org/GLM-5.2/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["license", "license_url"],
+        "evidence_file": "evidence/zai_org_glm_5_2_readme.md",
+        "evidence_literal": "license: mit",
+        "source_url": "https://huggingface.co/zai-org/GLM-5.2/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["tokenizer_name"],
+        "evidence_file": "evidence/zai_org_glm_5_2_tokenizer_config.json",
+        "evidence_literal": "\"tokenizer_class\": \"TokenizersBackend\"",
+        "source_url": "https://huggingface.co/zai-org/GLM-5.2/resolve/main/tokenizer_config.json",
+        "http_status": 200
+      },
+      {
+        "fields": ["release_date"],
+        "evidence_file": "evidence/zai_glm_5_2_blog_bundle.js",
+        "evidence_literal": "date:`2026-06-16`",
+        "source_url": "https://z.ai/blog/assets/glm-5.2-D418TmAz.js",
+        "http_status": 200
+      },
+      {
+        "fields": ["hosted_provider", "hosted_model_id"],
+        "evidence_file": "evidence/openrouter_models_api.json",
+        "evidence_literal": "\"id\":\"z-ai/glm-5.2\"",
+        "source_url": "https://openrouter.ai/api/v1/models",
+        "http_status": 200
+      }
+    ]
+  },
+  {
+    "model_id": "moonshotai/Kimi-K2-Instruct-0905",
+    "family": "Kimi K2",
+    "total_params": "1T",
+    "active_params": "32B",
+    "context_window": "256K tokens",
+    "license": "Modified MIT License",
+    "license_url": "https://huggingface.co/moonshotai/Kimi-K2-Instruct-0905/blob/main/LICENSE",
+    "tokenizer_name": "TikTokenTokenizer",
+    "hf_url": "https://huggingface.co/moonshotai/Kimi-K2-Instruct-0905",
+    "release_date": null,
+    "hosted_provider": "OpenRouter",
+    "hosted_model_id": "moonshotai/kimi-k2-0905",
+    "notes": "Release date not stated on the captured card.",
+    "_evidence": [
+      {
+        "fields": ["total_params", "active_params"],
+        "evidence_file": "evidence/moonshotai_kimi_k2_instruct_0905_readme.md",
+        "evidence_literal": "featuring 32 billion activated parameters and a total of 1 trillion parameters.",
+        "source_url": "https://huggingface.co/moonshotai/Kimi-K2-Instruct-0905/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["context_window"],
+        "evidence_file": "evidence/moonshotai_kimi_k2_instruct_0905_readme.md",
+        "evidence_literal": "| **Context Length** | 256K |",
+        "source_url": "https://huggingface.co/moonshotai/Kimi-K2-Instruct-0905/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["license", "license_url"],
+        "evidence_file": "evidence/moonshotai_kimi_k2_instruct_0905_readme.md",
+        "evidence_literal": "Both the code repository and the model weights are released under the [Modified MIT License](LICENSE).",
+        "source_url": "https://huggingface.co/moonshotai/Kimi-K2-Instruct-0905/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["tokenizer_name"],
+        "evidence_file": "evidence/moonshotai_kimi_k2_instruct_0905_tokenizer_config.json",
+        "evidence_literal": "\"tokenizer_class\": \"TikTokenTokenizer\"",
+        "source_url": "https://huggingface.co/moonshotai/Kimi-K2-Instruct-0905/resolve/main/tokenizer_config.json",
+        "http_status": 200
+      },
+      {
+        "fields": ["hosted_provider", "hosted_model_id"],
+        "evidence_file": "evidence/openrouter_models_api.json",
+        "evidence_literal": "\"id\":\"moonshotai/kimi-k2-0905\"",
+        "source_url": "https://openrouter.ai/api/v1/models",
+        "http_status": 200
+      }
+    ]
+  },
+  {
+    "model_id": "moonshotai/Kimi-K2-Thinking",
+    "family": "Kimi K2",
+    "total_params": "1T",
+    "active_params": "32B",
+    "context_window": "256K tokens",
+    "license": "Modified MIT License",
+    "license_url": "https://huggingface.co/moonshotai/Kimi-K2-Thinking/blob/main/LICENSE",
+    "tokenizer_name": "TikTokenTokenizer",
+    "hf_url": "https://huggingface.co/moonshotai/Kimi-K2-Thinking",
+    "release_date": null,
+    "hosted_provider": "OpenRouter",
+    "hosted_model_id": "moonshotai/kimi-k2-thinking",
+    "notes": "Release date not stated on the captured card.",
+    "_evidence": [
+      {
+        "fields": ["total_params"],
+        "evidence_file": "evidence/moonshotai_kimi_k2_thinking_readme.md",
+        "evidence_literal": "| **Total Parameters** | 1T |",
+        "source_url": "https://huggingface.co/moonshotai/Kimi-K2-Thinking/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["active_params"],
+        "evidence_file": "evidence/moonshotai_kimi_k2_thinking_readme.md",
+        "evidence_literal": "| **Activated Parameters** | 32B |",
+        "source_url": "https://huggingface.co/moonshotai/Kimi-K2-Thinking/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["context_window"],
+        "evidence_file": "evidence/moonshotai_kimi_k2_thinking_readme.md",
+        "evidence_literal": "| **Context Length** | 256K |",
+        "source_url": "https://huggingface.co/moonshotai/Kimi-K2-Thinking/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["license", "license_url"],
+        "evidence_file": "evidence/moonshotai_kimi_k2_thinking_readme.md",
+        "evidence_literal": "Both the code repository and the model weights are released under the [Modified MIT License](LICENSE).",
+        "source_url": "https://huggingface.co/moonshotai/Kimi-K2-Thinking/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["tokenizer_name"],
+        "evidence_file": "evidence/moonshotai_kimi_k2_thinking_tokenizer_config.json",
+        "evidence_literal": "\"tokenizer_class\": \"TikTokenTokenizer\"",
+        "source_url": "https://huggingface.co/moonshotai/Kimi-K2-Thinking/resolve/main/tokenizer_config.json",
+        "http_status": 200
+      },
+      {
+        "fields": ["hosted_provider", "hosted_model_id"],
+        "evidence_file": "evidence/openrouter_models_api.json",
+        "evidence_literal": "\"id\":\"moonshotai/kimi-k2-thinking\"",
+        "source_url": "https://openrouter.ai/api/v1/models",
+        "http_status": 200
+      }
+    ]
+  },
+  {
+    "model_id": "MiniMaxAI/MiniMax-M2.7",
+    "family": "MiniMax M2",
+    "total_params": null,
+    "active_params": null,
+    "context_window": "204800 tokens",
+    "license": "NON-COMMERCIAL LICENSE",
+    "license_url": "https://github.com/MiniMax-AI/MiniMax-M2.7/blob/main/LICENSE",
+    "tokenizer_name": "GPT2Tokenizer",
+    "hf_url": "https://huggingface.co/MiniMaxAI/MiniMax-M2.7",
+    "release_date": null,
+    "hosted_provider": "OpenRouter",
+    "hosted_model_id": "minimax/minimax-m2.7",
+    "notes": "Total and active parameters are not stated on the captured official card/repo. Release date not stated.",
+    "_evidence": [
+      {
+        "fields": ["context_window"],
+        "evidence_file": "evidence/minimaxai_minimax_m2_7_config.json",
+        "evidence_literal": "\"max_position_embeddings\": 204800",
+        "source_url": "https://huggingface.co/MiniMaxAI/MiniMax-M2.7/resolve/main/config.json",
+        "http_status": 200
+      },
+      {
+        "fields": ["license", "license_url"],
+        "evidence_file": "evidence/minimax_m2_7_license.txt",
+        "evidence_literal": "NON-COMMERCIAL LICENSE",
+        "source_url": "https://raw.githubusercontent.com/MiniMax-AI/MiniMax-M2.7/main/LICENSE",
+        "http_status": 200
+      },
+      {
+        "fields": ["tokenizer_name"],
+        "evidence_file": "evidence/minimaxai_minimax_m2_7_tokenizer_config.json",
+        "evidence_literal": "\"tokenizer_class\": \"GPT2Tokenizer\"",
+        "source_url": "https://huggingface.co/MiniMaxAI/MiniMax-M2.7/resolve/main/tokenizer_config.json",
+        "http_status": 200
+      },
+      {
+        "fields": ["hosted_provider", "hosted_model_id"],
+        "evidence_file": "evidence/openrouter_models_api.json",
+        "evidence_literal": "\"id\":\"minimax/minimax-m2.7\"",
+        "source_url": "https://openrouter.ai/api/v1/models",
+        "http_status": 200
+      }
+    ]
+  },
+  {
+    "model_id": "MiniMaxAI/MiniMax-M2.5",
+    "family": "MiniMax M2",
+    "total_params": null,
+    "active_params": null,
+    "context_window": "196608 tokens",
+    "license": "Modified-MIT",
+    "license_url": "https://github.com/MiniMax-AI/MiniMax-M2.5/blob/main/LICENSE-MODEL",
+    "tokenizer_name": "GPT2Tokenizer",
+    "hf_url": "https://huggingface.co/MiniMaxAI/MiniMax-M2.5",
+    "release_date": "2026-02-13",
+    "hosted_provider": "OpenRouter",
+    "hosted_model_id": "minimax/minimax-m2.5",
+    "notes": "Total and active parameters are not stated on the captured official card/repo.",
+    "_evidence": [
+      {
+        "fields": ["context_window"],
+        "evidence_file": "evidence/minimaxai_minimax_m2_5_config.json",
+        "evidence_literal": "\"max_position_embeddings\": 196608",
+        "source_url": "https://huggingface.co/MiniMaxAI/MiniMax-M2.5/resolve/main/config.json",
+        "http_status": 200
+      },
+      {
+        "fields": ["license"],
+        "evidence_file": "evidence/minimaxai_minimax_m2_5_readme.md",
+        "evidence_literal": "license_name: modified-mit",
+        "source_url": "https://huggingface.co/MiniMaxAI/MiniMax-M2.5/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["license_url", "release_date"],
+        "evidence_file": "evidence/minimax_m2_5_license_model.txt",
+        "evidence_literal": "MiniMax-M2.5 Version Release Date: 2026-02-13",
+        "source_url": "https://raw.githubusercontent.com/MiniMax-AI/MiniMax-M2.5/main/LICENSE-MODEL",
+        "http_status": 200
+      },
+      {
+        "fields": ["tokenizer_name"],
+        "evidence_file": "evidence/minimaxai_minimax_m2_5_tokenizer_config.json",
+        "evidence_literal": "\"tokenizer_class\": \"GPT2Tokenizer\"",
+        "source_url": "https://huggingface.co/MiniMaxAI/MiniMax-M2.5/resolve/main/tokenizer_config.json",
+        "http_status": 200
+      },
+      {
+        "fields": ["hosted_provider", "hosted_model_id"],
+        "evidence_file": "evidence/openrouter_models_api.json",
+        "evidence_literal": "\"id\":\"minimax/minimax-m2.5\"",
+        "source_url": "https://openrouter.ai/api/v1/models",
+        "http_status": 200
+      }
+    ]
+  },
+  {
+    "model_id": "openai/gpt-oss-120b",
+    "family": "gpt-oss",
+    "total_params": "117B",
+    "active_params": "5.1B",
+    "context_window": "131072 tokens",
+    "license": "Apache 2.0",
+    "license_url": "https://huggingface.co/openai/gpt-oss-120b/blob/main/LICENSE",
+    "tokenizer_name": "PreTrainedTokenizerFast",
+    "hf_url": "https://huggingface.co/openai/gpt-oss-120b",
+    "release_date": null,
+    "hosted_provider": "OpenRouter",
+    "hosted_model_id": "openai/gpt-oss-120b",
+    "notes": "Release date not stated on the captured card.",
+    "_evidence": [
+      {
+        "fields": ["total_params", "active_params"],
+        "evidence_file": "evidence/openai_gpt_oss_120b_readme.md",
+        "evidence_literal": "(117B parameters with 5.1B active parameters)",
+        "source_url": "https://huggingface.co/openai/gpt-oss-120b/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["context_window"],
+        "evidence_file": "evidence/openai_gpt_oss_120b_config.json",
+        "evidence_literal": "\"max_position_embeddings\": 131072",
+        "source_url": "https://huggingface.co/openai/gpt-oss-120b/resolve/main/config.json",
+        "http_status": 200
+      },
+      {
+        "fields": ["license", "license_url"],
+        "evidence_file": "evidence/openai_gpt_oss_120b_readme.md",
+        "evidence_literal": "**Permissive Apache 2.0 license:**",
+        "source_url": "https://huggingface.co/openai/gpt-oss-120b/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["tokenizer_name"],
+        "evidence_file": "evidence/openai_gpt_oss_120b_tokenizer_config.json",
+        "evidence_literal": "\"tokenizer_class\": \"PreTrainedTokenizerFast\"",
+        "source_url": "https://huggingface.co/openai/gpt-oss-120b/resolve/main/tokenizer_config.json",
+        "http_status": 200
+      },
+      {
+        "fields": ["hosted_provider", "hosted_model_id"],
+        "evidence_file": "evidence/openrouter_models_api.json",
+        "evidence_literal": "\"id\":\"openai/gpt-oss-120b\"",
+        "source_url": "https://openrouter.ai/api/v1/models",
+        "http_status": 200
+      }
+    ]
+  },
+  {
+    "model_id": "openai/gpt-oss-20b",
+    "family": "gpt-oss",
+    "total_params": "21B",
+    "active_params": "3.6B",
+    "context_window": "131072 tokens",
+    "license": "Apache 2.0",
+    "license_url": "https://huggingface.co/openai/gpt-oss-20b/blob/main/LICENSE",
+    "tokenizer_name": "PreTrainedTokenizerFast",
+    "hf_url": "https://huggingface.co/openai/gpt-oss-20b",
+    "release_date": null,
+    "hosted_provider": "OpenRouter",
+    "hosted_model_id": "openai/gpt-oss-20b",
+    "notes": "Release date not stated on the captured card.",
+    "_evidence": [
+      {
+        "fields": ["total_params", "active_params"],
+        "evidence_file": "evidence/openai_gpt_oss_20b_readme.md",
+        "evidence_literal": "(21B parameters with 3.6B active parameters)",
+        "source_url": "https://huggingface.co/openai/gpt-oss-20b/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["context_window"],
+        "evidence_file": "evidence/openai_gpt_oss_20b_config.json",
+        "evidence_literal": "\"max_position_embeddings\": 131072",
+        "source_url": "https://huggingface.co/openai/gpt-oss-20b/resolve/main/config.json",
+        "http_status": 200
+      },
+      {
+        "fields": ["license", "license_url"],
+        "evidence_file": "evidence/openai_gpt_oss_20b_readme.md",
+        "evidence_literal": "**Permissive Apache 2.0 license:**",
+        "source_url": "https://huggingface.co/openai/gpt-oss-20b/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["tokenizer_name"],
+        "evidence_file": "evidence/openai_gpt_oss_20b_tokenizer_config.json",
+        "evidence_literal": "\"tokenizer_class\": \"PreTrainedTokenizerFast\"",
+        "source_url": "https://huggingface.co/openai/gpt-oss-20b/resolve/main/tokenizer_config.json",
+        "http_status": 200
+      },
+      {
+        "fields": ["hosted_provider", "hosted_model_id"],
+        "evidence_file": "evidence/openrouter_models_api.json",
+        "evidence_literal": "\"id\":\"openai/gpt-oss-20b\"",
+        "source_url": "https://openrouter.ai/api/v1/models",
+        "http_status": 200
+      }
+    ]
+  },
+  {
+    "model_id": "google/gemma-4-26B-A4B-it",
+    "family": "Gemma 4",
+    "total_params": "25.2B",
+    "active_params": "3.8B",
+    "context_window": "256K tokens",
+    "license": "Apache 2.0",
+    "license_url": "https://ai.google.dev/gemma/docs/gemma_4_license",
+    "tokenizer_name": "GemmaTokenizer",
+    "hf_url": "https://huggingface.co/google/gemma-4-26B-A4B-it",
+    "release_date": null,
+    "hosted_provider": "OpenRouter",
+    "hosted_model_id": "google/gemma-4-26b-a4b-it",
+    "notes": "Release date not stated on the captured card.",
+    "_evidence": [
+      {
+        "fields": ["total_params"],
+        "evidence_file": "evidence/google_gemma_4_26b_a4b_it_readme.md",
+        "evidence_literal": "| **Total Parameters** | 25.2B |",
+        "source_url": "https://huggingface.co/google/gemma-4-26B-A4B-it/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["active_params"],
+        "evidence_file": "evidence/google_gemma_4_26b_a4b_it_readme.md",
+        "evidence_literal": "| **Active Parameters** | 3.8B |",
+        "source_url": "https://huggingface.co/google/gemma-4-26B-A4B-it/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["context_window"],
+        "evidence_file": "evidence/google_gemma_4_26b_a4b_it_readme.md",
+        "evidence_literal": "| **Context Length** | 256K tokens |",
+        "source_url": "https://huggingface.co/google/gemma-4-26B-A4B-it/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["license", "license_url"],
+        "evidence_file": "evidence/google_gemma_4_26b_a4b_it_readme.md",
+        "evidence_literal": "<b>License</b>: <a href=\"https://ai.google.dev/gemma/docs/gemma_4_license\" target=\"_blank\">Apache 2.0</a>",
+        "source_url": "https://huggingface.co/google/gemma-4-26B-A4B-it/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["tokenizer_name"],
+        "evidence_file": "evidence/google_gemma_4_26b_a4b_it_tokenizer_config.json",
+        "evidence_literal": "\"tokenizer_class\": \"GemmaTokenizer\"",
+        "source_url": "https://huggingface.co/google/gemma-4-26B-A4B-it/resolve/main/tokenizer_config.json",
+        "http_status": 200
+      },
+      {
+        "fields": ["hosted_provider", "hosted_model_id"],
+        "evidence_file": "evidence/openrouter_models_api.json",
+        "evidence_literal": "\"id\":\"google/gemma-4-26b-a4b-it\"",
+        "source_url": "https://openrouter.ai/api/v1/models",
+        "http_status": 200
+      }
+    ]
+  },
+  {
+    "model_id": "google/gemma-4-31B-it",
+    "family": "Gemma 4",
+    "total_params": "30.7B",
+    "active_params": "30.7B",
+    "context_window": "256K tokens",
+    "license": "Apache 2.0",
+    "license_url": "https://ai.google.dev/gemma/docs/gemma_4_license",
+    "tokenizer_name": "GemmaTokenizer",
+    "hf_url": "https://huggingface.co/google/gemma-4-31B-it",
+    "release_date": null,
+    "hosted_provider": "OpenRouter",
+    "hosted_model_id": "google/gemma-4-31b-it",
+    "notes": "Card labels the 31B model dense, so active_params is set equal to total_params as required. Release date not stated.",
+    "_evidence": [
+      {
+        "fields": ["total_params", "active_params"],
+        "evidence_file": "evidence/google_gemma_4_31b_it_readme.md",
+        "evidence_literal": "| **Total Parameters** | 2.3B effective <br> (5.1B with embeddings) | 4.5B effective <br> (8B with embeddings) | 11.95B | 30.7B |",
+        "source_url": "https://huggingface.co/google/gemma-4-31B-it/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["context_window"],
+        "evidence_file": "evidence/google_gemma_4_31b_it_readme.md",
+        "evidence_literal": "| **Context Length** | 128K tokens | 128K tokens | 256K tokens  | 256K tokens  |",
+        "source_url": "https://huggingface.co/google/gemma-4-31B-it/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["license", "license_url"],
+        "evidence_file": "evidence/google_gemma_4_31b_it_readme.md",
+        "evidence_literal": "<b>License</b>: <a href=\"https://ai.google.dev/gemma/docs/gemma_4_license\" target=\"_blank\">Apache 2.0</a>",
+        "source_url": "https://huggingface.co/google/gemma-4-31B-it/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["tokenizer_name"],
+        "evidence_file": "evidence/google_gemma_4_31b_it_tokenizer_config.json",
+        "evidence_literal": "\"tokenizer_class\": \"GemmaTokenizer\"",
+        "source_url": "https://huggingface.co/google/gemma-4-31B-it/resolve/main/tokenizer_config.json",
+        "http_status": 200
+      },
+      {
+        "fields": ["hosted_provider", "hosted_model_id"],
+        "evidence_file": "evidence/openrouter_models_api.json",
+        "evidence_literal": "\"id\":\"google/gemma-4-31b-it\"",
+        "source_url": "https://openrouter.ai/api/v1/models",
+        "http_status": 200
+      }
+    ]
+  },
+  {
+    "model_id": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
+    "family": "NVIDIA Nemotron 3",
+    "total_params": "120B",
+    "active_params": "12B",
+    "context_window": "Up to 1M tokens",
+    "license": "NVIDIA Nemotron Open Model License",
+    "license_url": "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-nemotron-open-model-license/",
+    "tokenizer_name": "PreTrainedTokenizerFast",
+    "hf_url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
+    "release_date": "March 11, 2026",
+    "hosted_provider": "OpenRouter",
+    "hosted_model_id": "nvidia/nemotron-3-super-120b-a12b",
+    "notes": null,
+    "_evidence": [
+      {
+        "fields": ["total_params", "active_params"],
+        "evidence_file": "evidence/nvidia_nvidia_nemotron_3_super_120b_a12b_bf16_readme.md",
+        "evidence_literal": "| **Total Parameters** | 120B (12B active) |",
+        "source_url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["context_window"],
+        "evidence_file": "evidence/nvidia_nvidia_nemotron_3_super_120b_a12b_bf16_readme.md",
+        "evidence_literal": "| **Context Length** | Up to 1M tokens |",
+        "source_url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["license", "license_url"],
+        "evidence_file": "evidence/nvidia_nvidia_nemotron_3_super_120b_a12b_bf16_readme.md",
+        "evidence_literal": "| **License** | [NVIDIA Nemotron Open Model License](https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-nemotron-open-model-license/) |",
+        "source_url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["release_date"],
+        "evidence_file": "evidence/nvidia_nvidia_nemotron_3_super_120b_a12b_bf16_readme.md",
+        "evidence_literal": "| **Release Date** | March 11, 2026 |",
+        "source_url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["tokenizer_name"],
+        "evidence_file": "evidence/nvidia_nvidia_nemotron_3_super_120b_a12b_bf16_tokenizer_config.json",
+        "evidence_literal": "\"tokenizer_class\": \"PreTrainedTokenizerFast\"",
+        "source_url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16/resolve/main/tokenizer_config.json",
+        "http_status": 200
+      },
+      {
+        "fields": ["hosted_provider", "hosted_model_id"],
+        "evidence_file": "evidence/openrouter_models_api.json",
+        "evidence_literal": "\"id\":\"nvidia/nemotron-3-super-120b-a12b\"",
+        "source_url": "https://openrouter.ai/api/v1/models",
+        "http_status": 200
+      }
+    ]
+  },
+  {
+    "model_id": "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16",
+    "family": "NVIDIA Nemotron 3",
+    "total_params": "550B",
+    "active_params": "55B",
+    "context_window": "Up to 1M tokens",
+    "license": "OpenMDW License Agreement, version 1.1",
+    "license_url": "https://openmdw.ai/license/1-1/",
+    "tokenizer_name": "PreTrainedTokenizerFast",
+    "hf_url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16",
+    "release_date": "June 4, 2026",
+    "hosted_provider": "OpenRouter",
+    "hosted_model_id": "nvidia/nemotron-3-ultra-550b-a55b",
+    "notes": null,
+    "_evidence": [
+      {
+        "fields": ["total_params", "active_params"],
+        "evidence_file": "evidence/nvidia_nvidia_nemotron_3_ultra_550b_a55b_bf16_readme.md",
+        "evidence_literal": "| **Total Parameters** | 550B (55B active) |",
+        "source_url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["context_window"],
+        "evidence_file": "evidence/nvidia_nvidia_nemotron_3_ultra_550b_a55b_bf16_readme.md",
+        "evidence_literal": "| **Context Length** | Up to 1M tokens |",
+        "source_url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["license", "license_url"],
+        "evidence_file": "evidence/nvidia_nvidia_nemotron_3_ultra_550b_a55b_bf16_readme.md",
+        "evidence_literal": "| **License** | [OpenMDW License Agreement, version 1.1](https://raw.githubusercontent.com/OpenMDW/OpenMDW/refs/heads/main/1.1/LICENSE.OpenMDW-1.1) |",
+        "source_url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["release_date"],
+        "evidence_file": "evidence/nvidia_nvidia_nemotron_3_ultra_550b_a55b_bf16_readme.md",
+        "evidence_literal": "| **Release Date** | June 4, 2026 |",
+        "source_url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["tokenizer_name"],
+        "evidence_file": "evidence/nvidia_nvidia_nemotron_3_ultra_550b_a55b_bf16_tokenizer_config.json",
+        "evidence_literal": "\"tokenizer_class\": \"PreTrainedTokenizerFast\"",
+        "source_url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16/resolve/main/tokenizer_config.json",
+        "http_status": 200
+      },
+      {
+        "fields": ["hosted_provider", "hosted_model_id"],
+        "evidence_file": "evidence/openrouter_models_api.json",
+        "evidence_literal": "\"id\":\"nvidia/nemotron-3-ultra-550b-a55b\"",
+        "source_url": "https://openrouter.ai/api/v1/models",
+        "http_status": 200
+      }
+    ]
+  }
+]

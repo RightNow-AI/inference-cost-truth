@@ -1,0 +1,431 @@
+[
+  {
+    "model_id": "openai/gpt-oss-20b",
+    "hf_url": "https://huggingface.co/openai/gpt-oss-20b",
+    "recommended_gpu": "NVIDIA L40S 48 GB",
+    "gpu_count": 1,
+    "recommended_gpu_reason": "The official card says the MXFP4 model runs within 16GB of memory; one Runpod L40S exposes 48 GB, leaving capacity for the runtime and KV cache.",
+    "gpu_rental_provider": "Runpod",
+    "gpu_rental_provider_url": "https://www.runpod.io/gpu-models/l40s",
+    "inference_engine": "vLLM",
+    "quantization": "MXFP4 MoE weights",
+    "image": "vllm/vllm-openai",
+    "tag": "v0.26.0",
+    "registry_api_url": "https://hub.docker.com/v2/repositories/vllm/vllm-openai/tags/v0.26.0",
+    "registry_evidence_file": "evidence/dockerhub_vllm_tag_v0_26_0.json",
+    "registry_evidence_literal": "\"name\":\"v0.26.0\"",
+    "docker_run": "docker run --rm --gpus all --ipc=host --network=host -v \"${HOME}/.cache/huggingface:/root/.cache/huggingface\" vllm/vllm-openai:v0.26.0 --model openai/gpt-oss-20b --port 8000",
+    "benchmark_command": "docker run --rm --network=host --entrypoint vllm vllm/vllm-openai:v0.26.0 bench serve --backend openai --endpoint /v1/completions --model openai/gpt-oss-20b --dataset-name random --num-prompts 1000 --random-input-len 1024 --random-output-len 128 --port 8000",
+    "_evidence": [
+      {
+        "fields": ["model_id", "quantization", "recommended_gpu_reason", "gpu_count"],
+        "evidence_file": "evidence/openai_gpt_oss_20b_readme.md",
+        "evidence_literal": "the `gpt-oss-20b` model run within 16GB of memory. All evals were performed with the same MXFP4 quantization.",
+        "source_url": "https://huggingface.co/openai/gpt-oss-20b/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["recommended_gpu", "gpu_rental_provider", "gpu_rental_provider_url"],
+        "evidence_file": "evidence/runpod_l40s.html",
+        "evidence_literal": "Run NVIDIA L40S GPUs with 48 GB VRAM memory for AI workloads on Runpod, with fast deployment and usage-based pricing.",
+        "source_url": "https://www.runpod.io/gpu-models/l40s",
+        "http_status": 200
+      },
+      {
+        "fields": ["image", "tag", "registry_api_url"],
+        "evidence_file": "evidence/dockerhub_vllm_tag_v0_26_0.json",
+        "evidence_literal": "\"name\":\"v0.26.0\"",
+        "source_url": "https://hub.docker.com/v2/repositories/vllm/vllm-openai/tags/v0.26.0",
+        "http_status": 200
+      },
+      {
+        "fields": ["benchmark_command"],
+        "evidence_file": "evidence/vllm_bench_serve.html",
+        "evidence_literal": "Number of prompts to process.</dd> <dd>Default: <code>1000</code>",
+        "source_url": "https://docs.vllm.ai/en/stable/cli/bench/serve/",
+        "http_status": 200
+      },
+      {
+        "fields": ["benchmark_command"],
+        "evidence_file": "evidence/vllm_bench_serve.html",
+        "evidence_literal": "Number of input tokens per request, used only for random sampling.</dd> <dd>Default: <code>1024</code>",
+        "source_url": "https://docs.vllm.ai/en/stable/cli/bench/serve/",
+        "http_status": 200
+      },
+      {
+        "fields": ["benchmark_command"],
+        "evidence_file": "evidence/vllm_bench_serve.html",
+        "evidence_literal": "Number of output tokens per request, used only for random sampling.</dd> <dd>Default: <code>128</code>",
+        "source_url": "https://docs.vllm.ai/en/stable/cli/bench/serve/",
+        "http_status": 200
+      },
+      {
+        "fields": ["docker_run", "benchmark_command"],
+        "evidence_file": "evidence/vllm_bench_serve.html",
+        "evidence_literal": "Default: <code>8000</code>",
+        "source_url": "https://docs.vllm.ai/en/stable/cli/bench/serve/",
+        "http_status": 200
+      }
+    ]
+  },
+  {
+    "model_id": "openai/gpt-oss-120b",
+    "hf_url": "https://huggingface.co/openai/gpt-oss-120b",
+    "recommended_gpu": "NVIDIA H100 80 GB",
+    "gpu_count": 1,
+    "recommended_gpu_reason": "The official card states that the 117B/5.1B-active MXFP4 model fits into a single 80GB GPU and names NVIDIA H100 as an example.",
+    "gpu_rental_provider": "Runpod",
+    "gpu_rental_provider_url": "https://www.runpod.io/gpu-models/h100",
+    "inference_engine": "vLLM",
+    "quantization": "MXFP4 MoE weights",
+    "image": "vllm/vllm-openai",
+    "tag": "v0.26.0",
+    "registry_api_url": "https://hub.docker.com/v2/repositories/vllm/vllm-openai/tags/v0.26.0",
+    "registry_evidence_file": "evidence/dockerhub_vllm_tag_v0_26_0.json",
+    "registry_evidence_literal": "\"name\":\"v0.26.0\"",
+    "docker_run": "docker run --rm --gpus all --ipc=host --network=host -v \"${HOME}/.cache/huggingface:/root/.cache/huggingface\" vllm/vllm-openai:v0.26.0 --model openai/gpt-oss-120b --port 8000",
+    "benchmark_command": "docker run --rm --network=host --entrypoint vllm vllm/vllm-openai:v0.26.0 bench serve --backend openai --endpoint /v1/completions --model openai/gpt-oss-120b --dataset-name random --num-prompts 1000 --random-input-len 1024 --random-output-len 128 --port 8000",
+    "_evidence": [
+      {
+        "fields": ["model_id", "recommended_gpu", "gpu_count", "recommended_gpu_reason", "quantization"],
+        "evidence_file": "evidence/openai_gpt_oss_120b_readme.md",
+        "evidence_literal": "`gpt-oss-120b` — for production, general purpose, high reasoning use cases that fit into a single 80GB GPU (like NVIDIA H100 or AMD MI300X) (117B parameters with 5.1B active parameters)",
+        "source_url": "https://huggingface.co/openai/gpt-oss-120b/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["gpu_rental_provider", "gpu_rental_provider_url"],
+        "evidence_file": "evidence/runpod_h100.html",
+        "evidence_literal": "Run NVIDIA H100 GPUs with 80 GB VRAM memory for AI workloads on Runpod, with fast deployment and usage-based pricing.",
+        "source_url": "https://www.runpod.io/gpu-models/h100",
+        "http_status": 200
+      },
+      {
+        "fields": ["image", "tag", "registry_api_url"],
+        "evidence_file": "evidence/dockerhub_vllm_tag_v0_26_0.json",
+        "evidence_literal": "\"name\":\"v0.26.0\"",
+        "source_url": "https://hub.docker.com/v2/repositories/vllm/vllm-openai/tags/v0.26.0",
+        "http_status": 200
+      },
+      {
+        "fields": ["benchmark_command"],
+        "evidence_file": "evidence/vllm_bench_serve.html",
+        "evidence_literal": "Number of prompts to process.</dd> <dd>Default: <code>1000</code>",
+        "source_url": "https://docs.vllm.ai/en/stable/cli/bench/serve/",
+        "http_status": 200
+      },
+      {
+        "fields": ["benchmark_command"],
+        "evidence_file": "evidence/vllm_bench_serve.html",
+        "evidence_literal": "Number of input tokens per request, used only for random sampling.</dd> <dd>Default: <code>1024</code>",
+        "source_url": "https://docs.vllm.ai/en/stable/cli/bench/serve/",
+        "http_status": 200
+      },
+      {
+        "fields": ["benchmark_command"],
+        "evidence_file": "evidence/vllm_bench_serve.html",
+        "evidence_literal": "Number of output tokens per request, used only for random sampling.</dd> <dd>Default: <code>128</code>",
+        "source_url": "https://docs.vllm.ai/en/stable/cli/bench/serve/",
+        "http_status": 200
+      },
+      {
+        "fields": ["docker_run", "benchmark_command"],
+        "evidence_file": "evidence/vllm_bench_serve.html",
+        "evidence_literal": "Default: <code>8000</code>",
+        "source_url": "https://docs.vllm.ai/en/stable/cli/bench/serve/",
+        "http_status": 200
+      }
+    ]
+  },
+  {
+    "model_id": "mistralai/Mistral-Small-4-119B-2603",
+    "hf_url": "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603",
+    "recommended_gpu": "NVIDIA H100 80 GB",
+    "gpu_count": 2,
+    "recommended_gpu_reason": "The official checkpoint is 119B with FP8 weights, and its official vLLM launch uses tensor parallel size 2; two Runpod H100 GPUs provide 80 GB each.",
+    "gpu_rental_provider": "Runpod",
+    "gpu_rental_provider_url": "https://www.runpod.io/gpu-models/h100",
+    "inference_engine": "vLLM",
+    "quantization": "FP8",
+    "image": "vllm/vllm-openai",
+    "tag": "v0.26.0",
+    "registry_api_url": "https://hub.docker.com/v2/repositories/vllm/vllm-openai/tags/v0.26.0",
+    "registry_evidence_file": "evidence/dockerhub_vllm_tag_v0_26_0.json",
+    "registry_evidence_literal": "\"name\":\"v0.26.0\"",
+    "docker_run": "docker run --rm --gpus all --ipc=host --network=host -v \"${HOME}/.cache/huggingface:/root/.cache/huggingface\" vllm/vllm-openai:v0.26.0 --model mistralai/Mistral-Small-4-119B-2603 --port 8000 --max-model-len 262144 --tensor-parallel-size 2 --attention-backend FLASH_ATTN_MLA --tool-call-parser mistral --enable-auto-tool-choice --reasoning-parser mistral --max_num_batched_tokens 16384 --max_num_seqs 128 --gpu_memory_utilization 0.8",
+    "benchmark_command": "docker run --rm --network=host --entrypoint vllm vllm/vllm-openai:v0.26.0 bench serve --backend openai --endpoint /v1/completions --model mistralai/Mistral-Small-4-119B-2603 --dataset-name random --num-prompts 1000 --random-input-len 1024 --random-output-len 128 --port 8000",
+    "_evidence": [
+      {
+        "fields": ["model_id", "recommended_gpu_reason"],
+        "evidence_file": "evidence/mistralai_mistral_small_4_119b_2603_readme.md",
+        "evidence_literal": "- **119B parameters**, with **6.5B activated per token**.",
+        "source_url": "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["quantization"],
+        "evidence_file": "evidence/mistralai_mistral_small_4_119b_2603_config.json",
+        "evidence_literal": "\"quant_method\": \"fp8\"",
+        "source_url": "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603/resolve/main/config.json",
+        "http_status": 200
+      },
+      {
+        "fields": ["gpu_count", "docker_run"],
+        "evidence_file": "evidence/mistralai_mistral_small_4_119b_2603_readme.md",
+        "evidence_literal": "vllm serve mistralai/Mistral-Small-4-119B-2603 --max-model-len 262144 --tensor-parallel-size 2 --attention-backend FLASH_ATTN_MLA",
+        "source_url": "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["docker_run"],
+        "evidence_file": "evidence/mistralai_mistral_small_4_119b_2603_readme.md",
+        "evidence_literal": "--tool-call-parser mistral --enable-auto-tool-choice --reasoning-parser mistral --max_num_batched_tokens 16384 --max_num_seqs 128",
+        "source_url": "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["docker_run"],
+        "evidence_file": "evidence/mistralai_mistral_small_4_119b_2603_readme.md",
+        "evidence_literal": "--gpu_memory_utilization 0.8",
+        "source_url": "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["recommended_gpu", "gpu_rental_provider", "gpu_rental_provider_url"],
+        "evidence_file": "evidence/runpod_h100.html",
+        "evidence_literal": "Run NVIDIA H100 GPUs with 80 GB VRAM memory for AI workloads on Runpod, with fast deployment and usage-based pricing.",
+        "source_url": "https://www.runpod.io/gpu-models/h100",
+        "http_status": 200
+      },
+      {
+        "fields": ["image", "tag", "registry_api_url"],
+        "evidence_file": "evidence/dockerhub_vllm_tag_v0_26_0.json",
+        "evidence_literal": "\"name\":\"v0.26.0\"",
+        "source_url": "https://hub.docker.com/v2/repositories/vllm/vllm-openai/tags/v0.26.0",
+        "http_status": 200
+      },
+      {
+        "fields": ["benchmark_command"],
+        "evidence_file": "evidence/vllm_bench_serve.html",
+        "evidence_literal": "Number of prompts to process.</dd> <dd>Default: <code>1000</code>",
+        "source_url": "https://docs.vllm.ai/en/stable/cli/bench/serve/",
+        "http_status": 200
+      },
+      {
+        "fields": ["benchmark_command"],
+        "evidence_file": "evidence/vllm_bench_serve.html",
+        "evidence_literal": "Number of input tokens per request, used only for random sampling.</dd> <dd>Default: <code>1024</code>",
+        "source_url": "https://docs.vllm.ai/en/stable/cli/bench/serve/",
+        "http_status": 200
+      },
+      {
+        "fields": ["benchmark_command"],
+        "evidence_file": "evidence/vllm_bench_serve.html",
+        "evidence_literal": "Number of output tokens per request, used only for random sampling.</dd> <dd>Default: <code>128</code>",
+        "source_url": "https://docs.vllm.ai/en/stable/cli/bench/serve/",
+        "http_status": 200
+      }
+    ]
+  },
+  {
+    "model_id": "Qwen/Qwen3.6-35B-A3B",
+    "hf_url": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+    "recommended_gpu": "NVIDIA H100 80 GB",
+    "gpu_count": 8,
+    "recommended_gpu_reason": "The official 35B/3B-active BF16 card explicitly recommends tensor parallel on 8 GPUs for the 262,144-token endpoint; H100 is a listed 80 GB rental GPU.",
+    "gpu_rental_provider": "Runpod",
+    "gpu_rental_provider_url": "https://www.runpod.io/gpu-models/h100",
+    "inference_engine": "vLLM",
+    "quantization": "BF16",
+    "image": "vllm/vllm-openai",
+    "tag": "v0.26.0",
+    "registry_api_url": "https://hub.docker.com/v2/repositories/vllm/vllm-openai/tags/v0.26.0",
+    "registry_evidence_file": "evidence/dockerhub_vllm_tag_v0_26_0.json",
+    "registry_evidence_literal": "\"name\":\"v0.26.0\"",
+    "docker_run": "docker run --rm --gpus all --ipc=host --network=host -v \"${HOME}/.cache/huggingface:/root/.cache/huggingface\" vllm/vllm-openai:v0.26.0 --model Qwen/Qwen3.6-35B-A3B --port 8000 --tensor-parallel-size 8 --max-model-len 262144 --reasoning-parser qwen3 --enable-auto-tool-choice --tool-call-parser qwen3_coder",
+    "benchmark_command": "docker run --rm --network=host --entrypoint vllm vllm/vllm-openai:v0.26.0 bench serve --backend openai --endpoint /v1/completions --model Qwen/Qwen3.6-35B-A3B --dataset-name random --num-prompts 1000 --random-input-len 1024 --random-output-len 128 --port 8000",
+    "_evidence": [
+      {
+        "fields": ["model_id", "recommended_gpu_reason"],
+        "evidence_file": "evidence/qwen_qwen3_6_35b_a3b_readme.md",
+        "evidence_literal": "- Number of Parameters: 35B in total and 3B activated",
+        "source_url": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["quantization"],
+        "evidence_file": "evidence/qwen_qwen3_6_35b_a3b_config.json",
+        "evidence_literal": "\"dtype\": \"bfloat16\"",
+        "source_url": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B/resolve/main/config.json",
+        "http_status": 200
+      },
+      {
+        "fields": ["gpu_count", "docker_run", "recommended_gpu_reason"],
+        "evidence_file": "evidence/qwen_qwen3_6_35b_a3b_readme.md",
+        "evidence_literal": "maximum context length 262,144 tokens using tensor parallel on 8 GPUs.",
+        "source_url": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["docker_run"],
+        "evidence_file": "evidence/qwen_qwen3_6_35b_a3b_readme.md",
+        "evidence_literal": "vllm serve Qwen/Qwen3.6-35B-A3B --port 8000 --tensor-parallel-size 8 --max-model-len 262144 --reasoning-parser qwen3 --enable-auto-tool-choice --tool-call-parser qwen3_coder",
+        "source_url": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["recommended_gpu", "gpu_rental_provider", "gpu_rental_provider_url"],
+        "evidence_file": "evidence/runpod_h100.html",
+        "evidence_literal": "Run NVIDIA H100 GPUs with 80 GB VRAM memory for AI workloads on Runpod, with fast deployment and usage-based pricing.",
+        "source_url": "https://www.runpod.io/gpu-models/h100",
+        "http_status": 200
+      },
+      {
+        "fields": ["image", "tag", "registry_api_url"],
+        "evidence_file": "evidence/dockerhub_vllm_tag_v0_26_0.json",
+        "evidence_literal": "\"name\":\"v0.26.0\"",
+        "source_url": "https://hub.docker.com/v2/repositories/vllm/vllm-openai/tags/v0.26.0",
+        "http_status": 200
+      },
+      {
+        "fields": ["benchmark_command"],
+        "evidence_file": "evidence/vllm_bench_serve.html",
+        "evidence_literal": "Number of prompts to process.</dd> <dd>Default: <code>1000</code>",
+        "source_url": "https://docs.vllm.ai/en/stable/cli/bench/serve/",
+        "http_status": 200
+      },
+      {
+        "fields": ["benchmark_command"],
+        "evidence_file": "evidence/vllm_bench_serve.html",
+        "evidence_literal": "Number of input tokens per request, used only for random sampling.</dd> <dd>Default: <code>1024</code>",
+        "source_url": "https://docs.vllm.ai/en/stable/cli/bench/serve/",
+        "http_status": 200
+      },
+      {
+        "fields": ["benchmark_command"],
+        "evidence_file": "evidence/vllm_bench_serve.html",
+        "evidence_literal": "Number of output tokens per request, used only for random sampling.</dd> <dd>Default: <code>128</code>",
+        "source_url": "https://docs.vllm.ai/en/stable/cli/bench/serve/",
+        "http_status": 200
+      }
+    ]
+  },
+  {
+    "model_id": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
+    "hf_url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
+    "recommended_gpu": "NVIDIA H100-80GB",
+    "gpu_count": 8,
+    "recommended_gpu_reason": "NVIDIA states a minimum requirement of 8 H100-80GB GPUs for the 120B/12B-active BF16 checkpoint.",
+    "gpu_rental_provider": "Runpod",
+    "gpu_rental_provider_url": "https://www.runpod.io/gpu-models/h100",
+    "inference_engine": "vLLM",
+    "quantization": "BF16 weights with FP8 KV cache",
+    "image": "vllm/vllm-openai",
+    "tag": "v0.18.1",
+    "registry_api_url": "https://hub.docker.com/v2/repositories/vllm/vllm-openai/tags/v0.18.1",
+    "registry_evidence_file": "evidence/dockerhub_vllm_tag_v0_18_1.json",
+    "registry_evidence_literal": "\"name\":\"v0.18.1\"",
+    "docker_run": "docker run --rm --gpus all --ipc=host --network=host -v \"${HOME}/.cache/huggingface:/root/.cache/huggingface\" vllm/vllm-openai:v0.18.1 --model nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16 --port 8000 --async-scheduling --dtype auto --kv-cache-dtype fp8 --tensor-parallel-size 8 --max-model-len 262144 --enable-expert-parallel --swap-space 0 --trust-remote-code --gpu-memory-utilization 0.9 --max-cudagraph-capture-size 128 --enable-chunked-prefill --mamba-ssm-cache-dtype float32",
+    "benchmark_command": "docker run --rm --network=host --entrypoint vllm vllm/vllm-openai:v0.18.1 bench serve --backend openai --endpoint /v1/completions --model nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16 --dataset-name random --num-prompts 1000 --random-input-len 1024 --random-output-len 128 --port 8000",
+    "_evidence": [
+      {
+        "fields": ["model_id", "recommended_gpu", "gpu_count", "recommended_gpu_reason"],
+        "evidence_file": "evidence/nvidia_nvidia_nemotron_3_super_120b_a12b_bf16_readme.md",
+        "evidence_literal": "| **Minimum GPU Requirement** | 8× H100-80GB |",
+        "source_url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["recommended_gpu_reason"],
+        "evidence_file": "evidence/nvidia_nvidia_nemotron_3_super_120b_a12b_bf16_readme.md",
+        "evidence_literal": "| **Total Parameters** | 120B (12B active) |",
+        "source_url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["quantization", "docker_run"],
+        "evidence_file": "evidence/nvidia_nvidia_nemotron_3_super_120b_a12b_bf16_readme.md",
+        "evidence_literal": "--dtype auto",
+        "source_url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["quantization", "docker_run"],
+        "evidence_file": "evidence/nvidia_nvidia_nemotron_3_super_120b_a12b_bf16_readme.md",
+        "evidence_literal": "--kv-cache-dtype fp8",
+        "source_url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["docker_run"],
+        "evidence_file": "evidence/nvidia_nvidia_nemotron_3_super_120b_a12b_bf16_readme.md",
+        "evidence_literal": "--tensor-parallel-size 8",
+        "source_url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["docker_run"],
+        "evidence_file": "evidence/nvidia_nvidia_nemotron_3_super_120b_a12b_bf16_readme.md",
+        "evidence_literal": "--max-model-len 262144",
+        "source_url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["docker_run"],
+        "evidence_file": "evidence/nvidia_nvidia_nemotron_3_super_120b_a12b_bf16_readme.md",
+        "evidence_literal": "--swap-space 0",
+        "source_url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["docker_run"],
+        "evidence_file": "evidence/nvidia_nvidia_nemotron_3_super_120b_a12b_bf16_readme.md",
+        "evidence_literal": "--gpu-memory-utilization 0.9",
+        "source_url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["docker_run"],
+        "evidence_file": "evidence/nvidia_nvidia_nemotron_3_super_120b_a12b_bf16_readme.md",
+        "evidence_literal": "--max-cudagraph-capture-size 128",
+        "source_url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16/resolve/main/README.md",
+        "http_status": 200
+      },
+      {
+        "fields": ["recommended_gpu", "gpu_rental_provider", "gpu_rental_provider_url"],
+        "evidence_file": "evidence/runpod_h100.html",
+        "evidence_literal": "Run NVIDIA H100 GPUs with 80 GB VRAM memory for AI workloads on Runpod, with fast deployment and usage-based pricing.",
+        "source_url": "https://www.runpod.io/gpu-models/h100",
+        "http_status": 200
+      },
+      {
+        "fields": ["image", "tag", "registry_api_url"],
+        "evidence_file": "evidence/dockerhub_vllm_tag_v0_18_1.json",
+        "evidence_literal": "\"name\":\"v0.18.1\"",
+        "source_url": "https://hub.docker.com/v2/repositories/vllm/vllm-openai/tags/v0.18.1",
+        "http_status": 200
+      },
+      {
+        "fields": ["benchmark_command"],
+        "evidence_file": "evidence/vllm_0_18_1_bench_serve.html",
+        "evidence_literal": "Number of prompts to process.</dd> <dd>Default: <code>1000</code>",
+        "source_url": "https://docs.vllm.ai/en/v0.18.1/cli/bench/serve/",
+        "http_status": 200
+      },
+      {
+        "fields": ["benchmark_command"],
+        "evidence_file": "evidence/vllm_0_18_1_bench_serve.html",
+        "evidence_literal": "Number of input tokens per request, used only for random sampling.</dd> <dd>Default: <code>1024</code>",
+        "source_url": "https://docs.vllm.ai/en/v0.18.1/cli/bench/serve/",
+        "http_status": 200
+      },
+      {
+        "fields": ["benchmark_command"],
+        "evidence_file": "evidence/vllm_0_18_1_bench_serve.html",
+        "evidence_literal": "Number of output tokens per request, used only for random sampling.</dd> <dd>Default: <code>128</code>",
+        "source_url": "https://docs.vllm.ai/en/v0.18.1/cli/bench/serve/",
+        "http_status": 200
+      }
+    ]
+  }
+]
